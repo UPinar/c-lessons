@@ -279,6 +279,9 @@
   
 ### [Environment Variables](https://github.com/UPinar/CLessons/tree/master/environment_variables)
 
+### [Data Structures](https://github.com/UPinar/CLessons/tree/master/data_structures)
+  - dynamic array
+
 ### [Not Related](https://github.com/UPinar/CLessons/tree/master/not_related)
   - strict aliasing rule
   - localization

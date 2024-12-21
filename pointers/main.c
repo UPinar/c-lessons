@@ -7293,3 +7293,538 @@
     // Those 2 lines are equivalent.
   }
 */
+
+/*
+  int main(void)
+  {
+    int* ptr;   // wild pointer
+    *ptr = 10;  // undefined behavior(UB)
+
+    // using indeterminate value is undefined behavior
+  }
+*/
+
+/*
+  int main(void)
+  {
+    char* p;
+    printf("enter a string : ");
+    scanf("%s", p);   // undefined behaviour(UB)
+  }
+*/
+
+/*
+  int main(void)
+  {
+    char str[100];
+    char* p = str;
+
+    printf("Enter a string : ");
+    scanf("%s", p);     // VALID
+  }
+*/
+
+/*
+  int main(void)
+  {
+    int x = 10;
+    int* p = &x;
+
+    *p++ = 34;  // VALID (p is still a valid pointer)
+
+    *p;         // undefined behaviour(UB)
+    // using indeterminate value is undefined behavior
+
+    &(*p);      // VALID (compiler won't do dereferencing)
+  }
+*/
+
+/*
+  int main(void)
+  {
+    int i_arr[10] = { 0 };
+
+    i_arr[10];    // undefined behaviour(UB)
+    &i_arr[10];   // VALID
+  }
+*/
+
+/*
+  int main(void)
+  {
+    int x = 10;
+    int* p = &x;
+
+    int a = *p++;
+    int b = *p;   // undefined behaviour(UB) 
+    // using indeterminate value is undefined behavior
+  }
+*/
+
+/*
+  int main(void)
+  {
+    int ival = 44;
+    int* p1, p2;
+
+    p1 = &ival;
+    p2 = p1;    // conversion from int* to int
+    //  error: assignment to 'int' from 'int *' 
+    //  makes integer from pointer without a cast
+  }
+*/
+
+/*
+  int main(void)
+  {
+    double dval = 111.111;
+    int* p = (int*)&dval;
+
+    *p;   // undefined behaviour(UB) 
+    // using an incompatible type is undefined behavior
+  } 
+*/
+
+/*
+  int main(void)
+  {
+    unsigned int x = 11111u;
+    int* p = (int*)&x;
+
+    *p;   // VALID
+
+    // casting signed* <--> unsigned* in NOT UB.
+  }
+*/
+
+/*
+  #include <stddef.h> // size_t
+
+  int main(void)
+  {
+    unsigned int x = 0xFF00FF00u;
+    unsigned char* p = (unsigned char*)&x;  // VALID
+
+    for (size_t i = 0; i < sizeof(x); ++i)
+      printf("%u ", p[i]);
+    // output -> 0 255 0 255
+
+    // casting T* -> char* is NOT UB.
+  }
+*/
+
+/*
+  // type punning
+
+  struct Mystruct {
+    int m_a;
+    double m_d;
+    char m_str[16];
+  };
+
+  int main(void)
+  {
+    struct Mystruct m1 = { 111, 3.14, "hello world" };
+
+    int* i_ptr = (int*)&m1;   // VALID
+    printf("%d\n", *i_ptr);  
+    // output -> 111
+    // conversion from struct Mystruct* to 
+    // structure's first element type pointer(int*) is valid
+
+    *i_ptr = 222;
+    printf("%d\n", m1.m_a); 
+     // output -> 222
+
+    struct Mystruct* p_m2 = (struct Mystruct*)i_ptr;
+    printf("%f\n", p_m2->m_d);  
+    // output -> 3.140000
+  }
+*/
+
+/*
+  #include <string.h>   // strcmp
+
+  int main(void)
+  {
+    char str_1[] = "hello";
+    char str_2[] = "hello";
+
+    // --------------------------------------------------
+
+    if (str_1 == str_2)   // always false
+      printf("str_1 and str_2 are equal\n");
+    else
+      printf("str_1 and str_2 are NOT equal\n");
+    // output -> str_1 and str_2 are NOT equal
+
+    // warning: comparison between two arrays
+    // string comparison should be done with strcmp
+
+    // --------------------------------------------------
+
+    if (strcmp(str_1, str_2) == 0)
+      printf("str_1 and str_2 are equal\n");
+    else
+      printf("str_1 and str_2 are NOT equal\n");
+    // output -> str_1 and str_2 are equal
+
+    // --------------------------------------------------
+  }
+*/
+
+/*
+  int main(void)
+  {
+    "hello";    
+    // "hello" is an LValue expression,
+    // its data type is `char[6]`
+
+    char* p_str = "hello world";
+    p_str[0] = 'H';  // undefined behavior(UB)
+    // string literals are immutable
+  }
+*/
+
+/*
+  int main(void)
+  {
+    char* p_str1 = "hello";
+    char* p_str2 = "hello";
+
+    if (p_str1 == p_str2)   // unspecified behavior
+      printf("p_str1 and p_str2 are equal\n");
+    else
+      printf("p_str1 and p_str2 are NOT equal\n");
+    // output -> GCC(p_str1 and p_str2 are equal)
+
+    // compiler can store "hello" string literal 
+    // in the same memory location or different memory locations
+    // unspecified behavior
+  }
+*/
+
+/*
+  char* get_string(void)
+  {
+    char str[40] = "hello world";
+    return str;   
+    // returning automatic storage duration object's address
+    // will result dangling pointer.
+  }
+
+  // OUT parameter
+  char* get_string_1(char* p)
+  {
+    p = "hello world";
+    return p;
+  }
+
+  // returning static object's address
+  char* get_string_2(void)
+  {
+    static char str[40] = "hello world";
+    return str;
+
+    // returning static storage duration object's address
+  }
+*/
+
+/*
+  int main(void)
+  {
+    int x;
+    int* ptr = &x;
+
+    int y = *ptr;  // undefined behavior(UB)
+    // using indeterminate value is undefined behavior
+  }
+*/
+
+/*
+  #include <string.h> // strcpy
+
+  int main(void)
+  {
+    char str[100] = "hello_world";
+
+    strcpy(str + 3, str); // undefined behavior(UB)
+    // strcpy function's parameter variables 
+    // are `restrict` pointers
+    // and str and str + 3 are overlapping memory locations.
+  }
+*/
+
+/*
+  #include <stdlib.h>   // malloc, free, exit, EXIT_FAILURE
+  #include <stddef.h>   // size_t
+
+  void allocate_memory(char* p, size_t N)
+  {
+    p = (char*)malloc(N);
+    if (!p) {
+      fprintf(stderr, "malloc failed\n");
+      exit(EXIT_FAILURE);
+    }
+  }
+
+  // OUT param
+  void allocate_memory_2(char** p, size_t N)
+  {
+    p = (char*)malloc(N);
+    if (!p) {
+      fprintf(stderr, "malloc failed\n");
+      exit(EXIT_FAILURE);
+    }
+  }
+
+  int main(void)
+  {
+    char* ptr;
+    allocate_memory(ptr, 100);  // undefined behavior(UB)
+    // ptr's value will be copied to function's parameter variable
+    // because of "ptr" is holding indetermined value,
+    // copying indetermined value to function's parameter variable
+    // will result in undefined behavior(UB)
+
+    // -------------------------------------------------------
+
+    ptr = "hello world";
+    allocate_memory(ptr, 100);  
+    // there is NO undefined behaviour in this scenario 
+    // "hello world" array's first element's address 
+    // will be copied to function's parameter variable("p")
+    // and return value of the malloc function 
+    // will change the address that parameter variable("p")
+    // is pointing to so because of "p" is a local variable
+    // and holding dynamic allocated memory's address,
+    // returning from the function without free'ing that memory
+    // will result memory leak.
+
+    // -------------------------------------------------------
+
+    allocate_memory_2(&ptr, 100);
+    // copying ptr's address to function's parameter variable
+    // will result in valid scenario.
+
+    free(ptr);
+
+    // -------------------------------------------------------
+  }
+*/
+
+/*
+  #include <stdlib.h>   // malloc, free
+  #include <string.h>   // strcpy
+
+  typedef struct {
+    char* mp_address;
+    int   m_id;
+  } Person_t;
+
+  int main(void)
+  {
+    const char* p_address1 = "kadikoy_istanbul";
+    Person_t per1;
+
+    per1.mp_address = (char*)malloc(strlen(p_address1) + 1);
+    strcpy(per1.mp_address, p_address1);
+    per1.m_id = 111;
+
+    Person_t per2 = per1;
+    free(per1.mp_address);
+
+    puts(per2.mp_address);    // undefined behaviour(UB)
+
+    // because of per1.mp_address and per2.mp_address are 
+    // pointing to the same address
+    // free'ing per1.mp_address will result per2.mp_address
+    // to become dangling pointer.
+
+    free(per2.mp_address);    // undefined behaviour(UB)
+
+    // free'ing a memory location that is already free'd
+    // is undefined behaviour(UB)
+  }
+*/
+
+/*
+  #include <stdio.h>    // FILE, fopen, fclose
+
+  typedef struct {
+    FILE* mp_file;
+  } FileInfo_t;
+
+  int main(void)
+  {
+    FileInfo_t i1;
+    i1.mp_file = fopen("notes.txt", "r");
+
+    FileInfo_t i2 = i1;
+
+    fclose(i1.mp_file);
+    // mp_file is a shared resource between i1 and i2
+    // closing the file will result in i2.mp_file to become
+    // dangling pointer.
+
+    i2.mp_file; 
+    // using dangling pointer is undefined behaviour(UB)
+  }
+*/
+
+/*
+  #include <stdlib.h>  // free
+
+  int main(void)
+  {
+    char str[] = "hello world";
+    char* p = str;
+
+    puts(p);
+    free(p);  // undefined behavior(UB)
+    // free'ing automatic storage duration object's address
+  }
+*/
+
+/*
+  #include <stdlib.h>  // free
+
+  int main(void)
+  {
+    char str[] = "hello world";
+    char* p = str;
+
+    puts(p);
+    p = NULL;
+    free(p);  // VALID
+    // free'ing NULL pointer is valid
+  }
+*/
+
+/*
+  #include <string.h>   // strcpy
+
+  int main(void)
+  {
+    char str[] = "hello world";
+    char* p_dyn = (char*)malloc(strlen(str));
+    strcpy(p_dyn, str);   // undefined behaviour(UB)
+    // because of strlen(str) does not include null character
+    // strcpy function will write null character to the
+    // memory location that is not allocated by malloc function.
+
+    puts(p_dyn); 
+    free(p_dyn);
+  }
+*/
+
+/*
+  #include <stdlib.h> // malloc
+
+  int main(void)
+  {
+    int i_arr[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    int* p = i_arr;
+    int(*pa)[10] = &i_arr;
+
+    int* p1 = (int*)malloc(sizeof(p));
+    // sizeof(p) is the size of a pointer
+    // can not hold whole array.
+
+    int* p2 = (int*)malloc(sizeof(*p));
+    // "*p" expression's data type is int
+    // *p -> &i_arr[0]
+    // sizeof(*p) is the size of an int
+
+    int* p3 = (int*)malloc(sizeof(i_arr));
+    // sizeof(i_arr) is the size of the whole array
+
+    int* p4 = (int*)malloc(sizeof(pa));
+    // sizeof(pa) is the size of a pointer
+
+    int* p5 = (int*)malloc(sizeof(*pa));
+    // "*pa" expression's data type is int[10]
+    // sizeof(*pa) is the size of the whole array
+    // *pa -> i_arr 
+  }
+*/
+
+/*
+  #include <stddef.h> // size_t
+  #include <stdlib.h> // malloc, rand, exit, EXIT_FAILURE
+
+  int main(void)
+  {
+    size_t N = (rand() % 100 + 5) * 16;
+    int* p = (int*)malloc(sizeof(int));
+
+    if (!p) {
+      fprintf(stderr, "malloc failed\n");
+      exit(EXIT_FAILURE);
+    }
+
+    int x = 20;
+    p = &x; // memory leak 
+    // address of dynamic allocated memory is lost
+    // because of the assignment.
+  }
+*/
+
+/*
+  #include <string.h> // memset
+  #include <stddef.h> // size_t
+  #include <stdlib.h> // malloc, free
+
+  int main(void)
+  {
+    size_t N;
+    printf("Enter the size of the array : ");;
+    (void)scanf("%zu", &N);
+
+    int* p_dyn = (int*)malloc(N * sizeof(int));
+    if (!p_dyn) {
+      fprintf(stderr, "malloc failed\n");
+      exit(EXIT_FAILURE);
+    }
+
+    int* p = p_dyn;
+    memset(p_dyn, 0, N * sizeof(int));
+
+    free(p_dyn);
+    free(p);  // undefined behavior(UB)
+    // free'ing a memory location that is already free'd
+    // double free
+  }
+*/
+
+/*
+  #include <stddef.h> // size_t
+  #include <string.h> // memcpy
+  #include <stdlib.h> // malloc, qsort
+
+  int int_compare(const void* vp1, const void* vp2)
+  {
+    int i1 = *(const int*)vp1;
+    int i2 = *(const int*)vp2;
+
+    return i1 > i2  ? 1 
+                    : i1 < i2 ? -1 
+                              : 0;
+  }
+
+  int get_median(const int* p_arr, size_t N)
+  {
+    int* p_dyn = (int*)malloc(N * sizeof(int));
+    if (!p_dyn) {
+      fprintf(stderr, "malloc failed\n");
+      exit(EXIT_FAILURE);
+    }
+
+    memcpy(p_dyn, p_arr, N * sizeof(int));
+    qsort(p_dyn, N, sizeof(*p_dyn), &int_compare);
+
+    // not free'ing p_dyn will result in memory leak
+
+    return p_dyn[N / 2];
+  }
+*/
