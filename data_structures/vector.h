@@ -51,7 +51,6 @@ bool vector_push_back(Vector_p p_vec, DATATYPE val);
 bool vector_pop_back(Vector_p p_vec);
 bool vector_insert(Vector_p p_vec, size_t index, DATATYPE val);
 bool vector_erase(Vector_p p_vec, size_t index);
-size_t vector_erase_all(Vector_p p_vec, DATATYPE val);
 bool vector_erase_first_occurrence( Vector_p p_vec, 
                                     DATATYPE val, 
                                     VALUE_COMPARE_FN compare_fn);

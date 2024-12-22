@@ -281,6 +281,7 @@
 
 ### [Data Structures](https://github.com/UPinar/CLessons/tree/master/data_structures)
   - dynamic array
+  - linked list
 
 ### [Not Related](https://github.com/UPinar/CLessons/tree/master/not_related)
   - strict aliasing rule
