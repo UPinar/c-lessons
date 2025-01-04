@@ -81,6 +81,59 @@
 */
 
 /*
+  #include <stddef.h>   // size_t
+  #include "../headers/nutility.h"
+
+  int main(void)
+  {
+    // ----------------------------------------------
+
+    int arr[][4] = {
+      { 1, 2, 3, 4 },
+      { 5, 6, 7, 8 },
+      { 9, 8, 7, 6 },
+      { 5, 4, 3, 2 },
+      { 1, 2, 3, 4 }
+    };
+
+    for (size_t i = 0; i < asize(arr); ++i){
+      for (size_t k = 0; k < 4; ++k)
+        printf("%d ", arr[i][k]);
+      printf("\n");
+    }
+
+    // output ->
+    //  1 2 3 4
+    //  5 6 7 8
+    //  9 8 7 6
+    //  5 4 3 2
+    //  1 2 3 4
+
+    putchar('\n');
+
+    // ----------------------------------------------
+
+    int arr_2[][4] = {
+      #include "init.txt"
+    };
+
+    for (size_t i = 0; i < asize(arr_2); ++i){
+      for (size_t k = 0; k < 4; ++k)
+        printf("%d ", arr_2[i][k]);
+      printf("\n");
+    }
+    // output ->
+    //  1 1 1 1
+    //  2 2 2 2
+    //  3 3 3 3
+    //  4 4 4 4
+    //  5 5 5 5
+
+    // ----------------------------------------------
+  }
+*/
+
+/*
                           -----------
                           | #define |
                           -----------
@@ -171,9 +224,9 @@
   int main(void){
     printf("SIZE"); // output -> SIZE
 
-    // for replacement(substitution) to happen macro should be a token,
-    //  not a part of any other token 
-    //  "SIZE" is string literal and it is a token
+    // for replacement(substitution) to happen 
+    // macro should be a token, not a part of any other token 
+    // "SIZE" is string literal and it is a token
   }
 */
 
@@ -588,7 +641,8 @@
     foo();
     code 
     code    
-    -> in this scenario compilers optimizer have less space to optimize
+    -> in this scenario compilers optimizer 
+        have less space to optimize
 
     Scenario 2:
     ------------
@@ -597,7 +651,74 @@
     code
     code
     code
-    -> in this scenario compilers optimizer have more space to optimize
+    -> in this scenario compilers optimizer 
+        have more space to optimize
+*/
+
+/*
+                          -----------
+                          | X macro |
+                          -----------
+*/
+
+/*
+  enum Color{ RED, GREEN, BLUE };
+
+  const char* color_arr[] = { "RED", "GREEN", "BLUE" };
+
+  void foo(enum Color c)
+  {
+    switch(c) {
+    case RED:    printf("RED\n");    break;
+    case GREEN:  printf("GREEN\n");  break;
+    case BLUE:   printf("BLUE\n");   break;
+    }
+  }
+
+  daha sonradan koda yeni bir renk eklenileceği zaman,
+  listenin lojik ilişki içerdiği her yerde değişiklik yapılması
+  gerekecektir. Bu durumda X macro kullanılabilir.
+*/
+
+/*
+  // yeni bir renk eklemek istendiğinde
+  // sadece XCOLORS makrosuna yeni renk eklenir.
+
+  #define XCOLORS \
+    X(RED)        \
+    X(GREEN)      \
+    X(BLUE)       \
+    X(WHITE)      \
+    X(BLACK)      
+
+  // ----------------------------------------------
+
+  enum Color{ 
+    #define   X(a)  a,
+      XCOLORS
+    #undef X
+  };
+  // enum Color{ RED, GREEN, BLUE, WHITE, BLACK, };
+
+  // ----------------------------------------------
+
+  #define   X(a)  #a,
+  const char* color_arr[] = { XCOLORS };
+  #undef X
+  // const char* color_arr[] = { 
+  //  "RED", "GREEN", "BLUE", "WHITE", "BLACK" };
+
+  // ----------------------------------------------
+
+  void foo(enum Color c)
+  {
+    #define   X(a)  case a: printf("%s", #a); break;
+      switch(c) {
+      XCOLORS
+      default: printf("unknown color");
+      }
+    #undef X
+  }
 */
 
 /*
@@ -754,7 +875,8 @@
   generate_max_1(double)
   generate_max_1(long)
   generate_max_1(unsigned)
-  //  syntax error -> function overloading is not allowed in C language
+  //  syntax error -> function overloading 
+  //  is not allowed in C language
 
 
   #define generate_max_2(t)   t max_##t(t x, t y){        \
@@ -1367,10 +1489,7 @@
 */
 
 /*
-  People thought that compiler will generate extensions to preprocessor.
-  That is why #pragma directive has been created.
   Compilers can generate its own #pragma directives.
-
   #pragma's are compiler specific (implementation-defined)
 */
 
@@ -1409,7 +1528,8 @@
   #define   printf(x)   printf("%d\n", x)
   // compile time inifite loop will not happen 
 
-  // when a macro replacement happening, if replacement is same as macro 
+  // when a macro replacement happening, 
+  // if replacement is same as macro 
   // it will not be replaced for the second time
 
   int main(void){

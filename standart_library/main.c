@@ -2791,6 +2791,58 @@
   // `printf` -> formatted output to standart output 
 */
 
+/*
+  int main(void)
+  {
+    int x = 12345;
+
+    printf("[%d]\n", x);      // output -> [12345]
+    // no width, no alignment
+
+    printf("[%12d]\n", x);    // output -> [       12345]  
+    // output width is 12 characters, alignment is right
+
+    printf("[%-12d]\n", x);   // output -> [12345       ]
+    // output width is 12 characters, alignment is left
+  }
+*/
+
+/*
+  int main(void)
+  {
+    int x = 123456789;
+    int w = 15;
+
+    printf("[%*d]\n", w, x);    // output -> [      123456789]
+    // output width is the value of "w" character 
+    // alignment is right
+
+    printf("[%*d]\n", -w, x);   // output -> [123456789      ]
+    // output width is the value of "w" character
+    // alignment is left
+  }
+*/
+
+/*
+  int main(void)
+  {
+    for (int i = 0; i < 10; ++i)
+      printf("[%*shello]\n", i, "");
+
+    // output ->
+    //  [hello]
+    //  [ hello]
+    //  [  hello]
+    //  [   hello]
+    //  [    hello]
+    //  [     hello]
+    //  [      hello]
+    //  [       hello]
+    //  [        hello]
+    //  [         hello]
+  }
+*/
+
 // --------------------------------------------------------
 // ---------------------| sprintf |------------------------
 // --------------------------------------------------------
@@ -2862,6 +2914,113 @@
   int scanf(const char* p_format_str, ...);
 
   // `scanf` -> formatted input from standart output 
+*/
+
+/*
+  // scanset in scanf
+
+  int main(void)
+  {
+    char str[100] = "";
+    printf("Enter a string : ");
+
+    scanf("%[abcde ]s", str);
+    //  only ('a', 'b', 'c', 'd', 'e', ' ') characters accepted
+
+    printf("str = [%s]\n", str);
+  }
+
+  // input -> Enter a string : abcd
+  // output -> str = [abcd]
+  // input -> Enter a string : abc123
+  // output -> str = [abc]
+  // input -> Enter a string : aaaa bbbb cccc dddd
+  // output -> str = [aaaa bbbb cccc dddd]
+  // input -> Enter a string : 123abc
+  // output -> str = []
+*/
+
+/*
+  int main(void)
+  {
+    char str[100] = "";
+    printf("Enter a string : ");
+
+    scanf("%[^abcde\n]s", str);
+    // ('a', 'b', 'c', 'd', 'e', '\n') characters NOT accepted
+
+    printf("str = [%s]\n", str);
+  }
+
+  // input -> Enter a string : zxcvb
+  // output -> str = [zx]
+  // input -> Enter a string : 123na
+  // output -> str = [123n]
+*/
+
+/*
+  int main(void)
+  {
+    char str[100] = "";
+    printf("Enter a string : ");
+
+    scanf("%[^\n]s", str);
+    // characters which are not '\n' is accepted (skip whitespace)
+
+    printf("str = [%s]\n", str);
+  }
+
+  // input -> Enter a string : hello world live from istanbul
+  // output -> str = [hello world live from istanbul]
+*/
+
+/*
+  int main(void)
+  {
+    char str[100] = "";
+    printf("Enter a string : ");
+
+    scanf("%*d%s", str);      
+    // decimal value will be discarded(extracted from the buffer)
+    // string will be assign to str
+
+    printf("str = [%s]\n", str);
+  }
+
+  // input -> Enter a string : 12345hello12345
+  // output -> str = [hello12345]
+*/
+
+/*
+  int main(void)
+  {
+    int d, m, y;
+    printf("Enter a date : ");
+
+    scanf("%d-%d-%d", &d, &m, &y);
+    // '-' character will be discarded
+
+    printf("%02d/%02d/%d\n", d, m, y);
+  }
+
+  // input -> Enter a date : 1-1-2001
+  // output -> 01/01/2001
+*/
+
+/*
+  int main(void)
+  {
+    int d, m, y;
+    printf("Enter a date : ");
+
+    scanf("%d%*c%d%*c%d", &d, &m, &y);
+    // any character will be discarded after first 2 integers
+
+    printf("%02d/%02d/%d\n", d, m, y);
+  }
+
+  // input -> Enter a date : 2-2/2002
+  // output -> 02/02/2002
 */
 
 // --------------------------------------------------------
@@ -3198,4 +3357,97 @@
     //  f1 function started
     //  f2 function started
   }
+*/
+
+// --------------------------------------------------------
+// -----------------------| system |-----------------------
+// --------------------------------------------------------
+
+/*
+  #include <stdlib.h>   // system
+
+  // system function's prototype
+  int system(const char* p_command);
+
+  // returns 0 when success.
+  // returns non-zero when failed.
+
+  // system fonksiyonu ile işletim sisteminin komut yorumlayıcısına
+  // bir komut gönderilir ve işletim sistemi bu komutu çalıştırır.
+*/
+
+/*
+  #include <stdlib.h>  // system
+
+  int main(void)
+  {
+    system("dir");
+    system("pause");
+    system("ls");
+  }
+
+  //  01/04/2025  06:33 PM            82,575 main.c
+  //  01/04/2025  06:33 PM            82,261 prog.exe
+  //  12/02/2024  02:46 AM               207 run.bat
+
+  // Press any key to continue . . .
+
+  // 'ls' is not recognized as an internal or external command,
+  // operable program or batch file.
+*/
+
+/*
+  #include <stdlib.h>  // system
+
+  int main(void)
+  {
+    if (system(NULL))
+      printf("command interpreter is available\n");
+    else
+      printf("command interpreter is not available\n");
+    // output -> command interpreter is available
+  }
+*/
+
+/*
+  #include <stdlib.h>  // system
+  #include <string.h>  // strcmp
+
+  void clear_input_buffer(void)
+  {
+    int ch;
+    while ((ch = getchar()) != '\n' && ch != EOF)
+      ; // null statement
+  }
+
+  int main(void)
+  {
+    char command_str[100];
+
+    for (;;) {
+      printf("enter a command > ");
+      (void)scanf("%[^\n]s", command_str);
+
+      if (!strcmp(command_str, "finish"))
+        break;
+
+      system(command_str);
+      clear_input_buffer();
+    }
+  }
+
+  // input -> enter a command > dir
+  // output ->
+  //  01/04/2025  06:39 PM            83,634 main.c
+  //  01/04/2025  06:39 PM            83,005 prog.exe
+  //  12/02/2024  02:46 AM               207 run.bat
+
+  // input -> enter a command > pause
+  // output -> Press any key to continue . . .
+
+  // input -> enter a command > cls
+  // output -> (clears the screen)
+
+  // input -> enter a command > finish
+  // output -> (program ends)
 */

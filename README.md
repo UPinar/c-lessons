@@ -71,6 +71,7 @@
   - `#define`
   - object-like macros
   - function-like(functional) macros
+  - X macro
   - comparison between functional macros and functions
   - preprocessor operators
   - conditional compiling (koşullu derleme)
@@ -172,6 +173,7 @@
   - process termination functions in `stdlib.h` module
     - `exit` and `atexit`
     - `abort`
+  - `system` function in `stdlib.h`
   
 ### [String Literals](https://github.com/UPinar/CLessons/tree/master/string_literals)
 
@@ -277,11 +279,16 @@
   - `inline` functions
   - variadic macros
   
+### [C11 Changes](https://github.com/UPinar/CLessons/tree/master/c11_changes)
+  - generic selection
+  
 ### [Environment Variables](https://github.com/UPinar/CLessons/tree/master/environment_variables)
 
 ### [Data Structures](https://github.com/UPinar/CLessons/tree/master/data_structures)
   - dynamic array
   - linked list
+  - queue
+  - stack
 
 ### [Not Related](https://github.com/UPinar/CLessons/tree/master/not_related)
   - strict aliasing rule

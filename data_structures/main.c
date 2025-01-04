@@ -211,3 +211,249 @@
   //  value = 0, size = 1
   //  list is destroyed
 */
+
+/*
+                        ------------------
+                        | Queue (Kuyruk) |
+                        ------------------
+*/
+
+/*
+  - queue is an abstract data type.
+  - FIFO (First In First Out) principle.
+*/
+
+/*
+  // queue implementation with dynamic array
+
+  #include "queue.h"
+
+  int main(void)
+  {
+    Queue_p queue = queue_create_with_capacity(5);
+    if (queue == NULL) {
+      fprintf(stderr, "cannot create queue\n");
+      return 1;
+    }
+
+    for (int i = 10; i < 15; ++i)
+      queue_push_by_value(queue, i);
+
+    int ival;
+    queue_pop(queue, &ival);
+    printf("ival = %d\n", ival);      // output -> ival = 10
+
+    queue_pop(queue, &ival);
+    printf("ival = %d\n", ival);      // output -> ival = 11
+
+    if (queue_increase_capacity(queue, 10)) {
+      printf("size = %zu, capacity = %zu\n", 
+              queue_get_size(queue), 
+              queue_get_capacity(queue));
+    }
+    // output -> size = 3, capacity = 10
+
+    while (queue_pop(queue, &ival))
+      printf("ival = %d\n", ival);
+    // output ->
+    //  ival = 12
+    //  ival = 13
+    //  ival = 14
+
+    if (queue_is_empty(queue))
+      printf("queue is empty\n");
+    else
+      printf("queue is not empty\n");
+    // output -> queue is empty
+
+    for (int i = 10; i < 20; ++i)
+      queue_push_by_value(queue, i);
+
+    printf("size = %zu, capacity = %zu\n", 
+            queue_get_size(queue), 
+            queue_get_capacity(queue));
+    // output -> size = 10, capacity = 10
+
+    queue_clear(queue);
+
+    printf("size = %zu, capacity = %zu\n", 
+            queue_get_size(queue), 
+            queue_get_capacity(queue));
+    // output -> size = 0, capacity = 10
+
+    queue_destroy(queue);
+    queue = NULL;
+  }
+*/
+
+/*
+  // queue implementation with linked list
+
+  #include "queue_2.h"
+
+  int main(void)
+  {
+    Queue_t* queue = queue_create();
+    if (queue == NULL) {
+      fprintf(stderr, "cannot create queue\n");
+      return 1;
+    }
+
+    for (int i = 10; i < 15; ++i)
+      queue_push_by_value(queue, i);
+
+    printf("size = %zu\n", queue_get_size(queue));
+    // output -> size = 5
+
+    int ival;
+    queue_pop(queue, &ival);
+    printf("ival = %d\n", ival);      // output -> ival = 10
+
+    queue_pop(queue, &ival);
+    printf("ival = %d\n", ival);      // output -> ival = 11
+
+    while (queue_pop(queue, &ival))
+      printf("ival = %d\n", ival);
+    // output ->
+    //  ival = 12
+    //  ival = 13
+    //  ival = 14
+
+    if (queue_is_empty(queue))
+      printf("queue is empty\n");
+    else
+      printf("queue is not empty\n");
+    // output -> queue is empty
+
+    for (int i = 10; i < 20; ++i)
+      queue_push_by_value(queue, i);
+
+    printf("size = %zu\n", queue_get_size(queue));
+    // output -> size = 10
+
+    queue_clear(queue);
+
+    printf("size = %zu\n", queue_get_size(queue));
+    // output -> size = 0
+
+    queue_destroy(queue);
+    queue = NULL;
+  }
+*/
+
+/*
+                        -----------------
+                        | Stack (Yığın) |
+                        -----------------
+*/
+
+/*
+  - stack is an abstract data type.
+  - LIFO (Last In First Out) principle.
+*/
+
+/*
+  // stack implementation with dynamic array
+
+  #include "stack.h"
+
+  int main(void)
+  {
+    Stack_t* stack = stack_create_with_capacity(5ULL);
+    if (stack == NULL) {
+      fprintf(stderr, "cannot create stack\n");
+      return 1;
+    }
+
+    for (int i = 10; i < 15; ++i)
+      stack_push_by_value(stack, i);
+
+    printf("size = %zu, capacity = %zu\n", 
+            stack_get_size(stack), 
+            stack_get_capacity(stack));
+    // output -> size = 5, capacity = 5
+
+    int ival;
+    stack_top(stack, &ival);
+
+    printf("stack top = %d\n", ival);      
+    // output -> stack top = 14
+
+    while (stack_pop(stack, &ival)) {
+      printf( "%d is popped, size = %zu\n", 
+              ival, 
+              stack_get_size(stack));
+    }
+    // output ->
+    //  14 is popped, size = 4
+    //  13 is popped, size = 3
+    //  12 is popped, size = 2
+    //  11 is popped, size = 1
+    //  10 is popped, size = 0
+
+    for (int i = 10; i < 15; ++i)
+      stack_push_by_value(stack, i);
+
+    printf("size = %zu\n", stack_get_size(stack));
+    // output -> size = 5
+          
+    stack_clear(stack);
+    printf("size = %zu\n", stack_get_size(stack));
+    // output -> size = 0
+
+    stack_destroy(stack);
+    stack = NULL;
+  }
+*/
+
+/*
+  // stack implementation with linked list
+
+  #include "stack_2.h"
+
+  int main(void)
+  {
+    Stack_t* stack = stack_create();
+    if (stack == NULL) {
+      fprintf(stderr, "cannot create stack\n");
+      return 1;
+    }
+
+    for (int i = 10; i < 15; ++i)
+      stack_push_by_value(stack, i);
+
+    printf("size = %zu\n", stack_get_size(stack));
+    // output -> size = 5
+
+    int ival;
+    stack_top(stack, &ival);
+
+    printf("stack top = %d\n", ival);      
+    // output -> stack top = 14
+
+    while (stack_pop(stack, &ival)) {
+      printf( "%d is popped, size = %zu\n", 
+              ival, 
+              stack_get_size(stack));
+    }
+    // output ->
+    //  14 is popped, size = 4
+    //  13 is popped, size = 3
+    //  12 is popped, size = 2
+    //  11 is popped, size = 1
+    //  10 is popped, size = 0
+
+    for (int i = 10; i < 15; ++i)
+      stack_push_by_value(stack, i);
+
+    printf("size = %zu\n", stack_get_size(stack));
+    // output -> size = 5
+          
+    stack_clear(stack);
+    printf("size = %zu\n", stack_get_size(stack));
+    // output -> size = 0
+
+    stack_destroy(stack);
+    stack = NULL;
+  }
+*/
