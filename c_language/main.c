@@ -239,7 +239,8 @@
   int y = x + 3;  // syntax error
   // output -> expression must have a constant value
 
-  int main(void){
+  int main(void)
+  {
 
   }
 */
@@ -482,21 +483,23 @@
 
   file1.c 
   ===============
-  int foo(int x){  // function definition
+  int foo(int x)    // function definition
+  {  
     return x * x;
   }
 
   main.c 
   ========
-  #include <file.h>
+  #include <file1.h>
 
-  int main(void){
+  int main(void)
+  {
     int x = foo(11);
   }
 
 
   1. compiler will see foo function's declaration in main.c file
-    #include <file.h>
+    #include <file1.h>
   2. compiler will generate main functions entry and exit codes
     and external reference to foo() function
   3. file1.c will be compiled to file1.o(object file)
@@ -512,10 +515,11 @@
 /*
     main.c
     ========
-    void foo(int x){
+    void foo(int x)
+    {
       int y = bar(x);     
     }
-    // compiler must see bar functions declaration or definition
+    // compiler must see bar function's declaration or definition
     
     in the object code that will be generated from main.c -> main.o
     compiler will write an external reference of bar() function
@@ -524,8 +528,7 @@
     So linker can find the object code(.o file) where bar() 
     function's code were in and link both object codes.
 
-    i.e bar functions code is in bar_code.c file 
+    i.e bar function's code is in bar_code.c file 
       bar_code.o and main.o will be linked when the executable file 
       is being created.
 */
-

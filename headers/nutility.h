@@ -1,7 +1,7 @@
 #ifndef   NUTILITY_H
 #define   NUTILITY_H
 
-#include <stddef.h> // size_t
+#include <stddef.h> // size_t 
 
 extern const int g_primes[];
 extern const char* p_names[];

@@ -1,33 +1,38 @@
 #include "../headers/nutility.h"
 
-#include <stdlib.h>
+#include <stdlib.h>   // srand, rand
 #include <stdio.h>
-#include <time.h>
+#include <time.h>     // time
 #include <math.h>
 
-void randomize(void){
+void randomize(void)
+{
   srand((unsigned)time(NULL));
 }
 
-void sgets(char* pStr){
+void sgets(char* pStr)
+{
   int c;
   while ((c = getchar()) != '\n')
     *pStr++ = (char)c;
   *pStr = '\0';
 }
 
-void swap(int* x, int* y){
+void swap(int* x, int* y)
+{
   int temp = *x;
   *x = *y;
   *y = temp;
 }
 
-void set_array_random(int* p_array, size_t size){
+void set_array_random(int* p_array, size_t size)
+{
   while(size--)
     *p_array++ = rand() % 1000;
 }
 
-int* set_array_random_2(int* p_array, size_t size){
+int* set_array_random_2(int* p_array, size_t size)
+{
   int* p_ret = p_array;
 
   while(size--)
@@ -36,25 +41,31 @@ int* set_array_random_2(int* p_array, size_t size){
   return p_ret;
 }
 
-void print_array(const int* p_array, size_t size){
-  for (size_t i = 0; i < size; ++i){
+void print_array(const int* p_array, size_t size)
+{
+  for (size_t i = 0; i < size; ++i)
+  {
     if (i && i % 10 == 0)
       putchar('\n');
+
     printf("%3d ", p_array[i]);
   }
+
   printf("\n---------------------------------------\n");
 }
 
-void sort_array(int* pArr, size_t size){
-  for (size_t i = 0; i < size - 1; ++i){
-    for (size_t k = i + 1; k < size; ++k){
-      if (pArr[i] > pArr[k]){
+void sort_array(int* pArr, size_t size)
+{
+  for (size_t i = 0; i < size - 1; ++i)
+    for (size_t k = i + 1; k < size; ++k)
+    {
+      if (pArr[i] > pArr[k])
+      {
         int temp = pArr[i];
         pArr[i] = pArr[k];
         pArr[k] = temp;
       }
-    }
-  }
+    }  
 }
 
 void reverse_array(int* p_array, size_t size)
@@ -112,7 +123,8 @@ void get_min_max(const int* p_array, size_t size, int* p_min, int* p_max)
 {
   *p_min = *p_max = *p_array;
 
-  for(size_t i = 1; i < size; ++i){
+  for(size_t i = 1; i < size; ++i)
+  {
     if(p_array[i] > *p_max)
       *p_max = p_array[i];
     else if(p_array[i] < *p_min)
@@ -280,7 +292,8 @@ void print_bits(unsigned int val)
 {
   unsigned int mask = ~(~0u >> 1);
 
-  while (mask) {
+  while (mask) 
+  {
     putchar(mask & val ? '1' : '0');
     mask >>= 1;
   }

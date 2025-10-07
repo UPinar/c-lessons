@@ -55,8 +55,7 @@
     int i_arr[N];
 
     printf("sizeof(i_arr) = %zu\n", sizeof(i_arr));
-    // "sizeof(i_arr)" expression 
-    // will be calculated at runtime
+    // "sizeof(i_arr)" expression will be calculated at runtime
 
     printf("i_arr size = %zu\n", sizeof(i_arr) / sizeof(i_arr[0])); 
   }
@@ -124,7 +123,8 @@
   {
     double* pd = malloc(arr_size * sizeof(double));
 
-    if (!pd) {
+    if (!pd) 
+    {
       fprintf(stderr, "memory allocation failed\n");
       exit(EXIT_FAILURE);
     }
@@ -233,12 +233,14 @@
       for (int k = 0; k < col; ++k) 
         matrix[i][k] = val++;
 
-    for (int i = 0; i < row; ++i) {
-      for (int k = 0; k < col; ++k) {
+    for (int i = 0; i < row; ++i) 
+    {
+      for (int k = 0; k < col; ++k) 
         printf("%d ", matrix[i][k]);
-      }
+
       printf("\n");
     }
+
   }
 
   int main(void)
@@ -260,7 +262,8 @@
   void func_1(size_t row, size_t col)
   {
     int* p = malloc(row * col * sizeof(int));
-    if (!p) {
+    if (!p) 
+    {
       fprintf(stderr, "memory allocation failed\n");
       exit(EXIT_FAILURE);
     }
@@ -272,9 +275,11 @@
       for (size_t k = 0; k < col; ++k)
         p[i * col + k] = rand() % 10;
 
-    for (size_t i = 0; i < row; ++i) {
+    for (size_t i = 0; i < row; ++i) 
+    {
       for (size_t k = 0; k < col; ++k)
         printf("%d ", p[i * col + k]);
+
       printf("\n");
     }
 
@@ -286,7 +291,8 @@
   {
     int(*p)[row][col] = malloc(sizeof(*p));
     // p is a pointer to a 2D array of integers
-    if (!p) {
+    if (!p) 
+    {
       fprintf(stderr, "memory allocation failed\n");
       exit(EXIT_FAILURE);
     }
@@ -295,9 +301,11 @@
       for (int k = 0; k < col; ++k)
         (*p)[i][k] = rand() % 10;
 
-    for (int i = 0; i < row; ++i) {
+    for (int i = 0; i < row; ++i) 
+    {
       for (int k = 0; k < col; ++k)
         printf("%d ", (*p)[i][k]);
+
       printf("\n");
     }
 
@@ -392,7 +400,7 @@
                 .m_id           = 1111,
                 .m_birth_date   = { 1990, 1, 1 } };
 
-    func(&(Person_t){ 1111, "n", "s", { 2000, 20, 20 } });
+    func(&(Person_t){ 1111, "n", "s", { 2000, 11, 11 } });
 
     char* str = (char[]){ "hello world" };
   }
@@ -442,13 +450,11 @@
   {
     int* p_arr;
 
-    if (p_arr == NULL) {
+    if (p_arr == NULL)
       p_arr = (int[]){ 11, 22, 33, 44, 55 };
-    }
 
     print(p_arr, 5);    // undefined behavior(UB)
-    // warning: dangling pointer 'p_arr' 
-    // to an unnamed temporary may be used 
+    // warning: dangling pointer 'p_arr' to an unnamed temporary may be used
   }
 */
 
@@ -556,7 +562,8 @@
 
     Student_t* p_s1 = 
       malloc(sizeof(Student_t) + (size_t)exam_count * sizeof(int));
-    if (!p_s1) {
+    if (!p_s1) 
+    {
       fprintf(stderr, "memory allocation failed\n");
       exit(EXIT_FAILURE);
     }
@@ -571,7 +578,8 @@
     // --------------------------------------------------
 
     Student_t s2 = *p_s1;
-    // data members are copied but not the flexible array member
+    // data members("m_name", "m_surname", "m_id") are copied 
+    // but not the flexible array member
 
     printf("id = %d\n", s2.m_id);
     printf("name = %s\n", s2.m_name);
@@ -580,8 +588,8 @@
     for (int i = 0; i < exam_count; ++i)
       printf("grade[%d] = %d\n", i, s2.m_grades_arr[i]);
     // undefined behavior(UB) 
-    // trying to reach flexible array members which 
-    // are not copied to the new object
+    // trying to reach flexible array members which are not copied
+    // to the new object(s2)
 
     // --------------------------------------------------
 
@@ -606,11 +614,9 @@
     int exam_count = 5;
     size_t student_storage_size = 
       sizeof(Student_t) + (size_t)exam_count * sizeof(int);
-    
-
     Student_t* p_s1 = malloc(student_storage_size);
-
-    if (!p_s1) {
+    if (!p_s1) 
+    {
       fprintf(stderr, "memory allocation failed\n");
       exit(EXIT_FAILURE);
     }
@@ -625,7 +631,8 @@
     // --------------------------------------------------
 
     Student_t* p_s2 = malloc(student_storage_size);
-    if (!p_s2) {
+    if (!p_s2) 
+    {
       fprintf(stderr, "memory allocation failed\n");
       exit(EXIT_FAILURE);
     }
@@ -668,8 +675,7 @@
 
     - fonksiyona giriş çıkış kodları için maliyet oluşmaz.
     - fonksiyon çağrısı sebebiyle akışın bölünmemesi
-      derleyicinin daha geniş kod alanında optimizasyon 
-      yapabilmesine olanak sağlar.
+      derleyicinin daha geniş kod alanında optimizasyon yapabilmesine olanak sağlar.
 
   - "inline" keyword (function specifier) 
 
@@ -740,8 +746,7 @@
 
     // if "main.c", "first.c" and "second.c" source files
     // includes "file1.h" header file,
-    // "func_1" function will be defined in each source file
-    // internally.
+    // "func_1" function will be defined in each source file internally.
   }
 */
 
@@ -764,8 +769,7 @@
     // every source file that includes "file1.h" header file
     // will have a definition of "func_1" function externally.
 
-    // if all source files that includes "file.h"
-    // are calling "func_1" 
+    // if all source files that includes "file.h" are calling "func_1" 
     // and compiler did not do inline expansion
     // linker will generate a multiple definition error !!
   }
@@ -830,8 +834,8 @@
 */
 
 /*
-  // "func" is expecting minimum 10 element array address
-  // to passed as an argument.
+  // "func" is expecting minimum 10 element array address to pass
+  
   void func(const int arr[static 10])
   {
     for (int i = 0; i < 10; ++i)

@@ -13,21 +13,18 @@
 */
 
 /*
-  - lojik açıdan değeri değişmemesi gerekn değişkenler `const`
-    yapılmalıdır. Yanlışlıkla değiştirmeye çalışan kod sentaks
-    hatası verir.
-  - `const` olan değişken dizi olabilir, pointer olabilir, user 
-    defined type olabilir.
+  - lojik açıdan değeri değişmemesi gerekn değişkenler `const` yapılmalıdır.
+    Bu sayede yanlışlıkla değiştirmeye çalışan kod sentaks hatası verir.
+    
+  - `const` olan değişken dizi olabilir, pointer olabilir, user defined type olabilir.
 
   - global değişkenler `const` olabilir.
   - local değişkenler `const` olabilir.
   - static local değişkenler `const` olabilir.
 
-  - `const` değişkenler derleyiciye daha iyi 
-    optimizasyon yapma imkanı verir.
+  - `const` değişkenler derleyiciye daha iyi optimizasyon yapma imkanı verir.
 
-  - `const` değişkenler multithread programlamada
-    senkronizasyon maaliyetini ortadan kaldırır.
+  - `const` değişkenler multithread programlamada senkronizasyon maaliyetini ortadan kaldırır.
 */
 
 /*
@@ -40,8 +37,8 @@
     // p1 is a constant pointer to an integer
     // top level const
 
-    *p1 = 30; // VALID
-    p1 = &y;   // syntax error
+    *p1 = 30;   // VALID        (changing the value that p1 points to)
+    p1 = &y;    // syntax error (changing the address that p1 points to)
     // error: assignment of read-only variable 'p'
   }
 */
@@ -209,8 +206,7 @@
 */
 
 /*
-  // conversion from (const T* ===> T*)
-  // will cause undefined behavior(UB)
+  // conversion from (const T* ===> T*) will cause undefined behavior(UB)
 
   int main(void)
   {
@@ -225,13 +221,12 @@
   void foo(T*)        -> setter, mutator function
     - aldığı adresteki değeri değiştirip çağıran koda bir
       değer iletiyor ise OUT param.
-    - aldığı adresteki değerden okuma yapıp hem de çağıran koda
+    - aldığı adresteki değerden hem okuma yapıp hem de çağıran koda
       bu adresi değiştirerek bir değer iletiyor ise IN-OUT param.
     
   void foo(const T*)  -> getter, accessor function
-    - aldığı adresteki değeri okuyup, çağıran koda 
-      bu adresi değiştirerek 
-      herhangi bir değer iletmiyor ise IN param.   
+    - aldığı adresteki değeri okuyup çağıran koda,
+      bu adresi değiştirerek herhangi bir değer iletmiyor ise IN param.   
 */
 
 /*
@@ -268,11 +263,9 @@
 
 /*
   - bir değişken "volatile" anahtar sözcüğü ile tanımlandığında,
-    bu değişkenin program dışı kaynaklar tarafından 
-    değiştirilebileceğini belirtir.
+    bu değişkenin program dışı kaynaklar tarafından değiştirilebileceğini belirtir.
 
-  memory mapped I/O : registerlar bellekteki adreslere 
-  map edilmiş olabilir. 
+  memory mapped I/O : registerlar bellekteki adreslere map edilmiş olabilir. 
 
     #define   ADR_REG   (int*)0x1111FFFF
 
@@ -280,7 +273,7 @@
     int* p = ADR_REG;
     "*p" ifadesi yazılan değer okunabilir. 
 
-  - interruplar bir değişkenin değerini değiştirebilir.
+  - interruptlar bir değişkenin değerini değiştirebilir.
   - işletim sisteminden gelen bir sinyali işleyen fonksiyonun
     içinde global bir değişkenin değeri değiştirilebilir.
 
@@ -291,7 +284,7 @@
   - "volatile" anahtar sözcüğü türün bir parçasıdır. 
 
   - değişken "volatile" anahtar sözcüğü ile tanımlandığında,
-    bu değişkenin değeri derleyici tarafından optimize edilmez.
+    bu değişkenin değeri, derleyici tarafından optimize edilmez.
     her okuma işleminde, değişkenin değeri bellekten tekrar okunur.
 */
 
@@ -315,8 +308,7 @@
     // p1 is a volatile pointer to an integer
 
     // when p1 wanted to use, 
-    // it must be read from memory(fetch)
-    // without compiler optimization
+    // it must be read from memory(fetch) without compiler optimization
 
     // --------------------------------------------------
 
@@ -324,21 +316,18 @@
     // p2 is a pointer to a volatile integer
 
     // when *p2(g_x) wanted to use, 
-    // it must be read from memory(fetch)
-    // without compiler optimization
-    
+    // it must be read from memory(fetch) without compiler optimization
+
     // --------------------------------------------------
 
     volatile int* volatile p3 = &g_x;
     // p3 is a volatile pointer to a volatile integer
 
     // when p3 wanted to use, 
-    // it must be read from memory(fetch)
-    // without compiler optimization
+    // it must be read from memory(fetch) without compiler optimization
 
     // when *p3(g_x) wanted to use, 
-    // it must be read from memory(fetch)
-    // without compiler optimization
+    // it must be read from memory(fetch) without compiler optimization
 
     // --------------------------------------------------
   }
@@ -350,21 +339,22 @@
     int a = 11;
     int x = a + 10;
     int y = a + 20;
+    printf("x = %d, y = %d", x, y);
   }
 
-  // compiled with x86-64 gcc 14.2 -O1
+  // compiled with x86-64 gcc 15.2 -O1
   //  .LC0:
-  //    .string "x = %d, y = %d\n"
+  //          .string "x = %d, y = %d"
   //  main:
-  //    sub     rsp, 8
-  //    mov     edx, 31                 : int y = 31;
-  //    mov     esi, 21                 : int x = 21;
-  //    mov     edi, OFFSET FLAT:.LC0
-  //    mov     eax, 0
-  //    call    printf
-  //    mov     eax, 0
-  //    add     rsp, 8
-  //    ret
+  //          sub     rsp, 8
+  //          mov     edx, 31                   ---> no read
+  //          mov     esi, 21                   ---> no read
+  //          mov     edi, OFFSET FLAT:.LC0
+  //          mov     eax, 0
+  //          call    printf
+  //          mov     eax, 0
+  //          add     rsp, 8
+  //          ret
 
   // "x" and "y" are not read from memory, 
   // because of there is not any change in code related with "a"
@@ -383,28 +373,28 @@
     printf("x = %d, y = %d\n", x, y);
   }
 
-  // compiled with x86-64 gcc 14.2 -O1
+  // compiled with x86-64 gcc 15.2 -O1
   //  .LC0:
-  //    .string "x = %d, y = %d\n"
+  //          .string "x = %d, y = %d\n"
   //  main:
-  //    sub     rsp, 24
-  //    mov     DWORD PTR [rsp+12], 11    
-  //    mov     esi, DWORD PTR [rsp+12]     : (read from memory 1)
-  //    mov     edx, DWORD PTR [rsp+12]     : (read from memory 2) 
-  //    add     edx, 20                     : "printf" 3rd argument
-  //    add     esi, 10                     : "printf" 2nd argument
-  //    mov     edi, OFFSET FLAT:.LC0       : "printf" 1st argument 
-  //    mov     eax, 0                      : zeroing ret val reg
-  //    call    printf                      : "printf" call
-  //    mov     eax, 0
-  //    add     rsp, 24
-  //    ret
+  //          sub     rsp, 24
+  //          mov     DWORD PTR [rsp+12], 11
+  //          mov     esi, DWORD PTR [rsp+12]       ---> first read
+  //          mov     edx, DWORD PTR [rsp+12]       ---> second read
+  //          add     edx, 20
+  //          add     esi, 10
+  //          mov     edi, OFFSET FLAT:.LC0
+  //          mov     eax, 0
+  //          call    printf
+  //          mov     eax, 0
+  //          add     rsp, 24
+  //          ret
 
   // for assigning "x" and "y" values,
   // compiler reads "a" variable's value from memory twice.
   // because volatile keyword is a way of telling to compiler that
   // some other program can change "a" variable's value,
-  // it must be read from memory every time it is used.
+  // it must be read(fetch) from memory every time it is being used.
 */
 
 /*
@@ -412,16 +402,16 @@
 
   int main(void)
   {
-    while(flag) {
+    while(flag) 
+    {
       // code...
     }
 
-    // "flag"'s value changed by an interrupt, 
-    // or a signal handler but loop won't be terminated.
-    // Because of there is not any code that changes "flag" 
-    // variable's value from the compiler's perspective,
-    // compiler will not read "flag" variable's value from memory
-    // every time it is used.
+    // when "flag"'s value changed by an interrupt or a signal handler to value of 0, 
+    // loop WILL NOT be terminated.
+    // Because of there is not any CODE that changes "flag" variable's value
+    // from the compiler's perspective,
+    // compiler will not read "flag" variable's value from memory every time it is being used.
   }
 */
 
@@ -430,12 +420,12 @@
 
   int main(void)
   {
-    while(flag) {
+    while(flag) 
+    {
       // code...
     }
 
-    // flag will be read from memory every time 
-    // that it will be compared with 0.
+    // flag will be read(fetch) from the memory every time that it will be compared with 0.
     // This will increase the cost of the loop.
   }
 */
@@ -453,8 +443,9 @@
   {
     signal(SIGINT, handle_sigint);  // Handle Ctrl+C signal
 
-    // keep_running will always be read from memory
-    while (keep_running) {
+    // "keep_running" variable's value will always be read(fetch) from the memory
+    while (keep_running) 
+    {
       printf("Running...\n");
       Sleep(1000);
     }
@@ -486,7 +477,7 @@
     const int cival = 10;
 
     int* p = &cival;  // INVALID
-    // conversion from 'const int*' to 'int*' is invalid
+    // conversion from 'const int*' to 'int*' is INVALID
 
     int* p2 = (int*)&cival;  // VALID
     // changing "cival"'s value by using p2 
@@ -497,7 +488,7 @@
     volatile int vival = 20;
 
     int* p3 = &vival;  // INVALID
-    // conversion from 'volatile int*' to 'int*' is invalid
+    // conversion from 'volatile int*' to 'int*' is INVALID
 
     volatile int* p4 = &vival;  // VALID
 
@@ -510,11 +501,9 @@
 */
 
 /*
-  // compiler optimization can be disabled 
-  // by using volatile keyword
+  // compiler optimization can be disabled by using volatile keyword
 
-  #include <time.h>
-  #include <stdio.h>
+  #include <time.h>   // clock, clock_t,  CLOCKS_PER_SEC
 
   int main(void)
   {
@@ -531,37 +520,38 @@
     printf( "modified non-volatile variable 100millon times\n"
             "time elapsed: %.2f seconds\n",
             (double)(clock() - c1) / CLOCKS_PER_SEC);
+
+    // output -> (compiled with x86-64 gcc 14.2 -O2)
+    //  modified non-volatile variable 100millon times
+    //  time elapsed: 0.00 seconds    
+
+    // because of variable "d"'s value 
+    // is not used after the loop,
+    // compiler optimized the code and deleted the loop.
       
     // --------------------------------------------------
 
     c1 = clock();
     volatile double vd = 0.0;
 
-    for (int i = 0; i < 10000; ++i) {
-      for (int k = 0; k < 10000; ++k) {
+    for (int i = 0; i < 10000; ++i) 
+      for (int k = 0; k < 10000; ++k) 
+      {
         double prod = vd * i * k;   
-        // reads from volatile variable
+        // reading(fetching) from volatile variable
         vd += prod;         
-        // reads from and write to volatile variable
+        // reading(fetching) from and writing to volatile variable
       }
-    }
 
     printf( "modified volatile variable 100millon times\n"
             "time elapsed: %.2f seconds\n",
             (double)(clock() - c1) / CLOCKS_PER_SEC);
 
-    // --------------------------------------------------
-
     // output -> (compiled with x86-64 gcc 14.2 -O2)
-    //  modified non-volatile variable 100millon times
-    //  modified non-volatile variable 100millon times
-    //  time elapsed: 0.00 seconds    
     //  modified volatile variable 100millon times
     //  time elapsed: 0.56 seconds
 
-    // because of variable "d"'s value 
-    // is not used after the loop,
-    // compiler optimized the code and deleted the loop.
+    // --------------------------------------------------
   }
 */
 
@@ -597,16 +587,14 @@
 */
 
 /*
-  - restrict qualifier yalnızca pointer değişkenleri
-    niteleyebilir. Bunun dışında kullanım sentaks hatasıdır.
+  - restrict qualifier yalnızca pointer değişkenleri niteleyebilir.
+    Bunun dışında kullanım sentaks hatasıdır.
 
   - restrict pointer, kullanıldığı scope'ta, 
-    kendi gösterdiği nesneyi gösteren başka bir pointer 
-    olmadığını belirtir. 
+    kendi gösterdiği nesneyi gösteren başka bir pointer olmadığını belirtir. 
 
-  - genel olarak fonksiyonların parametre değişkenleri 
-    için kullanılır.
-  
+  - genel olarak fonksiyonların parametre değişkenleri için kullanılır.
+    
   - restrict pointer'ın restrict garantisi sağlanmaz ise 
     tanımsız davranış(undefined behavior) oluşur.
 
@@ -637,8 +625,7 @@
 /*
   void foo(int* restrict p1, int* restrict p2);
 
-  // it is guaranteed that objects that p1 and p2 points to
-  // are different objects.
+  // it is guaranteed that objects that p1 and p2 points to are different objects.
 */
 
 /*
@@ -655,30 +642,30 @@
 
     double* dp1 = &g_d1;
 
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 10; ++i) 
+    {
       sum += *dp1;
       func();
     }
 
-    // compiler did not see the code of the "func"
-    // because of "func" function's code can change 
-    // the value of "g_d1" variable 
+    // compiler did not see the code of the "func".
+    // Because of "func" function's code can change the value of "g_d1" variable
     // by dereferencing "dp1" pointer,
-    // "sum += *dp1;" statement can not be optimized.
+    // "sum += *dp1;" statement CAN NOT be optimized.
 
     // ---------------------------------------------------
 
     double* restrict dp2 = &g_d2;
 
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 10; ++i) 
+    {
       sum += *dp2;
       func();
     }
 
     // because of "dp2" is a restrict pointer
-    // compiler thinks there won't be any code
-    // that can dereference "dp2" pointer
-    // so it can optimize the code.
+    // compiler thinks there won't be any code that can dereference "dp2" pointer
+    // so it CAN optimize the code.
 
     // ---------------------------------------------------
   }
@@ -733,6 +720,7 @@
 
     func(&x, &x);         // undefined behavior(UB)
     func(i_arr, i_arr);   // undefined behavior(UB)
+    // passing same pointer for restrict parameters
   }
 */
 
@@ -763,8 +751,7 @@
   }
 
   // compiler can optimize this code
-  // and can use SIMD instructions 
-  // when generating the assembly code.
+  // and can use SIMD instructions when generating the assembly code.
 
   // ---------------------------------------------------
 */

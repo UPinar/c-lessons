@@ -88,8 +88,8 @@
 */
 
 /*
-  // warning: function returns address of local variable
-  char* get_name(void)
+  // warning: function returns an address of a local variable
+  char* get_name_1(void)
   {
     char str[100] = "hello";  
     // str is an automatic storage duration array(local variable)
@@ -97,7 +97,7 @@
     return str;
   }
 
-  // function returns address of static storage duration array
+  // function returns an address of a static storage duration array
   char* get_name_2(void)
   {
     return "hello"; 
@@ -109,14 +109,15 @@
 /*
   char* get_weekday_name(int day_number)
   {
-    switch(day_number){
-    case 1: return "Monday";
-    case 2: return "Tuesday";
-    case 3: return "Wednesday";
-    case 4: return "Thursday";
-    case 5: return "Friday";
-    case 6: return "Saturday";
-    case 7: return "Sunday";
+    switch(day_number)
+    {
+      case 1: return "Monday";
+      case 2: return "Tuesday";
+      case 3: return "Wednesday";
+      case 4: return "Thursday";
+      case 5: return "Friday";
+      case 6: return "Saturday";
+      case 7: return "Sunday";
     }
 
     return NULL;
@@ -141,7 +142,8 @@
 /*
   int main(void)
   {
-    for (int i = 1; i <= 10; ++i){
+    for (int i = 1; i <= 10; ++i)
+    {
       char* ptr = "istanbul ankara izmir";
       printf("%p\n", ptr);
     }
@@ -168,7 +170,7 @@
 
     p[0] = 'H'; // undefined behavior(UB)
     // string literals are read-only data
-    // trying to modify a string literal is UB
+    // trying to modify a string literal is undefined behavior(UB)
   }
 */
 
@@ -224,15 +226,14 @@
     char str_1[] = "World";
     char str_2[] = { 'W', 'o', 'r', 'l', 'd', '\0' };
     // Those 2 lines are equivalent.
-    // str_1 is an automatic storage duration array
+    // str_1 and str_2 are automatic storage duration arrays
 
     str_1[0] = 'w'; // VALID
 
     // ---------------------------------------------------
 
     char* p = "Universe";
-    // "Universe" is a string literal and it is 
-    // a static storage duration array
+    // "Universe" is a string literal and it is a static storage duration array
 
     p[0] = 'u'; // undefined behavior(UB)
     *p = 'u';   // undefined behavior(UB)
@@ -246,10 +247,10 @@
   {
     char* p1 = "hello world";
     char* p2 = "hello world";
-    // when same string literals 
-    // used as a static storage duration array more than once
-    // depends on the compiler, it will store that literal once or more
-    // inside the read only memory (unspecified behavior)
+    // when same string literals used as a static storage duration array more than once,
+    // depends on the compiler, 
+    // it will store that string literal once or twice inside the read only memory 
+    // (compiler dependent - unspecified behavior)
 
     if (p1 == p2) {} // unspecified behavior
   }
@@ -310,7 +311,7 @@
   {
     const char* p = "";   // null string literal
     // null string literal is char[1] array
-    // its first and last element is '\0'
+    // its first(and last) element is '\0'
   }
 */
 
@@ -347,8 +348,8 @@
 
     printf("[7] -> %zu\n", sizeof(p[900])); // output -> [7] -> 1
     // "p[900]" is an expression and its data type is char
-    // because of no operation code will be generated 
-    // for p[900] expression, it won't be an UB
+    // because of no operation code will be generated for p[900] expression,
+    // it will NOT be an UB
 
     foo("Istanbul Ankara Izmir");           // output -> [8] -> 8
 
@@ -410,16 +411,16 @@
   {
     // ---------------------------------------------------
 
-    char *p = "monday \
-  tuesday \
-  wednesday \
-  thursday \
-  friday";
+    char *p = "monday     \
+               tuesday    \
+               wednesday  \
+               thursday   \
+               friday";
     puts(p);
     // output -> monday tuesday wednesday thursday friday
 
     char *p2 =  "monday  \
-                tuesday";
+                 tuesday";
     puts(p2);
     // output -> monday                 tuesday
 
@@ -449,10 +450,11 @@
     puts(str_1);  // output -> hello world
 
     strcat(str_2, "hello world"); // undefined behavior(UB)
-    // strcat will copy to the address of the null character,
-    // because of str_2 is an automatic storage duration array
-    // an is not been initialized, it has indetermined(garbage)
-    // values inside it.
+    // strcat will start concatenating str_2 from the beginning of the null character,
+    // which is not exist because of str_2 is an automatic storage duration array
+    // and it has not been initialized with any value,
+    // so it has indetermined(garbage) values inside of its bytes.
+    // which will cause UB
   }
 */
 

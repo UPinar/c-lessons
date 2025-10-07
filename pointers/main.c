@@ -15,12 +15,11 @@
 */
 
 /*
-  - expressions(ifade) have data type, value category and value.
+  - expressions(ifadeler) have data type, value category and value.
   - some expression's data type is address.
 
-  - farklı türlerden değişkenlerin adresleri olan ifadeler 
-    farklı türden ifadeler.
-      double türden bir nesnenin adresinin türü(double*)ile
+  - farklı türlerden değişkenlerin adresleri olan ifadeler farklı türden ifadeler.
+      double türden bir nesnenin adresinin türü(double*) ile
       int türden bir nesnenin adresinin türü(int*) farklıdır.
 
   - x, T türünden bir değişken(variable) olsun, eğer bir ifade(expression)
@@ -44,7 +43,7 @@
 */
 
 /*
-  float* ptr;  -> there are 3 tokens in this decla
+  float* ptr;  -> there are 3 tokens in this declaration statement.
 
   float -> keyword
   *     -> declarator
@@ -57,12 +56,13 @@
   - if a token(*) in a declaration is used for 
   declaring the type of an object, it's a declarator.
 
-  - eğer bir token(*) bir bildirimde(declaration) bir varlığın(objects)
+  - eğer bir token(*) bir bildirimde(declaration) bir varlığın(object's)
   türünü(data type) belirtmek için kullanılıyorsa, bu bir deklaratördür.
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int* p;
 
     *p = 0;  // "*p" is an expression so (*) token is an operator.
@@ -70,7 +70,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     printf("sizeof(char) = %zu\n", sizeof(char));
     // output -> sizeof(char) = 1
     printf("sizeof(char*) = %zu\n", sizeof(char*));
@@ -111,10 +112,10 @@
 /*
   int foo(void);
 
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     int a[10] = { 0 };
-
 
     34;       
     // "34" is an expression, its data type is int
@@ -142,7 +143,8 @@
   int foo(void);
   int* bar(void);
 
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     int a[10] = { 0 };
     int* ptr = a;
@@ -159,7 +161,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int* p1, p2, p3;
     // Those declarations are same as below
 
@@ -170,7 +173,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x, y[3], z, t[10];
     // Those declarations are same as below
 
@@ -182,7 +186,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int* p1, p2[10], p3, *p4;
     // Those declarations are same as below
 
@@ -194,7 +199,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x[5], *y, *z[4];
     // Those declarations are same as below
 
@@ -209,10 +215,11 @@
   // global pointer variable (static storage duration)
 
   void func(float* fptr); 
-  // function's parameter pointer variable (automatic storage duration)
+  // function's parameter is a pointer variable (automatic storage duration)
 
 
-  int main(void){
+  int main(void)
+  {
     int* p;           
     // local pointer variable (automatic storage duration)
 
@@ -224,7 +231,8 @@
 /*
   int g;        // zero initialized (static storage duration)
 
-  int main(void){
+  int main(void)
+  {
     int x;      // defining without initialization (garbage value)
     int y = 10; // defining with initialization
 
@@ -235,15 +243,18 @@
 /*
   int* gp;  // null pointer - (static storage duration)
 
-  int main(void){
+  int main(void)
+  {
     int* p;   // defining without initialization (garbage value)
+    // (automatic storage duration)
 
     static int* sp;  // null pointer - (static storage duration)
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     // int* p = init_expr;
     // init_expr should be an address of an int object
 
@@ -253,7 +264,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int* p;
     int x, y;
 
@@ -292,30 +304,37 @@
 */
 
 /*
-  - operand must be an LValue expression.
+  - operand of an address of operator must be an LValue expression.
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     &5;       // syntax error
     // error: lvalue required as unary '&' operand
+    // 5 is R value expression
 
     int x = 6;
     &(x + 5); // syntax error
     // error: lvalue required as unary '&' operand
+    // x + 5 is R value expression
 
     &x;       // VALID
+    // &x is L value expression
 
     int a[4];
     &a[2];    // VALID
+    // &a[2] is L value expression
 
     &+x;      // syntax error
     // error: lvalue required as unary '&' operand
+    // +x is R value expression
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 6;
     &x;      // "&x" is an expression, it's data type is int*
 
@@ -325,7 +344,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 6;
     int y = 56;
 
@@ -335,7 +355,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 5, *p = &x;
     // That line is same as below
 
@@ -345,7 +366,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 5;
     int* p1 = &x;
     int* p2 = p1;
@@ -358,7 +380,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int a[5] = { 0 };
     int b[5] = { 0 };
 
@@ -373,7 +396,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int* p;
     int x = 10;
 
@@ -387,7 +411,8 @@
 */
 
 /*
-  int main (void){
+  int main (void)
+  {
     int* p;
     double dval = 4.5;
 
@@ -401,10 +426,11 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10;
 
-    &x;  // "&x" is RValue expression
+    &x;  // "&x" is an RValue expression
 
     &(&x);  // syntax error
     // error: lvalue required as unary '&' operand
@@ -412,10 +438,11 @@
 */
 
 /*
-  // variables addresses cannot be changed in programs run time.
+  // variable's addresses cannot be changed in programs run time.
   // değişkenlerin adresleri programın çalışma zamanında değiştirilemez.
 
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     int y = 20;
     int* p = &x;
@@ -426,11 +453,12 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int a[10] = { 0 };
 
-    a;    // "a" is LValue expression
-    &a;   // "&a" is RValue expression
+    a;    // "a" is an LValue expression
+    &a;   // "&a" is an RValue expression
 
 
     // a =         -> becomes &a[0]
@@ -446,7 +474,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int a[10] = { 0 };
     a;    // "a" is non-modifiable LValue  
 
@@ -456,7 +485,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int a[10] = { 0 };
 
     sizeof(&a[0]);  // "&a[0]" is an expression, its data type is int*
@@ -471,9 +501,10 @@
 */
 
 /*
-  // for pointer expressions %p format specifier is being used.
+  // for pointer expressions, %p format specifier is being used.
 
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     int a[] = { 1, 2, 3, 4, 5 };
     int* ptr = &x;
@@ -496,7 +527,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 6;
     int* p = &x;
 
@@ -509,7 +541,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 6;
     int* ptr = &x;
 
@@ -521,11 +554,12 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 6;
     int* ptr = &x;
 
-    // ptr is a pointer, x is a pointee
+    // ptr is a pointer, x is pointee
   }
 */
 
@@ -549,7 +583,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 6;
     *x;  // syntax error
     // error: invalid type argument of unary '*' (have 'int')
@@ -557,7 +592,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 6;
 
     *&x;    // valid
@@ -568,21 +604,23 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 6;
     int* p = &x;
     int a[5] = { 0 };
 
-    *p;       // VALID, "p" expressions type is int*
+    *p;       // VALID, "p" expression's type is int*
 
-    *a;       // VALID, "a" expressions type is int* -> &a[0]
+    *a;       // VALID, "a" expression's type is int* -> &a[0]
     *&a[0];   // VALID
     // Those 2 lines are equivalent
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 6;
     printf("x = %d\n", x);   // output -> x = 6
 
@@ -610,7 +648,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int a[] = { 10, 20, 30 };
     *a = 777;
   }
@@ -640,7 +679,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 6;
     int* p = &x;
 
@@ -677,7 +717,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 3;
     int* p1 = &x;
     int* p2 = p1;
@@ -724,7 +765,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 3;
     int y = 67;
 
@@ -758,7 +800,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     int y = 20;
     int* p1 = &x;
@@ -773,7 +816,8 @@
 */
 
 /*
-    int main(void){
+    int main(void)
+    {
       int x = 10;
       int y = 20;
       int* p1 = &x;
@@ -804,7 +848,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     int y = 20;
     int* p1 = &x;
@@ -826,11 +871,13 @@
 /*
   // call by value 
 
-  void foo(int a){
+  void foo(int a)
+  {
     a = 999;
   }
 
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     printf("x = %d\n", x);  // output -> x = 10
 
@@ -866,11 +913,13 @@
 /*
   // call by reference
 
-  void foo(int* a){
+  void foo(int* a)
+  {
     *a = 999;
   }
 
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     printf("x = %d\n", x);  // output -> x = 10
 
@@ -902,13 +951,15 @@
 */
 
 /*
-  void swap(int* x, int* y){
+  void swap(int* x, int* y)
+  {
     int temp = *x;
     *x = *y;
     *y = temp;
   }
 
-  int main(void){
+  int main(void)
+  {
     int a = 5;
     int b = 10; 
     printf("a = %d, b = %d\n", a, b);   // output -> a = 5, b = 10
@@ -924,15 +975,17 @@
 */
 
 /*
-  void swap(int* x, int* y){
+  void swap(int* x, int* y)
+  {
     int temp = *x;
     *x = *y;
     *y = temp;
   }
 
-  int main(void){
-    int a[] = {111, 222, 333};
-    int b[] = {999, 888, 777};
+  int main(void)
+  {
+    int a[] = { 111, 222, 333 };
+    int b[] = { 999, 888, 777 };
     printf("a[0] = %d, b[0] = %d\n", a[0], b[0]);
     // output -> a[0] = 111, b[0] = 999
 
@@ -980,7 +1033,7 @@
 */
 
 /*
-  // if the only reason that I need to calculate area is 
+  // if the only reason that we need to calculate area is,
   // to use it in another function
 
   #define PI 3.14159265358979323846
@@ -1083,10 +1136,10 @@
     // 1608 bytes will be copied to m object
 
     get_random_matrix_2(&m);
-    // 8 bytes(Matrix*) will be copied to get_random_matrix_2 function
+    // 8 bytes(Matrix*)(a pointer to Matrix) will be copied to get_random_matrix_2 function.
 
     // get_random_matrix_1 and get_random_matrix_2 functions
-    // are doing the same job but get_random_matrix_2 is cheaper
+    // are doing the same job but get_random_matrix_2 is much more cheaper.
   }
 */
 
@@ -1183,10 +1236,13 @@
     // ...
 
     result = add_matrices_1(m1, m2);
+    // copying 3 Matrix objects -> 1608 * 3 bytes
 
     add_matrices_2(m1, m2, &result);
+    //  copying 2 Matrix and 1 Matrix* objects -> 1608 * 2 + 8 bytes
 
     add_matrices_3(&m1, &m2, &result);
+    // copying 3 Matrix* objects -> 8 * 3 bytes
   }
 */
 
@@ -1203,8 +1259,8 @@
     int a[100] = { 1, 2, 3, 4, 5 };
 
     // because of array's elements are contigious in memory
-    // we can reach every elements of the array 
-    // by using the address of the first element
+    // we can reach every element of the array 
+    // by using the address of the first element itself.
 
     foo(a);   // a ==> &a[0] (array decay)
     bar(a);   // a ==> &a[0] (array to pointer conversion)
@@ -1212,9 +1268,9 @@
 */
 
 /*
-  // some functions get the address of an object,
-  // it uses the object as an input and also writes to the object
-  // and pass the object to the caller
+  // some functions gets the address of an object,
+  // it uses the object as an input and also writes to that object
+  // and pass that object back to the caller
   // in-out parameter
 
   // out parameter 
@@ -1227,16 +1283,15 @@
   {
     int x;  // indeterminate(garbage) value
 
-    foo(&x);    
-    // no logic error 
+    foo(&x);  // no logic error 
     // foo function's parameter is out param
     // so foo is not using x variable as an input
 
-    bar(&x);  // undefined behavior
+    bar(&x);  // undefined behavior(UB)
     // bar function's parameter is in-out param
     // so bar is will use x variable as an input
     // but x variable has an indeterminate value
-    // using indeterminate value is undefined behavior
+    // using indeterminate value is undefined behavior(UB)
   }
 */
 
@@ -1380,7 +1435,7 @@
   {
     int a[10] = { 0, 11, 22, 33, 44, 55, 66, 77, 88, 99 };
 
-    // &a[3] -> (a + 3)
+    // &a[3] -> &(*(a + 3)) -> (a + 3)
 
     for(int i = 0; i < 10; ++i)
       printf("%2d %2d %2d\n", a[i], *(a + i), *(i + a));
@@ -1466,7 +1521,8 @@
     int* ptr = a;
 
     int n  = 10;
-    while(n--){
+    while(n--)
+    {
       printf("%d ", *ptr);
       ++ptr;
     }
@@ -1606,7 +1662,7 @@
 /*
   int main(void)
   {
-    int a[10] = { 0 , 11, 22, 33, 44, 55, 66, 77, 88, 99 }; 
+    int a[10] = { 0, 11, 22, 33, 44, 55, 66, 77, 88, 99 }; 
 
     //------------------------------------------------------
 
@@ -1628,7 +1684,8 @@
     //------------------------------------------------------
 
     int size = 10;
-    while(size--){
+    while(size--)
+    {
       printf("%d ", *p);
       ++p;
     }
@@ -1686,7 +1743,8 @@
 
     // <---- WAY 2 ---->
 
-    while(size--){
+    while(size--)
+    {
       printf("%d ", *ptr);
       ++ptr;
     }
@@ -1706,11 +1764,12 @@
 
   void aprint_2(int* ptr, int size)
   {
-      while(size--){
-        printf("%d ", *ptr);
-        ++ptr;
-      }
-      printf("\n");
+    while(size--)
+    {
+      printf("%d ", *ptr);
+      ++ptr;
+    }
+    printf("\n");
   }
 
   int main(void)
@@ -1759,7 +1818,8 @@
   int get_sum_2(const int* p_array, int size)
   {
     int sum = 0;
-    while (size--){
+    while (size--)
+    {
       sum += *p_array;
       ++p_array;
     }
@@ -1921,7 +1981,8 @@
   {
     *p_min = *p_max = *p_array;
 
-    for(int i = 1; i < size; ++i){
+    for(int i = 1; i < size; ++i)
+    {
       if(p_array[i] > *p_max)
         *p_max = p_array[i];
       else if(p_array[i] < *p_min)
@@ -2032,12 +2093,10 @@
 
   void bubble_sort(int* p, int size)
   {
-    for (int i = 0; i < size - 1; ++i){
-      for (int k = 0; k < size - i - 1; ++k){
+    for (int i = 0; i < size - 1; ++i)
+      for (int k = 0; k < size - i - 1; ++k)
         if (p[k] > p[k + 1])
           swap(p + k, p + k + 1);
-      }
-    }
   }
 
   int main(void)
@@ -2336,7 +2395,6 @@
 */
 
 /*
-
   *p = 500; 
   ++p;
   // Those 2 statements are equivalent to the statement below
@@ -2520,7 +2578,7 @@
     - both are pointing to the same object.
     - both are pointing at the end of the same array.
       (ikisi de aynı dizinin bittiği yerin adresi ise)
-    - both are NULL pointer.
+    - both are NULL pointer. 
 */
 
 /*
@@ -2580,7 +2638,8 @@
     int* p = a;
     int* pend = a + 5;
 
-    while (p != pend){
+    while (p != pend)
+    {
       printf("%d ", *p);
       ++p;
     }
@@ -2938,7 +2997,7 @@
   char* bar(void)
   {
     static char s_str[] = "reality or simulation";
-    // str is local static variable -> static storage duration
+    // s_str is local static variable -> static storage duration
 
     return s_str;
   }
@@ -3377,10 +3436,8 @@
 
   void selection_sort(int* p, int size)
   {
-    for (int i = 0; i < size - 1; ++i){
+    for (int i = 0; i < size - 1; ++i)
       swap(p + i, getMinElement(p + i, size - i));
-    }
-    
   }
 
   int main(void)
@@ -3433,7 +3490,7 @@
     printf("%d\n", *ptr);   // output -> 8
 
     ptr = a + 10;
-    int val = ptr - (a + 3);
+    ptrdiff_t val = ptr - (a + 3);
     printf("val = %d\n", val);  // val = 7;
 
     ptr = a + 10;
@@ -3889,10 +3946,11 @@
   // it will return a null pointer
   int* search_in_array(const int* p_array, int size, int key)
   {
-    while(size--){
-      if(*p_array == key){
+    while(size--)
+    {
+      if(*p_array == key)
         return (int*)p_array;   // const cast -> const int* to int*
-      }
+
       ++p_array;
     }
 
@@ -3911,7 +3969,8 @@
 
     int* ptr = search_in_array(a, SIZE, key);
 
-    if (ptr){
+    if (ptr)
+    {
       printf("key is found in the array\n");
       printf("index of the key is %lld\n", ptr - a);
       *ptr = -1;
@@ -4009,8 +4068,10 @@
 /*
   #include "../headers/nutility.h"
 
-  // void print_array(const int* p_array, int size){
-  //   for (int i = 0; i < size; ++i){
+  // void print_array(const int* p_array, int size)
+  // {
+  //   for (int i = 0; i < size; ++i)
+  //   {
   //     if (i && i % 10 == 0)
   //       putchar('\n');
   //     printf("%3d ", p_array[i]);    ---------------------->
@@ -4041,11 +4102,11 @@
   {
     int* p = NULL;
 
-    if (1){
+    if (1)
       p = &g_x;
-    }
 
-    if (p){ // using pointer's value as a flag
+    if (p)  // using pointer's value as a flag
+    { 
       // code..
     }   
   }
@@ -4539,7 +4600,8 @@
 
     int counter = 0;
     for (size_t i = 0; i < PNAMES_SIZE; ++i)
-      if (strchr(p_names[i], ch)){
+      if (strchr(p_names[i], ch))
+      {
         printf("%s ", p_names[i]);
         ++counter;
       }
@@ -4562,11 +4624,13 @@
   int main(void)
   {
     int counter = 0;
-    for (int c = 'a'; c <= 'z'; ++c){
+    for (int c = 'a'; c <= 'z'; ++c)
+    {
       printf("elements that have '%c' character inside of it : \n", c);
       counter = 0;
       for (size_t i = 0; i < PNAMES_SIZE; ++i)
-        if (strchr(p_names[i], c)){
+        if (strchr(p_names[i], c))
+        {
           printf("%s ", p_names[i]);
           ++counter;
         }
@@ -4734,7 +4798,8 @@
   {
     size_t len1, len2;
     for (size_t i = 0; i < PNAMES_SIZE - 1; ++i)
-      for (size_t k = 0; k < PNAMES_SIZE - 1 - i; ++k){
+      for (size_t k = 0; k < PNAMES_SIZE - 1 - i; ++k)
+      {
         len1 = strlen(p_names[k]);
         len2 = strlen(p_names[k + 1]);
 
@@ -4960,7 +5025,7 @@
 
     &x;     
     // "&x" expression's data type is `int*` 
-    // &x is a pointer int
+    // &x is a pointer to int
 
     p;      
     // "p" expression's data type is `int*` 
@@ -5706,13 +5771,11 @@
 /*
   int main(void)
   {
-    int arr[4] = { 10, 20, 30, 40};
-
-    // -------------------------------------------------------
-
+    int arr[4] = { 10, 20, 30, 40 };
     int* p1 = arr;
 
-    for (int i = 0; i < 5; ++i){
+    for (int i = 0; i < 5; ++i)
+    {
       printf("%p %p\n", arr + i, p1);
       ++p1;
     }
@@ -5732,7 +5795,8 @@
 
     int (*p2)[4] = &arr;
 
-    for (int i = 0; i < 5; ++i){
+    for (int i = 0; i < 5; ++i)
+    {
       printf("%p %p\n", &arr + i, p2);
       ++p2;
     }
@@ -5772,15 +5836,15 @@
 /*
   #include "../headers/nutility.h"
 
-  void foo(int (*p)[5])
+  void foo(int(*p)[5])
   {
-    print_array(*p, 5);   // output ->   1   2   3   4   5
+    print_array(*p, 5);   
   }
 
   int main(void)
   {
     int arr[5] = { 1, 2, 3, 4, 5 };
-    foo(&arr);
+    foo(&arr);    // output ->   1   2   3   4   5
   }
 */
 
@@ -5918,7 +5982,9 @@
 
   int main(void)
   {
-    if (foo(2)){} // syntax error
+    if (foo(2)) // syntax error
+    {
+    } 
     // error: void value not ignored as it ought to be
   }
 */
@@ -6680,7 +6746,7 @@
 
     fp();       // output -> foo is called
     (*fp)();    // output -> foo is called
-    // *fp ==> f1  ---  (*fp)() ==> f1()
+    // *fp ==> foo ---  (*fp)() ==> foo()
     // precedence of "()" is higher than "*"
 
     // -------------------------------------------------------
@@ -6714,8 +6780,7 @@
 */
 
 /*
-  #include <ctype.h>  
-  // isupper, islower, isdigit, isxdigit, ispunct
+  #include <ctype.h>  // isupper, islower, isdigit, isxdigit, ispunct
 
   void print_chars(int(*fp_ctest)(int))
   {
@@ -6779,7 +6844,7 @@
 /*
   // ------------------------------------------------
 
-  typedef int (*FPTYPE_1)(const char*, const char*);
+  typedef int (*FPTYPE_1)(int, int);
 
   int foo_1(int, int);
 
@@ -6836,12 +6901,12 @@
   typedef int INTARR5[5];
   typedef int(*P_INTARR5)[5];
 
-  P_INTARR5 BAR_2(void)
+  P_INTARR5 bar_2(void)
   {
     return &g_arr;
   }
 
-  INTARR5* BAR_3(void)
+  INTARR5* bar_3(void)
   {
     return &g_arr;
   }
@@ -7062,8 +7127,8 @@
 
 /*
   #include <ctype.h>
-  #include <string.h> // strcmp
-  #include <stddef.h> // size_t
+  #include <string.h>   // strcmp
+  #include <stddef.h>   // size_t
   #include "../headers/nutility.h"
 
   typedef int(*FP_CTEST)(int);
@@ -7217,14 +7282,6 @@
                         ------------------
                         | pointer errors |
                         ------------------
-*/
-
-/*
-  int main(void)
-  {
-    int* p;   // wild(invalid) pointer
-    *p = 110; // undefined behavior(ub)
-  }
 */
 
 /*
@@ -7393,7 +7450,7 @@
 
     *p;   // VALID
 
-    // casting signed* <--> unsigned* in NOT UB.
+    // casting signed* <--> unsigned* is NOT UB.
   }
 */
 
@@ -7500,7 +7557,7 @@
 
     // compiler can store "hello" string literal 
     // in the same memory location or different memory locations
-    // unspecified behavior
+    // so it is unspecified behavior NOT undefined behavior(UB)
   }
 */
 
@@ -7526,7 +7583,7 @@
     static char str[40] = "hello world";
     return str;
 
-    // returning static storage duration object's address
+    // returning static storage duration object's address is VALID
   }
 */
 
@@ -7537,7 +7594,7 @@
     int* ptr = &x;
 
     int y = *ptr;  // undefined behavior(UB)
-    // using indeterminate value is undefined behavior
+    // using indeterminate value is undefined behavior(UB)
   }
 */
 
@@ -7562,7 +7619,8 @@
   void allocate_memory(char* p, size_t N)
   {
     p = (char*)malloc(N);
-    if (!p) {
+    if (!p) 
+    {
       fprintf(stderr, "malloc failed\n");
       exit(EXIT_FAILURE);
     }
@@ -7572,7 +7630,8 @@
   void allocate_memory_2(char** p, size_t N)
   {
     p = (char*)malloc(N);
-    if (!p) {
+    if (!p) 
+    {
       fprintf(stderr, "malloc failed\n");
       exit(EXIT_FAILURE);
     }
@@ -7644,7 +7703,7 @@
     free(per2.mp_address);    // undefined behaviour(UB)
 
     // free'ing a memory location that is already free'd
-    // is undefined behaviour(UB)
+    // is undefined behaviour(UB) - double free
   }
 */
 
@@ -7663,9 +7722,9 @@
     FileInfo_t i2 = i1;
 
     fclose(i1.mp_file);
-    // mp_file is a shared resource between i1 and i2
-    // closing the file will result in i2.mp_file to become
-    // dangling pointer.
+    // mp_file is a shared resource between i1 and i2,
+    // closing the file(fclose) will result in i2.mp_file 
+    // to become a dangling pointer.
 
     i2.mp_file; 
     // using dangling pointer is undefined behaviour(UB)
@@ -7758,7 +7817,8 @@
     size_t N = (rand() % 100 + 5) * 16;
     int* p = (int*)malloc(sizeof(int));
 
-    if (!p) {
+    if (!p) 
+    {
       fprintf(stderr, "malloc failed\n");
       exit(EXIT_FAILURE);
     }
@@ -7782,7 +7842,8 @@
     (void)scanf("%zu", &N);
 
     int* p_dyn = (int*)malloc(N * sizeof(int));
-    if (!p_dyn) {
+    if (!p_dyn) 
+    {
       fprintf(stderr, "malloc failed\n");
       exit(EXIT_FAILURE);
     }
@@ -7793,7 +7854,7 @@
     free(p_dyn);
     free(p);  // undefined behavior(UB)
     // free'ing a memory location that is already free'd
-    // double free
+    // double-free
   }
 */
 
@@ -7815,7 +7876,8 @@
   int get_median(const int* p_arr, size_t N)
   {
     int* p_dyn = (int*)malloc(N * sizeof(int));
-    if (!p_dyn) {
+    if (!p_dyn) 
+    {
       fprintf(stderr, "malloc failed\n");
       exit(EXIT_FAILURE);
     }

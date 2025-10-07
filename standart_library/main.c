@@ -192,7 +192,8 @@
   // strchr function's implementation
   char* Strchr(const char* p, int ch)
   {
-    while (*p != '\0'){
+    while (*p != '\0')
+    {
       if (*p == ch)
         return (char*)p;
       ++p;
@@ -213,7 +214,8 @@
     char ch = 'o';
     char* p = strchr(str, ch);
 
-    if (p != NULL){
+    if (p != NULL)
+    {
       printf("found idx = %d\n", (int)(p - str));
       *p = '*';
       puts(str);
@@ -292,8 +294,9 @@
   {
     char* p_found = NULL;
 
-    while(*p){
-      if (*p == ch)
+    while(*p)
+    {
+      if (*p == (char)ch)
         p_found = (char*)p;
       
       ++p;
@@ -363,7 +366,8 @@
 
     while(*p_str)
     {
-      if (*p_str == *p_key){
+      if (*p_str == *p_key)
+      {
         ++p_key, ++p_str;
 
         if (*p_key == '\0')
@@ -416,7 +420,8 @@
   // strpbrk function's implementation
   char* Strpbrk_1(const char* p_str, const char* p_keys)
   {
-    for(int i = 0; p_str[i] != '\0'; ++i){
+    for(int i = 0; p_str[i] != '\0'; ++i)
+    {
       if(strchr(p_keys, p_str[i]) != NULL)
         return (char*)(p_str + i);
     }
@@ -426,7 +431,8 @@
 
   char* Strpbrk_2(const char* p_str, const char* p_keys)
   {
-    while(*p_str){
+    while(*p_str)
+    {
       if(strchr(p_keys, *p_str))
         return (char*)p_str;
       ++p_str;
@@ -1204,7 +1210,7 @@
     // s1 strings null character is int 3rd index(4th character)
     // strncmp is comparing 6 characters from s2 and s1
     // after 4th character comparison, function will stop comparing
-    // so no undefined behavior.
+    // so NO undefined behavior.
   }
 */
 
@@ -1254,7 +1260,7 @@
   size_t strcspn(const char* p_string, const char* p_characters);
 
   // finding a span of characters in a string
-  // which are NOT in the character set(p_characters)
+  // which are NOT in the character set(p_characters)(c : complement)
 */
 
 /*
@@ -1295,7 +1301,7 @@
     char str[SIZE] = "::!!!...::!";
 
     char* p_token = strtok(str, "!..::");
-    // when function does not have any token it wil return NULL
+    // when function does not have any token it will return NULL
 
     if (!p_token)
       printf("no token inside string\n");
@@ -1320,7 +1326,8 @@
     // later calls must have NULL in its first parameter
     // seperators can be different in each call
 
-    while(p_token) {
+    while(p_token) 
+    {
       printf("token = (%s)\n", p_token);
       p_token = strtok(NULL, "_");
     }
@@ -1337,7 +1344,7 @@
 
 /*
   // strtok function is changing seperator characters 
-  // with null character
+  // with null character('\0')
 
   #include <string.h>   // strtok, strlen
   #include <stddef.h>   // size_t
@@ -1362,7 +1369,8 @@
     putchar('\n');
 
     char* p_token = strtok(str, "_");
-    while(p_token) {
+    while(p_token) 
+    {
       printf("token = (%s)\n", p_token);
       p_token = strtok(NULL, "_");
     }
@@ -1452,7 +1460,7 @@
     printf("x = %d\n", x);  // output -> x = 10
 
     int* p = memset(&x, 0, sizeof x);
-    printf("x = %d\n", x);  // output -> x = 10
+    printf("x = %d\n", x);  // output -> x = 0
 
     // ---------------------------------------------------
 
@@ -1460,7 +1468,7 @@
       printf("p == &x\n");
 
     // memset function's return value is the address 
-    // that has been pass to the function as the first parameter
+    // that has been passed to the function as a first parameter
 
     // ---------------------------------------------------
 
@@ -1492,13 +1500,13 @@
 
     // ---------------------------------------------------
 
-    char str_2[100] = "hello universe live from Istanbul";
+    char str_2[100] = "hello universe we are live from Istanbul";
     puts(str_2);
-    // output -> hello universe live from Istanbul
+    // output -> hello universe we are live from Istanbul
 
     memset_T(str_2 + 6, '*', 8);
     puts(str_2);
-    // output -> hello ******** live from Istanbul
+    // output -> hello ******** we are live from Istanbul
 
     // ---------------------------------------------------
   }
@@ -1694,7 +1702,8 @@
   {
     const char* p = vp;
 
-    while(block_size--){
+    while(block_size--)
+    {
       if (*p == val)
         return (char*)p;
       ++p;
@@ -1810,7 +1819,8 @@
     const unsigned char* p1 = vp1;
     const unsigned char* p2 = vp2;
 
-    while(block_size--){
+    while(block_size--)
+    {
       if (*p1 != *p2)
         return *p1 > *p2 ? 1 : -1;
       ++p1, ++p2;
@@ -2114,7 +2124,7 @@
 
   int main(void)
   {
-    double d_arr[] = {1.2, 0.5, 3.4, 2.1, 6.8, -3.4, 5.4, -7.2 };
+    double d_arr[] = { 1.2, 0.5, 3.4, 2.1, 6.8, -3.4, 5.4, -7.2 };
     qsort(d_arr, asize(d_arr), sizeof d_arr[0], &compare_double_ASC);
 
     for (size_t i = 0; i < asize(d_arr); ++i)
@@ -2150,8 +2160,9 @@
     void* lhs_elem;
     void* rhs_elem;
 
-    for (size_t i = 0; i < arr_size - 1; ++i){
-      for (size_t k = 0; k < arr_size - 1 - i; ++k){
+    for (size_t i = 0; i < arr_size - 1; ++i)
+      for (size_t k = 0; k < arr_size - 1 - i; ++k)
+      {
 
         lhs_elem  = p_arr + k * elem_size;
         rhs_elem  = p_arr + (k + 1) * elem_size;
@@ -2159,7 +2170,6 @@
         if (fp_compare(lhs_elem, rhs_elem) > 0)
           swap_T(lhs_elem, rhs_elem, elem_size);
       }
-    }
   }
 
   int compare_ASC(const void* vp1, const void* vp2)
@@ -2405,9 +2415,9 @@
     char str[] = "12345";
     int ival = 0;
 
-    for (int i = 0; str[i] != '\0'; ++i){
+    for (int i = 0; str[i] != '\0'; ++i)
       ival = ival * 10 + str[i] - '0';
-    }
+    
 
     printf("ival = %d\n", ival);  // output -> ival = 12345
   }
@@ -3282,7 +3292,7 @@
     //  - FILO(First In Last Out)
 
     // -- foo registered first, bar registered second.
-    // -- bar will call first and foo will call second.
+    // -- bar will be called first and foo will be called second.
   }
 */
 
@@ -3296,8 +3306,8 @@
 
   - Cleanup operasyonlarının yapılabilmesi için `atexit` 
     fonksiyonu ile cleanup fonksiyonları kaydedilir.
-    Böylece program sonlandığı zaman kaynakların geri verilmeme 
-    ihtimali ortadan kalkar. 
+    Böylece program sonlandığı zaman çağrılacak fonksiyonlar sayesinde
+    kaynakların geri verilmemesi ihtimali ortadan kalkar. 
 */
 
 // --------------------------------------------------------
@@ -3424,7 +3434,8 @@
   {
     char command_str[100];
 
-    for (;;) {
+    for (;;) 
+    {
       printf("enter a command > ");
       (void)scanf("%[^\n]s", command_str);
 

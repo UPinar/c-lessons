@@ -40,7 +40,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     printf("0 character    = %d\n", '0');
     printf("null character = %d\n", '\0');
 
@@ -51,7 +52,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     char s[100];
 
     s[0] = 'H';
@@ -61,15 +63,16 @@
     s[4] = 'O';
     s[5] = '\0';
 
-    for (int i = 0; s[i] != '\0'; ++i){
+    for (int i = 0; s[i] != '\0'; ++i)
       printf("%c", s[i]);
-    }
+    
     // output -> HELLO
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     char s[100];
 
     s[0] = 'H';
@@ -82,15 +85,16 @@
     // duration so element's values are indetermined(garbage) value
 
 
-    for (int i = 0; s[i] != '\0'; ++i){
+    for (int i = 0; s[i] != '\0'; ++i)
       printf("%c", s[i]);
-    }
+    
     // undefined behavior(UB)
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     char s[100];
 
     s[0] = 'H';
@@ -100,7 +104,8 @@
     s[4] = 'O';
     s[5] = '\0';
 
-    for (int i = 0; s[i] != '\0'; ++i){
+    for (int i = 0; s[i] != '\0'; ++i)
+    {
     // for (int i = 0; s[i] != 0; ++i){       VALID
     // for (int i = 0; s[i]; ++i){            VALID
       printf("%c", s[i]);
@@ -126,7 +131,7 @@
     g_s[2] = 'L';
     g_s[3] = 'L';
     g_s[4] = 'O';
-    // it is guaranteed that this array's 5th index is null character
+    // it is guaranteed that this array's 5th index is a null character
 
     for (int i = 0; g_s[i] != '\0'; ++i)
       printf("%c", g_s[i]);
@@ -140,7 +145,7 @@
     s_s[2] = 'R';
     s_s[3] = 'L';
     s_s[4] = 'D';
-    // it is guaranteed that this array's 5th index is null character
+    // it is guaranteed that this array's 5th index is a null character
 
     for (int i = 0; s_s[i] != '\0'; ++i)
       printf("%c", s_s[i]);
@@ -149,7 +154,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     char s[100];
 
     s[0] = 'H';
@@ -159,10 +165,10 @@
     s[4] = 'O';
     s[5] = '\0';
 
-    // for (int i = 0; s[i] != '\0'; ++i)
-    //   putchar(s[i]);
-    // purchar('\n'); 
-    // printf("WORLD\n") 
+    for (int i = 0; s[i] != '\0'; ++i)
+      putchar(s[i]);
+    purchar('\n'); 
+    printf("WORLD\n") 
 
     // output -> 
     //  HELLO
@@ -180,7 +186,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     char s1[100];
 
     s1[0] = 'H';
@@ -208,30 +215,34 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     char str[100] = { 'H', 'E', 'L', 'L', 'O' };
     // there is a null character in the 5th index
     // from 5th to 99th index are null characters
     // it is NTBS
 
+    puts(str);  // VALID
+
     char str2[] = { 'H', 'E', 'L', 'L', 'O' };
     // this arrays SIZE is 5 
     // there is no null character at the end of the array
-    // it is not NTBS
+    // it is NOT NTBS
+
+    puts(str2); // undefined behavior(UB)
 
     char str3[5] = { 'H', 'E', 'L', 'L', 'O' };
     // this arrays SIZE is 5 
     // there is no null character at the end of the array
-    // it is not NTBS
+    // it is NOT NTBS
 
-    puts(str);  // VALID
-    puts(str2); // undefined behavior(UB)
     puts(str3); // undefined behavior(UB)
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     char str[10]; 
     // this array can hold max 9 character string 
     // this array can hold min 0 character string(empty string) 
@@ -240,7 +251,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     char str[] = {'h', 'e', 'l', 'l', 'o'};
     // char array's size is 5 
     // there is no null character at the end of the array
@@ -250,7 +262,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     char str[] = "Hello";
     // char array's size is 6 (including null('\0') character)
 
@@ -267,7 +280,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     // ----------- SCENARIO'S ARE NOT NTBS ------------
     // ----------------- SCENARIO 1
     char str[20];
@@ -294,7 +308,8 @@
 
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE];
 
     printf("Enter a string: ");
@@ -309,7 +324,8 @@
 /*
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char name[SIZE];
     long long age;
 
@@ -336,7 +352,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     char str[100];
 
     printf("Enter a string: ");
@@ -353,7 +370,8 @@
 /*
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE];
 
     printf("Enter a string: ");
@@ -377,7 +395,8 @@
 
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE];
 
     printf("Enter a string: ");
@@ -391,7 +410,8 @@
 
 /*
   // finding length of a string
-  int main(void){
+  int main(void)
+  {
     char str[100] = "Hello World";
 
     int len = 0;
@@ -413,7 +433,8 @@
 /*
   // Yazıyı tersten yazdırma (Printing string in reverse order)
 
-  int main(void){
+  int main(void)
+  {
     char str[] = "hello world";
 
     int i = 0;
@@ -434,14 +455,16 @@
 /*
   // Yazıyı ters çevirme (reversing string)
 
-  int main(void){
+  int main(void)
+  {
     char str[] = "hello galaxy";
 
     int len = 0;
     while (str[len])
       ++len;
 
-    for (int i = 0; i < len / 2; ++i){
+    for (int i = 0; i < len / 2; ++i)
+    {
       char temp = str[i];
       str[i] = str[len - 1 - i];
       str[len - 1 - i] = temp;
@@ -468,11 +491,12 @@
   // do not change array's elements
   // check if the string is palindrom
 
-  #include <ctype.h>  // tolower(), isalpha()
+  #include <ctype.h>  // tolower, isalpha
 
   #define   asize(x)  (sizeof(x) / sizeof(x[0]) )
 
-  int is_palindrom(const char* p, int size){
+  int is_palindrom(const char* p, int size)
+  {
     int start_idx = 0;
     int end_idx = size - 1;
 
@@ -516,7 +540,8 @@
 /*
   // s3 dizisinde s1 ile s2 yazılarının birleşimini oluşturunuz.
 
-  int main(){
+  int main()
+  {
     char str1[] = "Hello";
     char str2[] = "World";
     char str3[100];
@@ -540,7 +565,8 @@
 
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char s1[SIZE] = "Hello";
     char s2[SIZE] = "World";
 
@@ -572,15 +598,17 @@
 
   #define SIZE 100
 
-  int main(){
+  int main()
+  {
     char str[SIZE] = "Hello Universe";
-
     printf("(%s)\n", str);    // output -> (Hello Universe)
 
     int i = 0;
     int first_word_length = 0;
     int total_length = 0;
-    while (str[i]){
+
+    while (str[i])
+    {
       if (str[i] == ' ')
         first_word_length = i;
         
@@ -589,7 +617,8 @@
     total_length = i;
 
     i = 0;
-    while (i <= first_word_length){
+    while (i <= first_word_length)
+    {
       char temp = str[0];
 
       // shift all characters to left
@@ -603,7 +632,8 @@
 
     i = 0;
     int last_index = total_length - 1;
-    while (i < first_word_length){
+    while (i < first_word_length)
+    {
       char temp = str[last_index - i];
       str[last_index - i] = str[last_index - i - 1];
       str[last_index - i - 1] = temp;
@@ -617,7 +647,8 @@
 /*
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char s1[SIZE] = "Hello World";
     char s2[SIZE] = "";
 
@@ -625,7 +656,8 @@
     // output -> s1 = (Hello World), s2 = ()
 
     int i = 0;
-    while (s1[i] != '\0'){
+    while (s1[i] != '\0')
+    {
       s2[i] = s1[i];
       ++i;
     }
@@ -640,7 +672,8 @@
 /*
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char s1[SIZE] = "Hello World";
     char s2[SIZE] = "";
 
@@ -661,7 +694,8 @@
 /*
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char s1[SIZE] = "Hello World";
     char s2[SIZE] = "";
 
@@ -674,7 +708,7 @@
 
     // value that assignment operator generate is 
     // the value of the left operand
-    // when (s2[i] = s1[i]) -> (s2[i] = '\0)
+    // when (s2[i] = s1[i]) -> (s2[i] = '\0')
     // while(0) -> false : loop will break
  
     printf("s1 = (%s), s2 = (%s)\n", s1, s2);
@@ -693,14 +727,16 @@
 
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char s1[SIZE] = "ablam ankara'dan adanaya vardi.";
     char s2[SIZE];
     int c = 'a';
 
     int write_idx = 0;
 
-    for(int i = 0; s1[i] != '\0'; ++i){
+    for(int i = 0; s1[i] != '\0'; ++i)
+    {
       if (s1[i] != c)
         s2[write_idx++] = s1[i];
     }
@@ -716,17 +752,19 @@
 /*
   // copying a string but not number characters
 
-  #include <ctype.h>
+  #include <ctype.h>  // isdigit
 
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char s1[SIZE] = "3b14m 9nk4r4'd4n 3d8n4y7 v4rd1.";
     char s2[SIZE];
 
     int write_idx = 0;
 
-    for(int i = 0; s1[i] != '\0'; ++i){
+    for(int i = 0; s1[i] != '\0'; ++i)
+    {
       if (!isdigit(s1[i]))
         s2[write_idx++] = s1[i];
     }
@@ -744,7 +782,8 @@
 
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE] = "ablam ankara'dan adanaya vardi.";
 
     printf("str = (%s)\n", str);
@@ -753,7 +792,8 @@
     int c = 'a';
     int write_idx = 0;
 
-    for(int i = 0; str[i] != '\0'; ++i){
+    for(int i = 0; str[i] != '\0'; ++i)
+    {
       if (str[i] != c)
         str[write_idx++] = str[i];
     }
@@ -774,7 +814,8 @@
 /*
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE] = "ablam ankara'dan adanaya vardi.";
     int ch = 'a';
 
@@ -782,7 +823,8 @@
     // output -> str = (ablam ankara'dan adanaya vardi.)
 
     int count = 0;
-    for(int i = 0; str[i] != '\0'; ++i){
+    for(int i = 0; str[i] != '\0'; ++i)
+    {
       if (str[i] == ch)
         ++count;
     }
@@ -794,7 +836,8 @@
 /*
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE] = "Ankara Aydin";
     int ch = 'a'; // character is not 'A' it is 'a'
 
@@ -802,7 +845,8 @@
     // output -> str = (Ankara Aydin)
 
     int count = 0;
-    for(int i = 0; str[i] != '\0'; ++i){
+    for(int i = 0; str[i] != '\0'; ++i)
+    {
       if (str[i] == ch)
         ++count;
     }
@@ -814,11 +858,12 @@
 /*
   // checking case insensitive character count
 
-  #include <ctype.h>  // toupper()
+  #include <ctype.h>  // toupper
 
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE] = "Ankara Aydin";
     int ch = 'a'; 
 
@@ -826,7 +871,8 @@
     // output -> str = (Ankara Aydin)
 
     int count = 0;
-    for(int i = 0; str[i] != '\0'; ++i){
+    for(int i = 0; str[i] != '\0'; ++i)
+    {
       if (toupper(str[i]) == toupper(ch))
         ++count;
     }
@@ -844,18 +890,20 @@
 /*
   // count if character is a digit
 
-  #include <ctype.h> // isdigit()
+  #include <ctype.h> // isdigit
 
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE] = "3b14m 9nk4r4'd4n 3d8n4y7 v4rd1.";
 
     printf("str = (%s)\n", str);
     // output -> str = (3b14m 9nk4r4'd4n 3d8n4y7 v4rd1.)
 
     int count = 0;
-    for(int i = 0; str[i] != '\0'; ++i){
+    for(int i = 0; str[i] != '\0'; ++i)
+    {
       if (isdigit(str[i]))
         ++count;
     }
@@ -872,19 +920,21 @@
 
   #define  SIZE  300
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE] =  "Hello World we are live from Istanbul. "
                       "Weather is kind of rainy today. "
                       "Istanbul is the most crowded city in the World.";
 
-    int counts[26] = {0};
+    int counts[26] = { 0 };
     // counts[0] ---> A counter
     // counts[1] ---> B counter
     // ...
     // counts[25] ---> Z counter
 
     int idx = 0;
-    for (int i = 0; str[i] != '\0'; ++i){
+    for (int i = 0; str[i] != '\0'; ++i)
+    {
       if (isalpha(str[i]))
         ++counts[toupper(str[i]) - 'A'];
     }
@@ -920,18 +970,14 @@
 /*
   // yazida kelime saymak (counting words in a string)
 
-  #include <ctype.h>  // isspace()
+  #include <ctype.h>  // isspace
 
   #define   SIZE      300
   #define   INWORD    1
   #define   OUTWORD   0
 
-  // ___Hello___World___we___are___live___from___Istanbul___
-  //   xx      xx      xx   xx    xx     xx     xx    
-  // in "xx" locations(from space to word) 
-  // we need to increase word count
-
-  int main(void){
+  int main(void)
+  {
     char str[SIZE] =  "   Hello   World we are  live from   Istanbul "
                       "Weather  is kind   of  rainy       today "
                       "Istanbul   is the  most crowded   city in the World  ";
@@ -939,10 +985,12 @@
     int word_flag = OUTWORD;
     int word_count = 0;
 
-    for (int i = 0; str[i] != '\0'; ++i){
+    for (int i = 0; str[i] != '\0'; ++i)
+    {
       if (isspace(str[i]))
         word_flag = OUTWORD;
-      else if (word_flag == OUTWORD){
+      else if (word_flag == OUTWORD)
+      {
         ++word_count;
         word_flag = INWORD;
       }
@@ -956,17 +1004,19 @@
 /*
   // writing our own seperator function
 
-  #include <ctype.h>  // isspace()
+  #include <ctype.h>  // isspace
 
   #define   SIZE      300
   #define   INWORD    1
   #define   OUTWORD   0
 
-  int is_seperator(int c){
+  int is_seperator(int c)
+  {
     return isspace(c) || c == '.' || c == ',' || c == '!' || c == '?';
   }
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE] =  "   Hello   World,we are  live...from   Istanbul "
                       "Weather,is kind   of  rainy       today "
                       "Istanbul,is,the,most crowded   city!!!in the World";
@@ -974,10 +1024,12 @@
     int word_flag = OUTWORD;
     int word_count = 0;
 
-    for (int i = 0; str[i] != '\0'; ++i){
+    for (int i = 0; str[i] != '\0'; ++i)
+    {
       if (is_seperator(str[i]))
         word_flag = OUTWORD;
-      else if (word_flag == OUTWORD){
+      else if (word_flag == OUTWORD)
+      {
         ++word_count;
         word_flag = INWORD;
       }
@@ -989,7 +1041,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int a[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
     for (int i = 0; i < 10; ++i)
@@ -1016,9 +1069,9 @@
   
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE] = "123456";
-
 
     for(int i = 0; str[i] != '\0'; ++i)
       printf("%d\n", str[i]);
@@ -1044,9 +1097,8 @@
 
 
     int ival = 0;
-    for (int i = 0; str[i] != '\0'; ++i){
+    for (int i = 0; str[i] != '\0'; ++i)
       ival = ival * 10 + str[i] - '0';
-    }
 
     printf("ival = %d\n", ival);  
     // output -> ival = 123456
@@ -1056,13 +1108,13 @@
 /*
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE] = "11111111"; // binary
 
     int ival = 0;
-    for (int i = 0; str[i] != '\0'; ++i){
+    for (int i = 0; str[i] != '\0'; ++i)
       ival = ival * 2 + str[i] - '0';
-    }
 
     printf("ival = %d\n", ival);  
     // output -> ival = 255
@@ -1070,16 +1122,18 @@
 */
 
 /*
-  #include <ctype.h>  // isdigit(), isxdigit(), toupper()
+  #include <ctype.h>  // isdigit, isxdigit, toupper
 
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     char str[SIZE] = "1Ac"; // HEX 0-9 A-F a-f
 
     int ival = 0;
 
-    for (int i = 0; str[i] != '\0'; ++i){
+    for (int i = 0; str[i] != '\0'; ++i)
+    {
       if (isdigit(str[i]))
         ival = ival * 16 + str[i] - '0';
       else if (isxdigit(str[i]))
@@ -1096,14 +1150,16 @@
 
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     int ival = 781234;
     char str[SIZE];
 
     int temp = ival;
     int len = 0;
 
-    while (temp != 0){
+    while (temp != 0)
+    {
       str[len++] = temp % 10 + '0';
       temp /= 10;
     }
@@ -1113,7 +1169,8 @@
     // output -> (781234) (432187)
 
     char ch;
-    for (int i = 0; i < len / 2; ++i){
+    for (int i = 0; i < len / 2; ++i)
+    {
       ch = str[i];
       str[i] = str[len - 1 - i];
       str[len - 1 - i] = ch;
@@ -1124,25 +1181,31 @@
 */
 
 /*
-  int is_strings_equal(const char* p1, const char* p2){
-    while (*p1 == *p2){
+  int is_strings_equal(const char* p1, const char* p2)
+  {
+    while (*p1 == *p2)
+    {
       if (*p1 == '\0')
         return 1;
+
       ++p1;
       ++p2;
     }
     return 0;
   }
 
-  int main(void){
+  int main(void)
+  {
     char s1[] = "Hello World we are live from Istanbul";
     char s2[] = "Hello World we are live from Istanbul";
     char s3[] = "Hello World we are live from Izmir";
 
     // int i = 0;
     // int flag = 0;
-    // while (s1[i] == s2[i]){
-    //   if (s1[i] == '\0'){   // both strings are equal becuase 
+    // while (s1[i] == s2[i])
+    // {
+    //   if (s1[i] == '\0')   // both strings are equal becuase 
+    //   {   
     //     flag = 1;           // when "s1[i] == s2[i]" expression is true  
     //     break;
     //   }

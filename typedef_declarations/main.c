@@ -346,7 +346,7 @@
     // suppose that we want our new counter type to be long
     int cnt1 = 0;     // long cnt1 = 0;
     int cnt2 = 0;     // long cnt2 = 0;
-    // we need to change all of the counter variables' type
+    // we need to change all of the counter variable's data types
 
 
     // if we use typedef declaration

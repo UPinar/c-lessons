@@ -1,50 +1,67 @@
 #include <stdio.h>
 
 /*
-  data structures (veri yapıları) : how datas are stored in memory
-  <--- check data_structures.png --->
+  data structures (veri yapıları) : how datas are stored in memory.
+  algorithms (algoritmalar)       : how datas will be processed.
 
-  algorithms (algoritmalar) : how those datas will be processed
+  <--- check data_structures.png --->
 */
 
 /*
-  algorithms computational complexity (algoritmanın karmaşıklığı) :
-    relation between the data count inside data structure and 
-    the increase in the number of operations that will be done
+  ------------------------------------------------------------
+
+  algorithm's computational complexity (algoritmanın karmaşıklığı) :
+    relation between the data count of the data structure  
+    and the count of the operations that will be done.
 
   <--- check computational_complexity.png --->
 
-  constant-time algorithms: 
-    number of the data inside data structure does not affect 
-    the number of operations
-  linear-complexity :
-    number of the data inside data structure affects 
-    the number of operations linearly
-  big-o notation : 
-    O(1)        -> constant-time algorithms
-    O(log n)    -> logarithmic-complexity
-    O(n)        -> linear-complexity
-    O(n log n)  
-    O(n^2)      
-    O(2^n)      -> exponential-complexity
-    O(n!)       -> factorial-complexity
+  ------------------------------------------------------------
+  
+  constant-time algorithms : 
+  data count of the data structure DOES NOT affect 
+  the operation count.
+  linear-complexity algorithms :
+  data count of the data structure DOES affect 
+  the operation count linearly.
 
-  If there are two phases of an algorithm and the first phase is O(n)
-  and the second phase is O(n^2) then the algorithm's complexity is O(n^2)
+  ------------------------------------------------------------
+  
+  Big-O notation : 
+  O(1)        -> constant-time complexity
+  O(log N)    -> logarithmic complexity
+  O(N)        -> linear complexity
+  O(N log N)  -> log-linear complexity
+  O(N^2)      -> quadratic complexity
+  O(2^N)      -> exponential complexity
+  O(N!)       -> factorial complexity
+  
+  ------------------------------------------------------------
+  
+  If there are two phases of an algorithm 
+    first phase   -> O(n)
+    second phase  -> O(n^2) 
+  algorithm's complexity = O(n^2)
   O(n^2) > O(n) ----> O(n) + O(n^2) = O(n^2)
+
+  ------------------------------------------------------------
 */
 
 /*
-  for (int i 0; i < n; ++i){
-      // O(n)
+  for (int i 0; i < n; ++i) 
+  {
+    // O(n)
   }
 
-  for (int i 0; i < 2 * n; ++i){
-      // O(n)
+  for (int i 0; i < 2 * n; ++i) 
+  {
+    // O(n)
   }
 
-  for (int i 0; i < n; ++i){
-    for (int j = 0; j < n; ++j){
+  for (int i 0; i < n; ++i)
+  {
+    for (int j = 0; j < n; ++j)
+    {
       // O(n^2)
     }
   }
@@ -63,83 +80,100 @@
 */
 
 /*
-  -> C arrays are fixed arrays data structure.
-  -> Number of the elements are constant and cannot be changed.
-  -> datas are stored contiguously in memory.
-  -> reaching to an element with its index is O(1)[constant-time].
+  -> C arrays are fixed array data structure.
+  -> Element count is CONSTANT.
+  -> Elements are stored contiguously in memory.
+  -> Reaching an element with known index is O(1)[constant-time].
 */
 
 /*
   #define   SIZE  100
 
-  int main(void){
-    // int arr[constant expression(sabit ifadesi)];
+  int main(void)
+  {
+    // int array_identifier[constant expression(sabit ifadesi)];
 
-    int arr[20];        // arr identifiers type is int[20]
-    double b[50];       // b's type is double[50]
+    int arr1[20];       // "arr1" identifier's data type is int[20]
+    double d_arr[50];   // "d_arr" identifier's data type is double[50]
 
-    int arr2[20 + 30];  // valid 
-    int arr3[SIZE];     // valid
+    int arr2[1];        // VALID
+    int arr3[20 + 30];  // VALID 
+    int arr4[SIZE];     // VALID
 
     int x = 10;
-    int a[x]; // if compiler supports C11, this is valid
+    int arr5[x];  // if compiler supports C11, VALID
     // C99 - VLA(variable length array)
     // C11 - VLA(variable length array) =>  OPTIONAL
 
-    int arr4[];         // syntax error (EMPTY)
-    int arr5[0];        // syntax error (O)
-    int arr6[-5];       // syntax error (NEGATIVE)
-    
-    int arr7[1];        // valid
+    int arr6[];         // syntax error (EMPTY)
+    // error: array size missing in 'arr6'
+    int arr7[0];        // syntax error (O)
+    int arr8[-5];       // syntax error (NEGATIVE)
+    // error: size of array 'arr8' is negative
   }
 */
 
 /*
-  int main(void){
-    int x[10];
-    int y[20];
-    int z[30];
+  int main(void)
+  {
+    int arr1[10];
+    int arr2[20];
+    int arr3[30];
 
-    int a[10], b[20], c[30];    
-    // declaring arrays with comma separated list is valid 
+    int arr4[10], arr5[20], arr6[30];    
+    // declaring arrays with comma separated list is VALID 
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i;
     int j[5];
     int k;
     int m[10];
 
     int a, b[5], c, d[10];
-    // declaring variables and arrays(also a varible) 
-    // with comma separated list is valid
+    // declaring variables and arrays(also a variable) 
+    // with comma separated list is VALID
   }
 */
 
 /*
-  int g_ival;                   // zero value
-  int g_arr[20];                // elements have zero values
+  int g_ival;                   // global variable 
+  // g_ival's value is 0.
+  int g_arr[20];                // global array
+  // all elements of g_arr are 0's.
 
-  void foo(void){
-    int local_ival;             // garbage value
-    int local_arr[20];          // elements have garbage values
+  void foo(void)
+  {
+    // ------------------------------------------------
 
-    static int static_ival;     // zero value
-    static int static_arr[20];  // elements have zero values
+    int local_ival;             // local variable
+    // local_ival's value is garbage(indetermined).
+    int local_arr[20];          // local array
+    // all elements of locall_arr are garbage(indetermined) values.
+    
+    // ------------------------------------------------
+    
+    static int s_ival;          // static local variable
+    // s_ival's value is 0.
+    static int s_arr[20];  // static local array
+    // all elements of s_arr are 0's.
+
+    // ------------------------------------------------
   }
 */
 
 /*
-  // in C and C++ languages, function's parameter variable 
-  // can not be an array type
+  // in C and C++ languages, function's parameter variable's
+  // data type CAN NOT be an array type.
 
   void foo(int a[]);  
   // parameter variable's type is int* (pointer to int)
 
-  // in C and C++ languages, function's return values type 
-  // can not be an array type 
+  // in C and C++ languages, function's return value's 
+  // data type CAN NOT be an array type 
 */
 
 /*
@@ -147,62 +181,78 @@
   // array to pointer conversion
 
   // when an array's idenfier is used in an expression,
-  // the array identifier is converted to the address of its first element
-  // except some exceptions
+  // array identifier will be converted to the address of 
+  // its first element (with a few exceptions)
 
-  // bir dizinin ismi(identifier), bir ifade içinde kullanıldığında
-  // bazı istisnalar haricinde derleyici tarafından 
+  // bir dizinin ismi(identifier), 
+  // bir ifade(expression) içinde kullanıldığında, derleyici tarafından
   // o dizinin ilk elemanının adresine dönüştürülür
+  // (bazı istisnalar haricinde)
 
-  int main(void){
+  int main(void)
+  {
     int arr[10];
 
-    arr;  // &arr[0];
+    arr;  // arr(identifier) -> &arr[0];
   }
 */
 
 /*
-  // expression which have been created with an address operator
-  // are R value expressions
-  int main(void){
-    int a_arr[10];
-    int b_arr[10];
+  // expression which have been created with an address operator('&')
+  // are R value expressions.
 
-    a_arr = b_arr;            // syntax error
+  int main(void)
+  {
+    int arr1[10];
+    int arr2[10];
+
+    arr1 = arr2;            // syntax error
     // error: assignment to expression with array type
-    &a_arr[0] = b_arr;        // syntax error
+    &arr1[0] = arr2;        // syntax error
     // error: lvalue required as left operand of assignment
+    // Those 2 lines are equivalent.
 
-    // Those 2 lines are same
+    // arr1 becomes an R value expression, 
+    // when array decay(array to pointer conversion) occurs.
+  }
+*/
 
-    // a_arr becomes an R value expression, when array decay occurs
+
+/*
+  int main(void)
+  {
+    int arr1[10];   // NOT an expression, it is declaration.   
+    arr1[5];        // it is an expression    
   }
 */
 
 /*
-  int main(void){
-    int a[10];    
-    // int a[10] is not an expression it is a declaration
-    a[5];         
-    // a[5] is an expression
+  int main(void) 
+  {
+    // ---------------------------------------------------
 
+    int arr2[10];    
+    // '[]' token in this declaration is NOT an operator, it is declarator
+    arr2[5];         
+    // '[]' token in this expression is an operator(subscript operator)
+    
+    // ---------------------------------------------------
+    
+    int ival = 10;
 
-    int b[10];    
-    // [] token in this declaration is not an operator, it is declarator
-    b[5];         
-    // [] token in this expression is an operator(subscript operator)
-
-
-    int x = 10;
-    int* ptr = &x;  
-    // int* ptr is a declaration, * token is a declarator
+    int* ptr = &ival;
+    // "int* ptr" is a declaration, '*' token is a declarator
     *ptr = 20;      
-    // *ptr is an expression, * token is an operator(dereference operator)
+    // "*ptr" is an expression, 
+    // '*' token is an operator(dereference operator)
+
+    // ---------------------------------------------------
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int a[10];
 
     // a[0] is the 1st element of the array
@@ -215,7 +265,8 @@
 
   #define SIZE 100
 
-  int main(void){
+  int main(void)
+  {
     int a[10];
     // a[0] ... a[9]
 
@@ -225,48 +276,54 @@
 */
 
 /*
-  int main(void){
-    int a[10];
-    int x = 5;
-    int y = 10;
-    int z = 45;
+  int main(void)
+  {
+    int arr[10];
+    int ival1 = 5;
+    int ival2 = 10;
+    int ival3 = 15;
 
-    a[x] = 7;   // 5 is VALID index for a array
-    a[y] = 8;   // 10 is NOT VALID index for a array
-    a[z] = 9;   // 45 is NOT VALID index for a array
+    arr[ival1] = 11;   // 5 is VALID index for "arr"
+    arr[ival2] = 22;   // 10 is NOT VALID index for a array
+    arr[ival3] = 33;   // 15 is NOT VALID index for a array
 
-    // no syntax error but undefined behavior(UB)
-    // pointer error
+    // reaching out of boundries of the array 
+    // is NOT syntax error but undefined behavior(UB)
+    // --> pointer error
   }
 */
 
 /*
   int foo(void);
 
-  int main(void){
+  int main(void)
+  {
     int a[10];
 
     a[foo()] = 5;
-    // if foo() returns other than 0 to 9 
-    // it will be undefined behavior(UB)
+    // if "foo" function's return value is other than 0 to 9 
+    // it will become undefined behavior(UB)
   }
 */
 
 /*
-  int main(void){
-    int a[10];
+  int main(void)
+  {
+    int arr[10];
 
-    a[4]; // is an l value expression, corresponds to an object
+    arr[4]; 
+    // "arr[4]" is an L value expression, 
+    // corresponds to an object, have a memory location.
 
-    a[4] = 5;
-    int x = a[4];
-    ++a[4];
-    a[4]--;
-    scanf("%d", &a[4]);
+    arr[4] = 5;           // VALID
+    int x = arr[4];       // VALID
+    ++arr[4];             // VALID
+    arr[4]--;             // VALID
+    scanf("%d", &arr[4]); // VALID
 
-    // [] operator is higher precedence than ++ and -- and = and & operators
-    // [] operator have the highes precedence
-    // check OPERATOR PRIORITY LIST in Operators Lesson
+    // '[]' operator is precedence is higher than '++','--','=' and '&' operators
+    // '[]' operator have the highest precedence
+    // check OPERATOR PRIORITY LIST in operators Lesson
   }
 */
 
@@ -274,14 +331,16 @@
   #define   SIZE  10  
   // using symbolic constant for array size
 
-  int main(void){
-    int a[SIZE];
+  int main(void)
+  {
+    int arr[SIZE];
 
     for (int i = 0; i < SIZE; ++i)
-      a[i] = i;
+      arr[i] = i;
 
     for (int i = 0; i < SIZE; ++i)
-      printf("%d ", a[i]);
+      printf("%d ", arr[i]);
+    // output -> 0 1 2 3 4 5 6 7 8 9
 
     return 0;
   }
@@ -296,57 +355,72 @@
 /*
   #define  SIZE  10
 
-  int main(void){
-    int a[SIZE] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19};
+  int main(void)
+  {
+    int arr[SIZE] = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };
 
     for (int i = 0; i < SIZE; ++i)
-      printf("a[%d] = %d\n", i, a[i]);
+      printf("arr[%d] = %d\n", i, arr[i]);
 
     // output ->
-    //  a[0] = 1
-    //  a[1] = 3
-    //  a[2] = 5
-    //  a[3] = 7
-    //  a[4] = 9
-    //  a[5] = 11
-    //  a[6] = 13
-    //  a[7] = 15
-    //  a[8] = 17
-    //  a[9] = 19
+    //  arr[0] = 1
+    //  arr[1] = 3
+    //  arr[2] = 5
+    //  arr[3] = 7
+    //  arr[4] = 9
+    //  arr[5] = 11
+    //  arr[6] = 13
+    //  arr[7] = 15
+    //  arr[8] = 17
+    //  arr[9] = 19
   }
 */
 
 /*
-  int main(void){
-    int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}; // syntax error
+  int main(void)
+  {
+    // ----------------------------------------
+    
+    int arr1[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };  
+    // syntax error
     // error : too many initializer values
-
-    int d[10] = {};                         // syntax error
+    
+    // ----------------------------------------
+    
+    int arr2[10] = {};                      // syntax error
     // error : expected an expression
-
-    int b[10] = {1, 2, 3, 4, 5};            // VALID
-    // b[5] ... b[9] have zero values
-    // {1, 2, 3, 4, 5, 0, 0, 0, 0, 0}
-
-    int c[10] = {0};                        // VALID
-    // c[0] ... c[9] have zero values
-    // {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    
+    // ----------------------------------------
+    
+    int arr3[10] = { 1, 2, 3, 4, 5 };       // VALID
+    // arr3[5] ... arr3[9] will become 0
+    // { 1, 2, 3, 4, 5, 0, 0, 0, 0, 0 }
+    
+    // ----------------------------------------
+    
+    int arr4[10] = { 0 };                      // VALID
+    // arr4[0] ... arr4[9] have zero values
+    // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+    
+    // ----------------------------------------
   }
 */
 
 /*
-  int main(void){
-    int a[10] = {1, 2, 3, 4, 5,};   // trailing comma ","
-    int a[10] = {1, 2, 3, 4, 5};   
-    // Those 2 lines are same
+  int main(void)
+  {
+    int arr[10] = { 1, 2, 3, 4, 5, };   // trailing comma ","
+    int arr[10] = { 1, 2, 3, 4, 5 };   
+    // Those 2 lines are equivalent.
   }
 */
 
 /*
-  int main(void){
-    int a[] = {1, 2, 3, 4, 5};    // a's type is int[5]
-    int b[5] = {1, 2, 3, 4, 5}; 
-    // Those 2 lines are same
+  int main(void)
+  {
+    int arr1[] = { 1, 2, 3, 4, 5 };    // arr1 identifier's data type is int[5]
+    int arr2[5] = { 1, 2, 3, 4, 5 }; 
+    // Those 2 lines are equivalent.
   }
 */
 
@@ -359,36 +433,41 @@
 /*
   #define SIZE 10
 
-  int main(void){
-    // 4 ==> 9
-    // 2 ==> 13
-    // 6 ==> 55
-
-    int a[SIZE] = { [4] = 9, [2] = 13, [6] = 55 };
+  int main(void)
+  {
+    
+    int arr[SIZE] = { [4] = 11, [2] = 22, [6] = 33 };
     // other elements have zero values
 
+    // arr[4] = 11
+    // arr[2] = 22
+    // arr[6] = 33
+
     for (int i = 0; i < SIZE; ++i)
-      printf("a[%d] = %d\n", i, a[i]);
+      printf("arr[%d] = %d\n", i, arr[i]);
 
     // output ->
-    //  a[0] = 0
-    //  a[1] = 0
-    //  a[2] = 13
-    //  a[3] = 0
-    //  a[4] = 9
-    //  a[5] = 0
-    //  a[6] = 55
-    //  a[7] = 0
-    //  a[8] = 0
-    //  a[9] = 0
+    //  arr[0] = 0
+    //  arr[1] = 0
+    //  arr[2] = 22
+    //  arr[3] = 0
+    //  arr[4] = 11
+    //  arr[5] = 0
+    //  arr[6] = 33
+    //  arr[7] = 0
+    //  arr[8] = 0
+    //  arr[9] = 0
   }
 */
 
 /*
-  int main(void){
-    int b[] = { [4] = 9, [2] = 13, [6] = 55 }; // b's type is int[7] 
-    // array size is not specified 
-    // size will be 7 because 
+  int main(void)
+  {
+    int b[] = { [4] = 9, [2] = 13, [6] = 55 };  
+    // b's data type is int[7] 
+    // when array size is not specified 
+    // and designated initializer is being used. 
+    // size will become most index + 1 ---> 6 + 1 = 7
     // the largest index in designated initializer is 6
   }
 */
@@ -396,9 +475,10 @@
 /*
   #define SIZE 10
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE] = { [4] = 9, 77, [8] = 13, [6] = 55 };
-    // after designated initializer, normal initializer is used 
+    // after designated initializer, normal initializer is being used 
     // check 77 after [4] = 9
 
     for (int i = 0; i < SIZE; ++i)
@@ -409,21 +489,28 @@
     //  a[1] = 0
     //  a[2] = 0
     //  a[3] = 0
-    //  a[4] = 9
-    //  a[5] = 77
-    //  a[6] = 55
+    //  a[4] = 9    : designated initializer
+    //  a[5] = 77   : normal initializer
+    //  a[6] = 55   : designated initializer
     //  a[7] = 0
-    //  a[8] = 13
+    //  a[8] = 13   : designated initializer
     //  a[9] = 0
   }
 */
 
+// ------------------------------------------------
+// ------------------------------------------------
+// ------------------------------------------------
+// ------------------------------------------------
+// ------------------------------------------------
+
 /*
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define SIZE 50
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
 
     randomize();
@@ -440,13 +527,14 @@
 */
 
 /*
-  // write a code that prints sum 
+  // write a code that prints sum O(n) complexity
 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define SIZE 50
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
 
     randomize();
@@ -459,21 +547,20 @@
     printf("sum = %d\n", sum);
     // output -> sum = 27178 (can be change because of randomize)
 
-    // if sum's value will be greater than int's max value
-    // it will cause undefined behavior(UB) [Tanımsız Davranış]
-
-    // O(n) complexity
+    // if sum will be greater than max value that int can hold, 
+    // it will become an undefined behavior(UB) [Tanımsız Davranış]
   }
 */
 
 /*
   // write a code that prints mean 
 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define SIZE 50
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
 
     randomize();
@@ -484,19 +571,20 @@
       sum += a[i];
 
     printf("mean = %f\n", (double)sum / SIZE);
-    // mean = 551.240000
+    // output -> mean = 551.240000
   }
 */
 
 /*
   // write a code that prints standard deviation
 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
   #include <math.h>
 
   #define SIZE 50
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
     randomize();
     set_array_random(a, SIZE);
@@ -523,11 +611,12 @@
 /*
   // mean of the odd elements in an array
 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define SIZE 50
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
     randomize();
     set_array_random(a, SIZE);
@@ -535,8 +624,10 @@
     int sum_odd = 0;
     int count_odd = 0;
 
-    for (int i = 0; i < SIZE; ++i){
-      if (a[i] % 2 != 0){
+    for (int i = 0; i < SIZE; ++i)
+    {
+      if (a[i] % 2 != 0)
+      {
         sum_odd += a[i];
         ++count_odd;
       }
@@ -545,8 +636,8 @@
     // printf("mean of the odd elements = %f\n", (double)sum_odd / count_odd);
 
     // if there is no odd element in the array
-    // if count_odd will be 0, it was divided by 0
-    // it will cause undefined behavior(UB) [Tanımsız Davranış]
+    // if count_odd will be 0, dividing by 0 
+    // will cause undefined behavior(UB) [Tanımsız Davranış]
 
 
     if (count_odd)
@@ -560,13 +651,14 @@
 */
 
 /*
-  // max_element and its index in an array
+  // found the max_element and its index in an array
 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define SIZE 20
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
     randomize();
     set_array_random(a, SIZE);
@@ -575,8 +667,10 @@
     int max = a[0];
     int max_index = 0;
 
-    for (int i = 1; i < SIZE; ++i){
-      if (a[i] > max){
+    for (int i = 1; i < SIZE; ++i)
+    {
+      if (a[i] > max)
+      {
         max = a[i];
         max_index = i;
       }
@@ -592,13 +686,14 @@
 */
 
 /*
-  // minmax_element of an array
+  // found minmax_element of an array
 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define SIZE 20
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
     randomize();
     set_array_random(a, SIZE);
@@ -607,8 +702,8 @@
     int min = a[0];
     int max = a[0];
 
-
-    for (int i = 1; i < SIZE; ++i){
+    for (int i = 1; i < SIZE; ++i)
+    {
       if (a[i] > max)
         max = a[i];
       else if (a[i] < min)
@@ -627,13 +722,14 @@
 */
 
 /*
-  // max and the runner-up element of an array
+  // found max and the runner-up element of an array
 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define SIZE 30
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
 
     randomize();
@@ -643,13 +739,16 @@
     int max = a[0];
     int runner_up = a[1];
 
-    if (a[0] < a[1]){
+    if (a[0] < a[1])
+    {
       max = a[1];
       runner_up = a[0];
     }
 
-    for (int i = 2; i < SIZE; ++i){
-      if (a[i] > max){
+    for (int i = 2; i < SIZE; ++i)
+    {
+      if (a[i] > max)
+      {
         runner_up = max;
         max = a[i];
       }
@@ -669,105 +768,21 @@
   }
 */
 
-
 /*
   // HOMEWORK
   // Write a code that prints unique elements in an array
   // complexity O(n)
-
-  #include "nutility.h"
-  #include <stdlib.h>
-  #include <string.h>
-
-  #define SIZE 1000
-
-  int main(void){
-    int arr[SIZE];
-
-    randomize();
-
-    for (int i = 0; i < SIZE; ++i){
-      arr[i] = rand() % 500;
-    }
-
-    int uniqueArr[SIZE];
-    int notUniqueArr[SIZE];
-
-    memset(uniqueArr, -1, SIZE * sizeof(int));
-    memset(notUniqueArr, -1, SIZE * sizeof(int));
-
-    unsigned int flag_unique = 0;
-    int element; 
-
-    for (int i = 0; i < SIZE; ++i){
-      flag_unique = 0;
-      element = arr[i];
-
-      // element is not unique and already inside notUniqueArr 
-      // flag_unique = 1
-      for (int j = 0; j < SIZE; ++j){
-        if (notUniqueArr[j] == -1) 
-          break;
-        else if (notUniqueArr[j] == element){
-          flag_unique = 1;  
-          break;
-        }
-      }
-
-      // element is not unique and exists inside uniqueArr
-      // flag_unique = 2;
-      for (int j = 0; j < SIZE; ++j){
-        if (uniqueArr[j] != -1 && uniqueArr[j] == element){
-          flag_unique = 2;  
-          break;
-        }
-      }
-
-      switch (flag_unique)
-      {
-      case 0:
-        for (int k = 0; k < SIZE; ++k){
-          if (uniqueArr[k] == -1){
-            uniqueArr[k] = element;
-            break;
-          }
-        }
-        break;
-      case 1:
-        break;
-      case 2:
-        for (int k = 0; k < SIZE; ++k){
-          if (uniqueArr[k] == element){
-            uniqueArr[k] = -1;
-            break;
-          }
-        }
-        for (int k = 0; k < SIZE; ++k){
-          if (notUniqueArr[k] == -1){
-            notUniqueArr[k] = element;
-            break;
-          }
-        }
-        break;
-      }
-    }
-
-    // print unique values 
-    for (int i = 0; i < SIZE; ++i){
-      if (uniqueArr[i] != -1)
-        printf("%d ", uniqueArr[i]);
-    }
-  }
 */
 
 /*
   // searching an element in an array
 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
   #define SIZE 20
 
   // complexity of linear search agorithm is O(n)
-  void linear_search(const int* pa, int key){
+  void linear_search(const int* pa, int key)
+  {
     int i;
     for (i = 0; i < SIZE && pa[i] != key; ++i)
       ; // null statement
@@ -778,7 +793,8 @@
       printf("not found\n", key);
   }
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
     set_array_random(a, SIZE);
     print_array(a, SIZE);
@@ -802,7 +818,7 @@
 */
 
 /*
-  #include "nutility.h"
+  #include "../headers/nutility.h"
   #include <stdlib.h>
 
   #define URAND_MAX  20
@@ -811,7 +827,8 @@
   // unique rand
   // this function can only be generated URAND_MAX unique random numbers
   // if there is not any unique number, it will return -1
-  int urand(void){
+  int urand(void)
+  {
     static _Bool flagsArr[URAND_MAX];
     static int count = 0;
 
@@ -836,7 +853,8 @@
     return elem;
   }
 
-  int main(void){
+  int main(void)
+  {
     randomize();
 
     for (int i = 0; i < URAND_MAX; ++i)
@@ -851,20 +869,24 @@
 /*
   // reverse algorithm
 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define SIZE  20
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
+
     randomize();
     set_array_random(a, SIZE);
+
     print_array(a, SIZE);
     // output ->
     //  196 465  79 466 368 678 792 276 690 736
     //  597  39 629 522 783  22   9 999 831 116
 
-    for (int i = 0; i < SIZE / 2; ++i){
+    for (int i = 0; i < SIZE / 2; ++i)
+    {
       int temp = a[i];
       a[i] = a[SIZE - 1 - i];
       a[SIZE - 1 - i] = temp;
@@ -878,7 +900,7 @@
 */
 
 /*
-  // output should be
+  // write an algorithm that outputs,
   // 4 9 8 13 19 7 18 7 9 13
   // ****
   // ********* 
@@ -891,23 +913,26 @@
   // ********* 
   // ************* 
 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
   #include <stdlib.h>
 
   #define   SIZE  10
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
     randomize();
 
-    for (int i = 0; i < SIZE; ++i){
+    for (int i = 0; i < SIZE; ++i)
+    {
       a[i] = rand() % 20 + 1;
       printf("%d ", a[i]);
     }
     printf("\n");
 
     // <---- WAY 1 --->
-    // for (int i = 0; i < SIZE; ++i){
+    // for (int i = 0; i < SIZE; ++i)
+    // {
     //   for (int j = 0; j < a[i]; ++j)
     //     putchar('*');
     //   putchar('\n');
@@ -916,7 +941,8 @@
     // <---- WAY 2 ---> 
     // (if there is no problem with changing array element's values)
 
-    for (int i = 0; i < SIZE; ++i){
+    for (int i = 0; i < SIZE; ++i)
+    {
       while(a[i]--)
         putchar('*');
       putchar('\n');
@@ -926,37 +952,44 @@
 
 /*
   // HOMEWORK <---- check homework_2.png ---> 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define   SIZE  20
 
-  int main(void){
-    int a[SIZE] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-                  11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
-
-    print_array(a, SIZE);
-
-    // for (int i = 0; i < SIZE; ++i){
-    //   a[i] = rand() % 20 + 1;   
-
-    unsigned int max_elem = 20;
-
-    while (max_elem--)
+  int find_max(const int* p_array)
+  {
+    int max = p_array[0];
+    for (int i = 1; i < SIZE); ++i)
     {
-      for (int i = 0; i < SIZE; ++i){
-        if (a[i] > max_elem){
-          putchar('*');
-        }
-        else
-          putchar(' ');
+      if (p_array[i] > max)
+        max = p_array[i];
+    }
+
+    return max;
+  }
+
+  int main(void)
+  {
+    int a[SIZE] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+
+    int max_value = find_max(a, SIZE);
+
+    while(max_value)
+    {
+      for (int i = 0; i < SIZE; ++i)
+      {
+          if (a[i] >= max_value)
+              putchar('*');
+          else
+              putchar(' ');
       }
 
-      if (max_elem)
-        putchar('\n');
+      putchar('\n');
+      --max_value;
     }
   }
 */
-
 /*
   HOMEWORK - Maximum Subsequence Sum Problem - O(n) complexity
 
@@ -972,20 +1005,22 @@
 */
 
 /*
-  #include "nutility.h"
+  #include "../headers/nutility.h"
   #include <stdlib.h>
   #include <limits.h>
 
   #define   SIZE  10
 
-  int set_sum_max(int* sum_max, int a, int b, int c){
+  int set_sum_max(int* sum_max, int a, int b, int c)
+  {
     int sum_total = a + b + c;
 
     if (*sum_max < sum_total)
       *sum_max = sum_total;
   }
 
-  int max_subsequence_sum(const int* pa, int size){
+  int max_subsequence_sum(const int* pa, int size)
+  {
     int sum_first = 0;
     int sum_second = 0;
     int negative_val = 0;
@@ -993,22 +1028,25 @@
     
     int is_first_negative_appeared = 0;
 
-    for (int i = 0; i < size; ++i){
+    for (int i = 0; i < size; ++i)
+    {
       if (is_first_negative_appeared)
       {
-        if (pa[i] < 0){
+        if (pa[i] < 0)
+        {
           set_sum_max(&sum_max, sum_first, sum_second, negative_val);
 
           sum_first = sum_second;
           sum_second = 0;
           negative_val = pa[i];
         }
-        else{
+        else
           sum_second += pa[i];
-        } 
       }
-      else {
-        if (pa[i] < 0){  
+      else 
+      {
+        if (pa[i] < 0)
+        {  
           negative_val = pa[i];
           is_first_negative_appeared = 1;
         }
@@ -1017,28 +1055,32 @@
       }
 
       // check if it is the last element
-    	if (i == SIZE - 1)
+      if (i == SIZE - 1)
         set_sum_max(&sum_max, sum_first, sum_second, negative_val);
     }
 
     return sum_max;
   }
 
-  int main(void){
-
+  int main(void)
+  {
     int a[SIZE];
 
     randomize();
 
     int is_negative_exist = 0;
-    for (int i = 0; i < SIZE; ++i){
+    int last_element_index = SIZE - 1;
+
+    for (int i = 0; i < SIZE; ++i)
+    {
       a[i] = (rand() % 2 ? 1 : -1) * (rand() % 1000);
 
       // make sure that there is at least 1 negative number in the array
       if (is_negative_exist == 0 && a[i] < 0)
         is_negative_exist = 1;
 
-      if (is_negative_exist == 0 && i == SIZE - 1 && a[i] > 0) {
+      if (!is_negative_exist && i == last_element_index) 
+      {
         printf("There is no negative number in the array\n");
         a[i] = rand() % 1000 * -1;
       }
@@ -1066,23 +1108,26 @@
 */
 
 /*
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define SIZE 10
 
   // CHATGPT answer
-  int partition(int* pa, int size){
+  int partition(int* pa, int size)
+  {
     int i = 0;
     int j = size - 1;
 
-    while (i < j){
+    while (i < j)
+    {
       while (i < size && pa[i] % 2 == 0)
         ++i;
 
       while (j >= 0 && pa[j] % 2 != 0)
         --j;
 
-      if (i < j){
+      if (i < j)
+      {
         int temp = pa[i];
         pa[i] = pa[j];
         pa[j] = temp;
@@ -1092,7 +1137,8 @@
     return i;
   }
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
 
     randomize();
@@ -1110,11 +1156,12 @@
   HOMEWORK - Donald Knuth Question
   // find a code that does only 2 operations in the loop
 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define   SIZE  20
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
 
     randomize();
@@ -1278,19 +1325,22 @@
 */
 
 /*
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
 
     randomize();
     set_array_random(a, SIZE);
     print_array(a, SIZE);
 
-    for (int i = 0; i < SIZE - 1; ++i){
-      for (int k = 0; k < SIZE - 1 - i; ++k){
+    for (int i = 0; i < SIZE - 1; ++i)
+    {
+      for (int k = 0; k < SIZE - 1 - i; ++k)
+      {
         // buble sort algorithm ascending order
         if (a[k] > a[k + 1]){
           int temp = a[k];
@@ -1312,18 +1362,20 @@
 */
 
 /*
-  #include "nutility.h"
+  #include "../headers/nutility.h"
   #include <stdlib.h>
   #include <math.h>
 
   #define   SIZE  10
 
-  void set_array_random_include_negatives(int* pArr, int size){
+  void set_array_random_include_negatives(int* pArr, int size)
+  {
     while (size--)
       *pArr++ = (rand() % 2 ? 1 : -1) * (rand() % 1000);
   }
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
 
     randomize();
@@ -1331,9 +1383,12 @@
     print_array(a, SIZE);
     // output -> -49 327 789  35 717 -118 840  58 458 -715
 
-    for (int i = 0; i < SIZE - 1; ++i){
-      for (int k = 0; k < SIZE - 1 - i; ++k){
-        if (abs(a[k]) > abs(a[k + 1])){
+    for (int i = 0; i < SIZE - 1; ++i)
+    {
+      for (int k = 0; k < SIZE - 1 - i; ++k)
+      {
+        if (abs(a[k]) > abs(a[k + 1]))
+        {
           int temp = a[k];
           a[k] = a[k + 1];
           a[k + 1] = temp;
@@ -1351,11 +1406,12 @@
   //  odd numbers at the beginning, even numbers at the end
   //  odds and evens are sorted in ascending order
 
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define   SIZE  10
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
 
     randomize();
@@ -1363,8 +1419,10 @@
     print_array(a, SIZE);
     // output -> 607 732 147 322 782 647 477 380 872  79
 
-    for (int i = 0; i < SIZE - 1; ++i){
-      for (int k = 0; k < SIZE - 1 - i; ++k){
+    for (int i = 0; i < SIZE - 1; ++i)
+    {
+      for (int k = 0; k < SIZE - 1 - i; ++k)
+      {
         if (  (a[k] % 2 == 0 && a[k + 1] % 2 == 1) ||
               (a[k] % 2 == a[k + 1] % 2 && a[k] > a[k + 1]))
         {
@@ -1381,9 +1439,9 @@
 */
 
 /*
-  #include "nutility.h"
-  #include <stdlib.h>
-  #include <time.h>
+  #include "../headers/nutility.h"
+  #include <stdlib.h>   // qsort
+  #include <time.h>     // clock_t, clock
 
   #define   SIZE    50000000
 
@@ -1397,14 +1455,17 @@
   // O(n log n) -> 50'000'000 elements  : 3.419000 seconds
 
 
-  int icmp(const void* vp1, const void* vp2){
+  int icmp(const void* vp1, const void* vp2)
+  {
     return *(const int*)vp1 - *(const int*)vp2;
   }
 
-  int main(void){
+  int main(void)
+  {
     // memory allocation on heap segment
     int* p = (int*)malloc(SIZE * sizeof(int));
-    if (!p){
+    if (!p)
+    {
       printf("memory allocation failure\n");
       return 1;
     }
@@ -1450,11 +1511,12 @@
 */
 
 /*
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define   SIZE    10 
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
     int b[SIZE];
     int c[2 * SIZE];
@@ -1475,7 +1537,8 @@
     int idx_a = 0;
     int idx_b = 0;
 
-    for(int i = 0; i < 2 * SIZE; ++i){
+    for(int i = 0; i < 2 * SIZE; ++i)
+    {
       if (idx_a == SIZE)
         c[i] = b[idx_b++];
       else if (idx_b == SIZE)
@@ -1501,11 +1564,12 @@
 */
 
 /*
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define   SIZE    10 
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
 
     set_array_random(a, SIZE);
@@ -1520,7 +1584,8 @@
     int idx_last  = SIZE - 1;
     int idx_mid;
 
-    while(idx_first <= idx_last){
+    while(idx_first <= idx_last)
+    {
       idx_mid = (idx_first + idx_last) / 2;
 
       if (a[idx_mid] == key)
@@ -1551,11 +1616,12 @@
 */
 
 /*
-  #include "nutility.h"
+  #include "../headers/nutility.h"
 
   #define   SIZE    200 
 
-  int main(void){
+  int main(void)
+  {
     int a[SIZE];
 
     set_array_random(a, SIZE);
@@ -1568,7 +1634,8 @@
     int idx_mid;
     int count = 0;
 
-    while(idx_first <= idx_last){
+    while(idx_first <= idx_last)
+    {
       ++count;
       idx_mid = (idx_first + idx_last) / 2;
 
@@ -1608,7 +1675,7 @@
     // output -> arr_size = 10
 
     int md_arr[10][20];
-    // md_arr's element type is int[20]
+    // md_arr's element's type is int[20]
 
     size_t md_arr_size = asize(md_arr);
     printf("md_arr_size = %zu\n", md_arr_size);
@@ -1619,10 +1686,10 @@
 /*
   int main(void)
   {
-    // elemanları double[5] türünden olan 10 elemanlı bir dizi
+    // elemanları double[5] türünden 10 elemanlı bir dizi
     double md_arr[10][5];
 
-    // elemenalar char*[20] türünden olan 5 elemanlı bir dizi
+    // elemanları char*[20] türünden 5 elemanlı bir dizi
     char* md_arr2[5][20];
   }
 */
@@ -1634,7 +1701,7 @@
 
     for(int i = 0; i < 10; ++i)
       arr[i]; 
-    // döngünün her turunda arr[i] int[20] türünden farklı dizi olacak
+    // döngünün her turunda "arr[i]" int[20] türünden farklı diziler olacak
   }
 */
 
@@ -1685,7 +1752,7 @@
 
 
     int md_arr[5][10];
-    // md_arr's element's(int[10]) are contiguous in memory.
+    // md_arr's element's(int[10] arrays) are contiguous in memory.
   }
 */
 
@@ -1740,10 +1807,11 @@
                       { 3, 3, 3 }, 
                       { 4, 4, 4 }, };
 
-    for (int i = 0; i < 4; ++i){
-      for (int k = 0; k < 3; ++k){
+    for (int i = 0; i < 4; ++i)
+    {
+      for (int k = 0; k < 3; ++k)
         printf("%d ", arr[i][k]);
-      }
+      
       printf("\n");
     }
     // output ->
@@ -1761,10 +1829,11 @@
                       { 2, 2, 2 }, 
                       { 3, 3, 3 },};
 
-    for (int i = 0; i < 4; ++i){
-      for (int k = 0; k < 3; ++k){
+    for (int i = 0; i < 4; ++i)
+    {
+      for (int k = 0; k < 3; ++k)
         printf("%d ", arr[i][k]);
-      }
+
       printf("\n");
     }
     // output ->
@@ -1780,10 +1849,11 @@
   {
     int arr[4][3] = { { 1 }, { 2, 2 }, { 3, 3, 3 } };
 
-    for (int i = 0; i < 4; ++i){
-      for (int k = 0; k < 3; ++k){
+    for (int i = 0; i < 4; ++i)
+    {
+      for (int k = 0; k < 3; ++k)
         printf("%d ", arr[i][k]);
-      }
+    
       printf("\n");
     }
     // output ->
@@ -1799,10 +1869,11 @@
   {
     int arr[4][3] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1 };
 
-    for (int i = 0; i < 4; ++i){
-      for (int k = 0; k < 3; ++k){
+    for (int i = 0; i < 4; ++i)
+    {
+      for (int k = 0; k < 3; ++k)
         printf("%d ", arr[i][k]);
-      }
+      
       printf("\n");
     }
     // output ->
@@ -1818,6 +1889,8 @@
 
   int main(void)
   {
+    // -------------------------------------------------
+
     int arr_1[][] = 
       { 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4 }; // syntax error
     // error: array type has incomplete element type 'int[]'
@@ -1825,6 +1898,8 @@
     int arr_2[4][] = 
       { 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4 }; // syntax error
     // error: array type has incomplete element type 'int[]'
+
+    // -------------------------------------------------
 
     int arr_3[][3] = 
       { 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4 }; // VALID
@@ -1834,11 +1909,15 @@
     // ilk üç örnekte, dizinin boyutunu ilk köşeli parantez belirtiyor.
     // elemanlarının türünü ikinci köşeli parantez belirtiyor.
 
+    // -------------------------------------------------
+    
     INT_ARR3 arr_4[4] =
-      { 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4 }; // VALID
-
+    { 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4 }; // VALID
+    
     INT_ARR3 arr_5[] = 
-      { 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4 }; // VALID
+    { 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4 }; // VALID
+
+    // -------------------------------------------------
   }
 */
 
@@ -1860,10 +1939,11 @@
   {
     int arr[5][4] = { [2] = { 3, 3, 3, 3 }, [4] = { 5, 5, 5, 5 } }; 
 
-    for (int i = 0; i < 5; ++i){
-      for (int k = 0; k < 4; ++k){
+    for (int i = 0; i < 5; ++i)
+    {
+      for (int k = 0; k < 4; ++k)
         printf("%d ", arr[i][k]);
-      }
+
       printf("\n");
     }
     // output ->
@@ -1885,9 +1965,9 @@
     }; 
 
     for (int i = 0; i < 5; ++i){
-      for (int k = 0; k < 4; ++k){
+      for (int k = 0; k < 4; ++k)
         printf("%d ", arr[i][k]);
-      }
+      
       printf("\n");
     }
     // output ->
@@ -1934,7 +2014,8 @@
       { 5, 5, 5, 5 },
     };
 
-    for (int i = 0; i < 5; ++i){
+    for (int i = 0; i < 5; ++i)
+    {
       print_array(arr[i], 4);
       // print_array(&arr[i][0], 4);
       // Those 2 lines are equivalent.
@@ -2405,22 +2486,22 @@
 /*
   void func(int* p);  
   void func(int p[]);       // array to pointer conversion
-  // Those 2 lines are same. (function redeclaration)
+  // Those 2 lines are equivalent. (function redeclaration)
 
   void bar(int** p);
   void bar(int* p[]);       // array to pointer conversion
-  // Those 2 lines are same. (function redeclaration)
+  // Those 2 lines are equivalent. (function redeclaration)
 
   void foo(int (*p)[20]);
   void foo(int p[][20]);    // array to pointer conversion
-  // Those 2 lines are same. (function redeclaration)
+  // Those 2 lines are equivalent. (function redeclaration)
 
   typedef int (*FPTR)(int);
 
   void baz(int(*p)(int));
   void baz(FPTR p);
   void baz(int p(int));     // function to function pointer conversion
-  // Those 3 lines are same. (function redeclaration)
+  // Those 3 lines are equivalent. (function redeclaration)
 */
 
 /*
@@ -2434,9 +2515,6 @@
     // it can hold 10 string literal addresses
     // it can hold 10 string array(char[]) addresses
   }
-*/
-
-/*
 */
 
 /*
@@ -2456,14 +2534,18 @@
     // it is exactly a char array
     // it can be modified
 
+    
     for (int i = 0; i < 10; ++i)
-      printf("%s ", names[i]);
+    printf("%s ", names[i]);
     // output ->
     // Cemal Veli Hasan Huseyin Mehmet Ayse Fatma Zeynep Ali Necati
+
+    printf("\n");
 
     for (int i = 0; i < 10; ++i)
       printf("%s %zu\n", names[i], strlen(names[i])); 
     // output ->
+    //  Cemal 5
     //  Veli 4
     //  Hasan 5
     //  Huseyin 7

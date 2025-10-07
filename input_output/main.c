@@ -14,10 +14,12 @@
 */
 
 /*
-  #include <math.h>
+  #include <math.h> // sqrt
 
-  int main(void){
-    for (int i = 0; i < 100; ++i){
+  int main(void)
+  {
+    for (int i = 0; i < 100; ++i)
+    {
       printf("%d %f\n", i, sqrt(i));
     }
   }
@@ -27,11 +29,12 @@
 */
 
 /*
-  #include <math.h>
+  #include <math.h> // pow
 
   // double pow(double base, double exp);
 
-  int main(void){
+  int main(void)
+  {
     double base, exp;
 
     printf("write down base and exponential values: ");
@@ -52,11 +55,13 @@
 */
 
 /*
-  void foo(int x){
+  void foo(int x)
+  {
     x = 6554;
   }
 
-  int main(void){
+  int main(void)
+  {
     int a = 4;
 
     foo(a); // call by value (pass by value)
@@ -86,11 +91,13 @@
 */
 
 /*
-  void foo(int* x){
+  void foo(int* x)
+  {
     *x = 6554;  // dereferencing(*) operator
   }
 
-  int main(void){
+  int main(void)
+  {
     int a = 4;
 
     // address of(&) operator
@@ -123,13 +130,15 @@
 */
 
 /*
-  void swap(int* a, int* b){
+  void swap(int* a, int* b)
+  {
     int temp = *a;
     *a = *b;
     *b = temp;
   }
 
-  int main(void){
+  int main(void)
+  {
     int x = 45, y = 93;
     printf("x = %d y = %d\n", x, y);  // output -> x = 45 y = 93
 
@@ -197,7 +206,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     876;      // int 
     0X1AC4;   // int
 
@@ -218,7 +228,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     3.4;  // double
     5.;   // double
     0.6;  // double
@@ -236,7 +247,8 @@
 /*
   // scientific notations (üstel notasyon)
 
-  int main(void){
+  int main(void)
+  {
     2.3e3;    // 2.3 * 10 ^ 3
     2.3e+3;   // 2.3 * 10 ^ 3
     2.3e-3;   // 2.3 * 10 ^ -3
@@ -248,9 +260,10 @@
 /*
   <-- Check what_constants_become_standart.png -->
 
-  #include <limits.h>
+  #include <limits.h> // INT_MAX, LONG_MAX
 
-  int main(void){
+  int main(void)
+  {
     printf("sizeof(int) = %d\n", sizeof(int));
     printf("sizeof(long int) = %d\n", sizeof(long int));
     printf("sizeof(long long int) = %d\n", sizeof(long long int));
@@ -272,9 +285,10 @@
 */
 
 /*
-  #include <limits.h>
+  #include <limits.h> // INT_MAX
 
-  int main(void){
+  int main(void)
+  {
     printf("INT_MAX_HEX = %X", INT_MAX); 
     // output -> INT_MAX_HEX = 7FFFFFFF
 
@@ -324,12 +338,15 @@
 
   #include <ctype.h>
 
-  int main(void){
+  int main(void)
+  {
     
     FILE* f = fopen("chars.txt", "w");
 
-    for (int i = 0; i < 128; ++i){
-      if (iscntrl(i)){
+    for (int i = 0; i < 128; ++i)
+    {
+      if (iscntrl(i))
+      {
         fprintf(f, "%3d control character\n", i);
       }
       else
@@ -351,12 +368,13 @@
 */
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     int x = '+';
     printf("x = %d\n", x);  // output -> x = 43
 
-    for (int i = '0'; i <= '9'; ++i){
+    for (int i = '0'; i <= '9'; ++i)
+    {
       printf("%d\n", i);
     }
     // output ->
@@ -398,7 +416,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     printf("null              %d\n", '\0');  
     printf("alert             %d\n", '\a'); 
     printf("backspace         %d\n", '\b'); 
@@ -433,7 +452,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     '\x41'; // its type is (int)65  -> HEX
     '\x1B'; // its type is (int)27  -> HEX
     '\x5B'; // its type is (int)91  -> HEX
@@ -444,8 +464,8 @@
 */
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     int x = 'A';  
     int y = '\b';   
     int y = '\x1a';  // HEX
@@ -512,8 +532,8 @@
 */
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     int x = 723434;
 
     printf("x = %d\n", x);    // output -> x = 723434
@@ -531,28 +551,28 @@
 */
 
 /*
-  int printf(const char* pfmt, ...);
-  // function declaration(prototype)
-  // printf is writing standart output stream(default -> monitor)
-  // return value is how many character has been written to stream
+  int printf(const char* pfmt, ...);  // function declaration(prototype)
+  // printf is writing to standart output stream(default -> monitor)
+  // return value is, how many character has been written to stream
 */
 
 /*
   // array(dizi)
-  int main(void){
-
+  int main(void)
+  {
     char str[20];  
     // {'u', 'y', 'g', 'a', 'r', '\0'} -> null terminated byte stream
   }
 */
 
 /*
-  // functions parameter variables can not be array in C
-  // arrays should be send to function with call by reference
+  // function's parameter variables can not be array in C
+  // arrays should be sent to function with call by reference
 
   void foo(char* arr);
 
-  int main(void){
+  int main(void)
+  {
     char char_arr[10];
 
     foo(&char_arr[0]);
@@ -575,8 +595,8 @@
 
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     "hello";  // this is an array have 6 elements 
     // {'h', 'e', 'l', 'l', 'o', '\0'}
 
@@ -589,8 +609,8 @@
 */
 
 /*
-  int main(void){
-    
+  int main(void)
+  {
     printf("\x42\x41\x42\x41"); // output -> BABA
     // decimal 66, 65, 66, 65
   }
@@ -601,7 +621,8 @@
   // x = 368 
   // y = 20
 
-  int main(void){
+  int main(void)
+  {
     int x = 368;
     int y = 20;
 
@@ -612,7 +633,8 @@
 /*
   // output wanted -> 42 * 42 + 34 * 34 = 2920 
 
-  int main(void){
+  int main(void)
+  {
     int x = 42;
     int y = 34;
 
@@ -621,7 +643,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x;
 
     printf("Bir tam sayi giriniz: ");
@@ -653,7 +676,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     char str[100] = "Istanbul, Ankara, Izmir";
 
     printf("cities = %s\n", str);
@@ -665,7 +689,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 11;
     int y = 222;
     int z = 3333;
@@ -712,7 +737,8 @@
   // if we want to use '%' character in standart output 
   // we will need "%%" 
 
-  int main(void){
+  int main(void)
+  {
     printf("%%\n"); // output -> %
 
     double vat = 18.;
@@ -723,7 +749,8 @@
 /*
   // output wanted 17%5=2
 
-  int main(void){
+  int main(void)
+  {
     int x =  17;
     int y = 5;
 
@@ -748,7 +775,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x;
 
     printf("write a value : ");
@@ -769,7 +797,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x;
 
     printf("write a value : ");
@@ -783,12 +812,13 @@
 
 /*
   scanf function is using white space characters as a seperator
-  when we press ENTER in keyboar it will add new line character to 
+  when we press ENTER in keyboard it will add new line character to 
   scanf() functions buffer -> line buffered function
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x;
 
     printf("write a value : ");
@@ -803,13 +833,14 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x;
 
     printf("write a value : ");
     scanf("%d", &x);
     printf("x = %d\n", x);
-    // input -> 675hello
+    // input -> 675ankara
     // output -> x = 675 
 
     // "675" characters extracted from the input buffer
@@ -831,7 +862,8 @@
   // space characters can be used as seperator in scanf() function
   // to get different values from standart input
 
-  int main(void){
+  int main(void)
+  {
     int x, y;
 
     printf("Write 2 numbers : ");
@@ -845,7 +877,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x;
     double d;
 
@@ -873,7 +906,8 @@
   // If scanf() is not succeed to set a variable, it is not extracting
   // characters from the buffer.
 
-  int main(void){
+  int main(void)
+  {
     int x, y, z;
 
     printf("Write 3 numbers : ");
@@ -900,7 +934,8 @@
 /*
   // If scanf()'s buffer is empty, function will return -1
 
-  int main(void){
+  int main(void)
+  {
     int x, y, z;
 
     printf("Write 3 numbers : ");
@@ -921,7 +956,8 @@
 */
 
 /*
-  int max3(int a, int b, int c){
+  int max3(int a, int b, int c)
+  {
     int max = a;
 
     if (b > max)
@@ -933,7 +969,8 @@
     return max;
   }
 
-  int main(void){
+  int main(void)
+  {
     printf("3 sayi giriniz : ");
 
     int x, y, z;
@@ -944,8 +981,8 @@
 */
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     int x, y, z;
 
     (void)scanf("%d%d%d", &x, &y, &z);
@@ -959,22 +996,24 @@
 */
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     int x = 65;
     printf("%c\n", x);  // output -> A
 
     // %c format specifier will convert the integer value to 
     // character literal
 
-    for (int i = 33; i < 127; ++i){
+    for (int i = 33; i < 127; ++i)
+    {
       printf("%c", i);
     }
     // output ->
     // !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ
     // [\]^_`abcdefghijklmnopqrstuvwxyz{|}~
 
-    for (int i = 33; i < 127; ++i){
+    for (int i = 33; i < 127; ++i)
+    {
       printf("%3d  %#X  %c\n", i, i, i);
     }
   }
@@ -995,7 +1034,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     printf("write a character : ");
     int ch = getchar();
 
@@ -1013,7 +1053,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     printf("write something : ");
 
     int ch = getchar();
@@ -1039,7 +1080,8 @@
 /*
   // getchar() and scanf() are using the same buffer.
 
-  int main(void){
+  int main(void)
+  {
     int ival;
     double dval;
     char sep;
@@ -1059,7 +1101,8 @@
 /*
   // getchar() returns -1 when buffer is empty
 
-  int main(void){
+  int main(void)
+  {
     printf("write a character : ");    
     int c = getchar();
     printf("ch = %d\n", c); 
@@ -1069,12 +1112,14 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int c;
 
     printf("Write a number : ");
 
-    while ((c = getchar()) != '\n'){
+    while ((c = getchar()) != '\n')
+    {
       printf("%d --> %d\n", c,  c - '0');
     }
 
@@ -1090,13 +1135,15 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int c;
 
     printf("Write a number : ");
 
     int x = 0;
-    while ((c = getchar()) != '\n'){
+    while ((c = getchar()) != '\n')
+    {
       x = x * 10 + (c - '0');
     }
 
@@ -1111,14 +1158,16 @@
   // Write a number and check if it can be divisible by 3
   // the number can be larger than limits of "int" type.
 
-  int main(void){
+  int main(void)
+  {
     int x;
     printf("write a number : ");
 
     int digit_sum = 0;
     int c;
 
-    while ((c = getchar()) != '\n'){
+    while ((c = getchar()) != '\n')
+    {
       digit_sum += c - '0';
     }
 
@@ -1130,7 +1179,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     printf("true(t) or false(f) : ");
 
     int ch = getchar();
@@ -1154,7 +1204,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     putchar(65);  // output -> A 
     // if the program is using ASCII output will be "A"
     // but not guaranteed
@@ -1165,7 +1216,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     for (int i = 65; i <= 90; ++i)
       putchar(i);
     // output -> ABCDEFGHIJKLMNOPQRSTUVWXYZ

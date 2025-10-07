@@ -19,11 +19,10 @@
   epoch      :  
     tarih-zamanda bir başlangıç noktası(orjin).
     sistemden sisteme değişebilir.
-    unix epcoh: 01 01 1970 00:00:00
+    unix epoch: 01 01 1970 00:00:00
 
-  time point bilgisi epoch'tan ile süre arasındaki mesafe olarak 
-  tutuluyor ise, bu duruma calendar time denir.
-  "time_t" türü ile temsil edilir.
+  time point bilgisi epoch ile süre arasındaki mesafe olarak tutuluyor ise,
+  bu duruma calendar time denir. "time_t" türü ile temsil edilir.
 
   epoch'tan ilerleyerek veya gerileyerek belirli bir sayıda
   saniye sonrasında varılan noktanın, insan için anlamlı 
@@ -34,20 +33,20 @@
 
 /*
   struct tm {
-    int tm_year;  // years since 1900
-    int tm_mon;   // months since January [0, 11]
-    int tm_mday;  // day of the month [1, 31]
-    int tm_wday;  // days since Sunday [0, 6]
-    int tm_yday;  // days since January 1 [0, 365]
-    int tm_hour;  // hours since midnight [0, 23]
-    int tm_min;   // minutes after the hour [0, 60]
-    int tm_sec;   // seconds after the minute [0, 60]
-    int tm_isdst; // daylight saving time flag
+    int tm_year;    // years since 1900
+    int tm_mon;     // months since January [0, 11]
+    int tm_mday;    // day of the month [1, 31]
+    int tm_wday;    // days since Sunday [0, 6]
+    int tm_yday;    // days since January 1 [0, 365]
+    int tm_hour;    // hours since midnight [0, 23]
+    int tm_min;     // minutes after the hour [0, 60]
+    int tm_sec;     // seconds after the minute [0, 60]
+    int tm_isdst;   // daylight saving time flag
   };
 */
 
 /*
-  #include <time.h>
+  #include <time.h>   // time, time_t
 
   // time function's prototype
   time_t time(time_t*);
@@ -98,9 +97,8 @@
     //  000002F2A4DEE7D0
     //  000002F2A4DEE7D0
 
-    // because of localtime function 
-    // returns a pointer to a static object
-    // address of the object is same in each call
+    // because of localtime function returns a pointer to a static object,
+    // returned struct tm* object's address is same in every call.
     
     // ---------------------------------------------------------
   }
@@ -193,28 +191,27 @@
     time(&sec);
     struct tm* p_tm = localtime(&sec);
 
-    if (p_tm->tm_isdst) {
+    if (p_tm->tm_isdst) 
       printf("daylight saving time is in effect\n");
-    } 
-    else {
+    else 
       printf("daylight saving time is not in effect\n");
-    }
-    // output -> daylight saving time is not in effect(Turkiye)
+
+    // output -> daylight saving time is not in effect(Türkiye)
   }
 */
 
 /*
-  #include <time.h>
+  #include <time.h> // ctime, time_t, asctime
 
   // ctime function's prototype
   char* ctime(const time_t*);
-  // returns the address of static char[26] array
-  // gets calendar time pointer as a parameter
+  // - returns the address of static char[26] array
+  // - gets calendar time pointer as a parameter
 
   // asctime function's prototype
   char* asctime(const struct tm*);
-  // returns the address of static char[26] array
-  // gets broken-down time pointer as a parameter
+  // - returns the address of static char[26] array
+  // - gets broken-down time pointer as a parameter
 
   // both functions are returning the same array's address
 
@@ -256,13 +253,12 @@
 */
 
 /*
-  #include <time.h>
+  #include <time.h>   // time, time_t, struct tm, asctime, localtime
 
   int main(void)
   {
     time_t sec = time(NULL);
     struct tm* p_tm = localtime(&sec);
-
     printf("%s", asctime(p_tm));
     // output -> Thu Nov 14 00:03:46 2024
   }
@@ -273,7 +269,7 @@
 */
 
 /*
-  #include <time.h>
+  #include <time.h> // strftime, time, time_t, localtime
 
   #define BUFFER_SIZE 100
 
@@ -314,7 +310,7 @@
 */
 
 /*
-  #include <time.h> // time, localtime, asctime, strftime
+  #include <time.h> // time, struct tm, localtime, asctime, strftime
 
   #define   BUFFER_SIZE   256
 
@@ -352,7 +348,8 @@
 
     char buffer[BUFFER_SIZE];
 
-    if (!setlocale(LC_ALL, "turkish")) {
+    if (!setlocale(LC_ALL, "turkish")) 
+    {
       printf("locale setting failed\n");
       return 1;
     }
@@ -375,7 +372,8 @@
 
   int main(void)
   {
-    if (setlocale(LC_ALL, "turkish") == NULL) {
+    if (setlocale(LC_ALL, "turkish") == NULL) 
+    {
       printf("locale setting failed\n");
       return 1;
     }
@@ -398,8 +396,8 @@
 */
 
 /*
-  #include <time.h>
-  #include <stdlib.h> // malloc, free, qsort
+  #include <time.h>     // clock, clock_t
+  #include <stdlib.h>   // malloc, free, qsort
   #include "../headers/nutility.h"
 
   // clock function's prototype
@@ -418,9 +416,10 @@
   int main(void)
   {
     size_t N = 1000000; //  1'000'000
-    int* p = malloc(N * sizeof(int));
 
-    if (!p){
+    int* p = malloc(N * sizeof(int));
+    if (!p)
+    {
       printf("memory allocation failed\n");
       return 1;
     }

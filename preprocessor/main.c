@@ -60,7 +60,8 @@
   ========
   #include "header1.h"
 
-  int main(void){
+  int main(void)
+  {
     int x = bar(12);      // valid
     int y = foo(22, 44);  // valid  
   }
@@ -96,9 +97,11 @@
       { 1, 2, 3, 4 }
     };
 
-    for (size_t i = 0; i < asize(arr); ++i){
+    for (size_t i = 0; i < asize(arr); ++i)
+    {
       for (size_t k = 0; k < 4; ++k)
         printf("%d ", arr[i][k]);
+
       printf("\n");
     }
 
@@ -117,9 +120,11 @@
       #include "init.txt"
     };
 
-    for (size_t i = 0; i < asize(arr_2); ++i){
+    for (size_t i = 0; i < asize(arr_2); ++i)
+    {
       for (size_t k = 0; k < 4; ++k)
         printf("%d ", arr_2[i][k]);
+
       printf("\n");
     }
     // output ->
@@ -163,11 +168,11 @@
 /*
   #define SIZE  30
 
-  int main(void){
-
-    for(int i = 0; i < SIZE; ++i){
+  int main(void)
+  {
+    for(int i = 0; i < SIZE; ++i)
       printf("xo");
-    }
+    
     // output -> 
     //  xoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxo
   }
@@ -182,20 +187,19 @@
 
   int y = SIZE;   // VALID
   // replacement(substitution) CAN be done. 
-
-  int main(void){
-  }
 */
 
 /*
   void foo(void);
 
-  int main(void){
+  int main(void)
+  {
     #define SIZE  100   // preprocessor DOES NOT have scope !
     foo();
   }
 
-  void foo(void){
+  void foo(void)
+  {
     int x = SIZE;
     printf("x = %d", x);  // output -> x = 100
   }
@@ -204,7 +208,8 @@
 /*
   #define SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     int x = MAX_SIZE; // syntax error
     // error: 'MAX_SIZE' is undefined
     // preprocessor DID NOT make MAX_SIZE to MAX_100
@@ -221,7 +226,8 @@
 /*
   #define SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     printf("SIZE"); // output -> SIZE
 
     // for replacement(substitution) to happen 
@@ -233,7 +239,8 @@
 /*
   #define SIZE  100
 
-  int main(void){
+  int main(void)
+  {
     int x = size; // syntax error
     // macros are CASE-SENSITIVE
   }
@@ -243,7 +250,8 @@
   #define     ADD   100 + 200
   #define     ADD2  (100 + 200)
 
-  int main(void){
+  int main(void)
+  {
     int x = 7 * ADD;
     int y = 7 * ADD2;
 
@@ -259,7 +267,8 @@
   #define   HEY     100
   #define   YOLO    HEY + 400
 
-  int main(void){
+  int main(void)
+  {
     int x = TOS;
     printf("x = %d\n", x);  // output -> x = 200
 
@@ -267,7 +276,7 @@
     printf("y = %d\n", y);  // output -> y = 500
   }
 
-  // macro can be used inside another macro
+  // a macro can be used inside an another macro
 */
 
 /*
@@ -275,8 +284,8 @@
   // semicolon has been used in macro
   // HEY will be replaced with "100;"
 
-  int main(void){
-
+  int main(void)
+  {
     int x;
     x = HEY;  
     // x = 100;;  second ";" becomes null statement -> VALID
@@ -292,7 +301,8 @@
 /*
   #define   MESSAGE   "NOT ENOUGH MEMORY"
 
-  int main(void){
+  int main(void)
+  {
     printf(MESSAGE);  // output -> NOT ENOUGH MEMORY
   }
 */
@@ -310,7 +320,8 @@
 
   // for using next line in the macros "\" character needs to be used
 
-  int main(void){
+  int main(void)
+  {
     int x = SIZE;
 
     printf("x = %d", x);  // output -> x = 633
@@ -322,40 +333,40 @@
   // symbolic(manifest) constant -> sembolik sabit
 
   // 1. when constants have been used naked, code is getting harder
-  //  to understand, using symbolic constants makes it easy.
+  //  to understand, using symbolic constants makes it easier.
 
   // 2. large numbers are hard to write properly 100'000 can easily
-  //  be writeen as 1'000'000. Using symbolic constant decrease the
-  //  risk using wrong value.
+  //  be writeen as 1'000'000. Using a symbolic constant decreases the
+  //  risk of using wrong value.
 */
 
 /*
-  int main(void){
-    int arr[100] = { 0 };     // related with array size
+  int main(void)
+  {
+    int arr[100] = { 0 };           // related with array size
 
-    for (int i = 0; i < 100; ++i){  // related with array size
+    for (int i = 0; i < 100; ++i)   // related with array size
       arr[i] = 1;   
-    }
 
-    int x = 100;    // not related with the array size
+    int x = 100;                    // not related with the array size
 
-    if (x == 100)   // not related with the array
+    if (x == 100)                   // not related with the array
       ;
   }
 
-  // think about we need to increase size of the array 100 -> 500
-  // when we change every 100 to 500 inside THE file 
-  // it will broke other code which are not related 
-  // with the size of the array
+  // think about that we need to increase size of the array from 100 to 500
+  // and we did change every 100 to 500 inside the file 
+  // so it will broke other code which are not related with the size of the array
+  // because they also been changed to 500.
 
   #define   SIZE 500
 
-  int symbolic_constant_main(void){
+  int symbolic_constant_main(void)
+  {
     int arr[SIZE] = { 0 };     
 
-    for (int i = 0; i < SIZE; ++i){  
+    for (int i = 0; i < SIZE; ++i)
       arr[i] = 1;   
-    }
 
     int x = 100;    
 
@@ -365,9 +376,10 @@
 */
 
 /*
-  #include <stdlib.h>
+  #include <stdlib.h>   // rand, RAND_MAX
 
-  int main(void){
+  int main(void)
+  {
     rand(); 
 
     RAND_MAX; 
@@ -385,10 +397,10 @@
 */
 
 /*
-  #include <limits.h>
+  #include <limits.h>   // INT_MAX
 
-  int main(void){
-
+  int main(void)
+  {
     int x = 2147483647;
 
     int y = INT_MAX;
@@ -432,7 +444,8 @@
 /*
   #define SQUARE(A)   A * A 
 
-  int main(void){
+  int main(void)
+  {
     int x = 9;
 
     printf("%d * %d = %d", x, x, SQUARE(x));
@@ -445,7 +458,8 @@
   #define SQUARE_2(A)     (A) * (A)
   #define SQUARE_3(A)     ((A) * (A))
 
-  int main(void){
+  int main(void)
+  {
     int x = 5;
 
     // <----- PROBLEM 1 ----->
@@ -474,7 +488,8 @@
 /*
   #define   MAX(A, B)   ((A) > (B) ? (A) : (B))
 
-  int main(void){
+  int main(void)
+  {
     int x = 45, y = 21;
 
     printf("max = %d\n", MAX(x, y));  
@@ -486,7 +501,8 @@
   #define ISLEAP(y) \
           ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0)) 
 
-  int main(void){
+  int main(void)
+  {
     int year = 1988;
 
     if (ISLEAP(year))
@@ -507,12 +523,13 @@
 */
 
 /*
-  #include <stdlib.h>   
+  #include <stdlib.h>   // srand
   // for srand() function also NULL macro 
 
   #define   RANDOMIZE()   srand((unsigned int)time(NULL))
 
-  int main(void){
+  int main(void)
+  {
     RANDOMIZE();    // no paramater functional macro
   }
 */
@@ -520,7 +537,8 @@
 /*
   #define   SQUARE(x)     ((x) * (x))
 
-  int main(void){
+  int main(void)
+  {
     int a = 6;
     int b = SQUARE(a++);    // undefined behavior(UB)
 
@@ -536,7 +554,8 @@
 
   int foo(void);
 
-  int main(void){
+  int main(void)
+  {
     SQUARE(foo());
     // ((foo()) * (foo()))  -> compiler sees
 
@@ -558,14 +577,16 @@
 */
 
 /*
-  int square(int x){
+  int square(int x)
+  {
     printf("real function called\n");
     return x * x;
   }
 
   #define   square(x)     ((x) * (x))
 
-  int main(void){
+  int main(void)
+  {
     int i = 7;
 
     int result = square(i); 
@@ -588,7 +609,8 @@
   #define  swap_1(a, b)     { int temp = a; a = b; b = temp; }
   #define  swap_2(a, b)   do{ int temp = a; a = b; b = temp; } while(0)
 
-  int main(void){
+  int main(void)
+  {
     int x = 10, y = 20;
 
     swap_1(x, y); // valid
@@ -603,7 +625,8 @@
       x++;
     // error : 'else' without a previous 'if'
 
-    // if (x > 10){
+    // if (x > 10)
+    // {
     //   int temp = x; x = y; y = temp;
     // };   -> null statement broke the if-else statement's syntax
     // else
@@ -668,16 +691,17 @@
 
   void foo(enum Color c)
   {
-    switch(c) {
-    case RED:    printf("RED\n");    break;
-    case GREEN:  printf("GREEN\n");  break;
-    case BLUE:   printf("BLUE\n");   break;
+    switch(c) 
+    {
+      case RED:    printf("RED\n");    break;
+      case GREEN:  printf("GREEN\n");  break;
+      case BLUE:   printf("BLUE\n");   break;
     }
   }
 
   daha sonradan koda yeni bir renk eklenileceği zaman,
-  listenin lojik ilişki içerdiği her yerde değişiklik yapılması
-  gerekecektir. Bu durumda X macro kullanılabilir.
+  listenin lojik ilişki içerdiği her yerde değişiklik yapılması gerekecektir.
+  Bu durumda X macro kullanılabilir.
 */
 
 /*
@@ -768,13 +792,15 @@
 /*
   #define  STR(x)    #x
 
-  int main(void){
+  int main(void)
+  {
     printf(STR(hello world));  // output -> hello world
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     printf(
       "Istanbul "
       "Ankara "
@@ -790,7 +816,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     printf("[1]kayit ekle\n[2]kayit sil\n[3]kayit ara\n[4]menuden cik\n");
 
     printf(
@@ -812,7 +839,8 @@
 /*
   #define  iprint(i)  printf("%d\n", i)
 
-  int main(void){
+  int main(void)
+  {
     int x = 10, y = 20, z = 30;
 
     printf("%d\n", x);                      // output -> 10
@@ -830,7 +858,8 @@
 /*
   #define  iprint(i)  printf(#i " = %d\n", i)
 
-  int main(void){
+  int main(void)
+  {
     int x = 10, y = 20, z = 30;
 
     printf("x = %d\n", x);                    
@@ -854,7 +883,8 @@
 /*
   #define   UNITE(x, y)    x##y
 
-  int main(void){
+  int main(void)
+  {
     int odd_sum = 0;
 
     UNITE(odd_, sum)++;
@@ -868,7 +898,7 @@
   // önişlemci programa bir fonksiyon tanımı kodu yazdıracak
   // bir fonksiyonel makro oluşturmak
   #define generate_max_1(t)   t max(t x, t y){        \
-                              return x > y ? x : y; \
+                              return x > y ? x : y;   \
                             }
 
   generate_max_1(int)
@@ -903,7 +933,8 @@
     double d;
   };
 
-  int main(void){
+  int main(void)
+  {
     // offsetof() is a functional macro
     offsetof(struct Data, y); 
     ((size_t)&((struct Data *)0)->y); // same as above
@@ -913,7 +944,8 @@
 /*
   #define   asize(x)   (sizeof(x) / sizeof(x[0]))
 
-  int main(void){
+  int main(void)
+  {
     int a[] = {1, 5, 3, 6, 4, 9};
 
     sizeof(a) / sizeof(a[0]);  
@@ -957,7 +989,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
   #if 0
     prinf("hello world\n");
   #endif
@@ -969,7 +1002,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
   #if 1
     printf("Istanbul\n");
   #else
@@ -983,7 +1017,8 @@
 /*
   #define   SIZE  100
 
-  int main(void){
+  int main(void)
+  {
   #if SIZE > 20
     printf("SIZE is greater than 20\n");
   #endif
@@ -996,7 +1031,8 @@
   #define   AAA  100
   #define   BBB  200
 
-  int main(void){
+  int main(void)
+  {
   #if AAA > 90 && BBB < 180
     printf("IF directive\n");
   #else
@@ -1010,7 +1046,8 @@
   #define   AAA  100
   #define   BBB  200
 
-  int main(void){
+  int main(void)
+  {
   #if AAA + BBB > 250
     printf("IF directive\n");
   #else
@@ -1024,7 +1061,8 @@
   #define   AAAA
   #define   BBBB    1000
 
-  int main(void){
+  int main(void)
+  {
   #ifdef  AAAA
     printf("AAAA is defined\n");
   #endif
@@ -1046,7 +1084,8 @@
 /*
   #define   AAAA
 
-  int main(void){
+  int main(void)
+  {
   #ifdef  AAAA
     printf("AAAA is defined\n");
   #else
@@ -1068,7 +1107,8 @@
 /*
   #define  AAAA
 
-  int main(void){
+  int main(void)
+  {
   #ifdef  AAAA
     printf("AAAA is defined\n");
   #endif
@@ -1086,7 +1126,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
   #ifndef  DEBUG
     printf("DEBUG is not defined\n");
   #endif
@@ -1108,7 +1149,8 @@
   #define  YYYY
 
   // <--- 1st way --->
-  int main(void){
+  int main(void)
+  {
   #ifdef XXXX 
   #ifdef YYYY
     printf("both are defined\n");
@@ -1132,7 +1174,8 @@
   // if we define DEBUG macro, we can see the codes inside #if DEBUG
   // else compiler will ignore those codes
 
-  int main(void){
+  int main(void)
+  {
   #ifdef DEBUG
     printf("DEBUG_1\n");
   #endif
@@ -1187,7 +1230,8 @@
   #endif
   #endif
 
-  int main(void){
+  int main(void)
+  {
     printf("CURRENCY = %s\n", CURRENCY);
     // output -> CURRENCY = TL
   }
@@ -1215,7 +1259,8 @@
     #define CURRENCY "JPY"
   #endif
 
-  int main(void){
+  int main(void)
+  {
     printf("CURRENCY = %s\n", CURRENCY);
     // output -> CURRENCY = JPY
   }
@@ -1233,7 +1278,6 @@
   int foo(int);
   int foo(int);
 
-
   // bazı bildirimlerin ikinci defa yapılması sentaks hatasıdır
   // some declarations can not be done more than once
   struct Data{
@@ -1244,13 +1288,15 @@
   };
   // syntax error: redefinition of 'struct Data
 
+*/
+
+/*
+  // <check example.h, example2.h and example3.h files in this folder>
 
   #include "example.h"
   #include "example.h"
   // syntax error: redefinition of 'struct Data_2
-*/
 
-/*
   #include "example2.h"
   #include "example2.h"
   // no syntax error
@@ -1301,11 +1347,12 @@
   }
 
   // undefined behavior(UB) -> redefinition of 'SIZE'
-  // macros does not have scope
+  // macros does not have scope!
 */
 
 /*
-  void foo(void){
+  void foo(void)
+  {
   #undef SIZE
   #define SIZE 100
 
@@ -1314,7 +1361,8 @@
   #undef SIZE
   }
 
-  void bar(void){
+  void bar(void)
+  {
   #undef SIZE
   #define SIZE 500
 
@@ -1329,7 +1377,8 @@
 /*
   #define  XXXX
 
-  int main(void){
+  int main(void)
+  {
   #ifdef  XXXX
     printf("XXXX seen once\n");
   #endif
@@ -1351,7 +1400,7 @@
 */
 
 /*
-  ->Predefined symbolic constants are macros.
+  -> Predefined symbolic constants are macros.
   -> Predefined symbolic constants did not have a define directive
   but in preprocessing phase they will be replaced with their values.
   -> No header file needed to include for using these constants.
@@ -1369,9 +1418,10 @@
 /*
   #include <stdio.h>
 
-  int main(void){
+  int main(void)
+  {
     int x = __LINE__;
-    printf("x = %d\n", x);  // output -> x = 1251
+    printf("x = %d\n", x);  // output -> x = 1423
   }
 
   // __LINE__ macro will be replaced with the line number where it is
@@ -1385,7 +1435,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     printf(__FILE__ "\n");
     // printf("main.c" "\n");  -> compiler sees
 
@@ -1398,13 +1449,15 @@
 
 /*
   #ifdef __STDC__
-    int main(void){
+    int main(void)
+    {
       printf("Hello World\n");
     }
   #endif
 
   #ifdef __cplusplus
-    int main(void){
+    int main()
+    {
     printf("Hello Galaxy\n");
     }
   #endif
@@ -1415,12 +1468,14 @@
 /*
   // __func__ (since C99 standard)
 
-  void foo(void){
+  void foo(void)
+  {
     printf("foo() has been called\n");
     printf("function name : %s\n", __func__);
   }
 
-  int main(void){
+  int main(void)
+  {
     printf("function name : %s\n", __func__);
     foo();
     // output ->
@@ -1437,7 +1492,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
 
   #ifdef __STDC__ 
   #error "This program should be compiled with C++ compiler"
@@ -1450,7 +1506,8 @@
 
 /*
   // __STDC_VERSION__ macro (since C95 standard)
-  int main(void){
+  int main(void)
+  {
 
   #if __STDC_VERSION__ == 199409L
   #error "This program compiled with C95 compiler"
@@ -1475,7 +1532,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
   #line 100 "line.c"
     printf("__LINE__ = %d, __FILE__ = %s\n", __LINE__, __FILE__);
     // output -> __LINE__ = 100, __FILE__ = line.c
@@ -1517,11 +1575,11 @@
   #define   BBB(x)    AAA(x)
 
 
-  int main(void){
+  int main(void)
+  {
     printf(AAA(SIZE) "\n");   // output -> SIZE
     printf(BBB(SIZE) "\n");   // output -> 100
   }
-  // !!! will be explained later !!!
 */
 
 /*
@@ -1532,9 +1590,9 @@
   // if replacement is same as macro 
   // it will not be replaced for the second time
 
-  int main(void){
+  int main(void)
+  {
     printf(4567);   // output -> 4567
     // printf(4567) will become printf("%d\n", 4567)
   }
-  // !!! will be explained later !!!
 */

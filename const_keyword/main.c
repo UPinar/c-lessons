@@ -49,7 +49,7 @@
 /*
   int main(void)
   {
-    const int a[5] = {1, 2, 3, 4, 5};
+    const int a[5] = { 1, 2, 3, 4, 5 };
 
     int x = a[3] + a[1];  // for reading purpose -> VALID
     a[2]++;               // for writing purpose -> syntax error
@@ -86,19 +86,19 @@
   int main(void)
   {
     int daytabs[] = 
-        {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     // lookup table for days in month
 
     // If we did not make this array const qualified, 
     // code that change this array will NOT give any error
-    // but be a logic error
+    // but will be a logic error.
 
     int mon = 1;
     daytabs[mon]++;   // valid but logic error
 
 
     const int daytabs_2[] = 
-        {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
     daytabs_2[mon]++;  // syntax error
     // error: increment of read-only location 'daytabs_2[mon]'
@@ -120,7 +120,7 @@
     will become a syntax error.
   - for people to read and understand what the code is doing
   - compiler can optimize the code better, 
-    if it gets a guarantee that a variable will not change
+    when a variable does give a guarantee that it will not be changed.
 */
 
 /*
@@ -129,7 +129,7 @@
     const int x = 10;
 
     int* ptr = (int*)&x;
-    *ptr = 777;   // undefined behavior(ub)
+    *ptr = 777;   // undefined behavior(UB)
 
     // attempting to change the value of a constant variable 
     // is undefined behavior
@@ -164,12 +164,14 @@
     const int cint_2 = 200;
     const int cint_3 = 300;
 
-    switch (val){
-    case cint_1:;   // syntax error
-    case cint_2:;   // syntax error
-    case cint_3:;   // syntax error
+    switch (val)
+    {
+      case cint_1:;   // syntax error
+      case cint_2:;   // syntax error
+      case cint_3:;   // syntax error
     }
     //  error: case label does not reduce to an integer constant
+    // because of that cint_1, cint_2, cint_3 are not constant expressions
   }
 */
 
@@ -207,14 +209,14 @@
     int* const c_ptr = &x;  // constant pointer to int
 
     // - Giving a promise that this pointer will not change
-    // - pointer değişkenin değeri değişmeyecek sözünü veriyoruz.
+    // - pointer değişkenin değerinin değişmeyeceği sözünü veriyoruz.
 
     // - Not giving a promise that the variable it points to 
     //  will not change
     // - pointer'ın gösterdiği değişkenin değişmeyeceğine 
-    //  dair bir söz vermiyoruz.
+    //  dair herhangi bir söz vermiyoruz.
 
-    *c_ptr = 30;  // valid
+    *c_ptr = 30;  // VALID
 
     c_ptr = &y;   // syntax error
     // error: assignment of read-only variable 'c_ptr'
@@ -230,13 +232,13 @@
     const int* ptr = &x;  // pointer to const int
     // int const* ptr = &x;
 
-    // - Giving a promise that the variable it points to will not change
-    // - pointerin gösterdiği değişkenin değişmeyeceği sözünü veriyoruz.
+    // - giving a promise that, the variable it points to will not change
+    // - pointerın gösterdiği değişkenin değişmeyeceğinin sözünü veriyoruz
 
-    // - Not giving a promise that the pointer itself will not change
-    // - pointer'ın değişmeyeceğine dair bir söz vermiyoruz.
+    // - not giving a promise that the pointer itself will not change.
+    // - pointer'ın değişmeyeceğine dair herhangi bir söz vermiyoruz.
 
-    ptr = &y;   // valid
+    ptr = &y;   // VALID
 
     *ptr = 30;  // syntax error
     // error: assignment of read-only location '*ptr'
@@ -251,10 +253,10 @@
 
     const int* const ptr = &x;  // const pointer to const int
 
-    // - Giving a promise that the variable it points to will not change
-    // - pointerin gösterdiği değişkenin değişmeyeceği sözünü veriyoruz.
+    // - Giving a promise that the pointer variable will not change
+    // - pointer değişkenin değerinin değişmeyeceği sözünü veriyoruz.
 
-    // - Giving a promise that the variable it points to will not change
+    // - Giving a promise that the variable that pointer points to will not change
     // - pointerin gösterdiği değişkenin değişmeyeceği sözünü veriyoruz.
 
     ptr = &y;   // syntax error
@@ -288,7 +290,7 @@
   int main(void)
   {
     const int daytabs[] = 
-        {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
     printArray(daytabs, 13);
     // warning : passing argument 1 of 'printArray' discards 
@@ -339,7 +341,7 @@
 
 /*
   - conversion from T* to const T* is VALID
-  - conversion from const T* to T* is INVALID(ub)
+  - conversion from const T* to T* is INVALID(undefined behavior)
 */
 
 /*
@@ -350,7 +352,7 @@
 
     int* ptr = &x;  
     // ptr is not giving a promise that it will not change "x"
-    // undefine behavior(ub)
+    // undefined behavior(ub)
   }
 */
 
@@ -391,7 +393,7 @@
 
     int z = 5;
     const int* r = &z;
-    // r is giving a promise that it will not change "z"]
+    // r is giving a promise that it will not change "z"
     // z is not const qualified so it can be changed
     // VALID (int* ==> const int*)
 
@@ -413,8 +415,8 @@
 
 /*
   - there are some scenarios that conversion from (const T* ==> T*) 
-    needs to be done. In those scenarios we will be use typecast 
-    operator. (const cast)
+    needs to be done. 
+    In those scenarios we will be using typecast operator. (const cast)
 */
 
 /*

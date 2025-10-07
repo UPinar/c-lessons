@@ -385,20 +385,22 @@
       int a = 10, b = 20;
 
       sum(a, b);
-      // sum(a, b) expressions type is "int" 
+      // sum(a, b) expression's type is "int" 
       // because functions return value type is int
 
-      // sum(a, b) expressions value is 30 
-      // functions return value is 30
+      // sum(a, b) expression's value is 30 
+      // function's return value is 30
   }
 */
 
 /*
-  int max2(int x, int y){
+  int max2(int x, int y)
+  {
     return (x > y) ? x : y;
   }
 
-  int main(void){
+  int main(void)
+  {
     int a = 25, b = 33;
 
     max2(25, 33); 
@@ -439,16 +441,18 @@
 /*
   int ndigit(int);
 
-  int main(){
+  int main()
+  {
     int x = 10, y = 5, z = 222;
 
-    // if functions return value will not be used in the code 
+    // if function's return value will not be used in the code 
     // again it is better using it as sub-expression
-    if (ndigit(x) > ndigit(y)){
+    if (ndigit(x) > ndigit(y))
+    {
       // code
     }
 
-    // if functions return value will be used more than once
+    // if function's return value will be used more than once
     // better hold the return value in a variable
     int ival = ndigit(z);
   }
@@ -463,7 +467,7 @@
     int x = 5, y = 4;
 
     int z = foo(x) + bar(y) * 5;
-    // Question: foo or bar function will be called before ?
+    // Question: which function will be called earlier, foo or bar?
     // Answer: it depends on the compiler 
     // This situation is being called UNSPECIFIED BEHAVIOR
   }
@@ -472,24 +476,27 @@
 /*
   int g_x = 20;
 
-  int foo(int a){
+  int foo(int a)
+  {
     g_x += 80;
     return a * 3;
   }
 
-  int bar(int a){
+  int bar(int a)
+  {
     return g_x + a;
   }
 
-  int main(){
+  int main()
+  {
     int x = 5, y = 4;
 
     int z = foo(x) + bar(y);
-    // if foo is called before z = 15 + 104 = 119
-    // if bar is called before z = 24 + 15 = 39
+    // if foo is called earlier z = 15 + 104 = 119
+    // if bar is called earlier z = 24 + 15 = 39
 
     // this code's logic structure will be changed 
-    // by the call orders of the functions 
+    // by the call orders of the functions.
   }
 */
 
@@ -518,7 +525,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 56;
     int y = 10;
 
@@ -543,7 +551,8 @@
 /*
   void foo(int, int, ...);
 
-  int main(){
+  int main()
+  {
     // min 2 arguments to call foo function
 
     foo();              // not valid 
@@ -556,7 +565,8 @@
 
 /*
   // main is also a function
-  int main(void){
+  int main(void)
+  {
 
     return 0; 
     // returning 0 is telling that program succeeds 
@@ -569,10 +579,12 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     
     FILE* f = fopen("dataxyz.dat", "rb");
-    if (f == NULL){
+    if (f == NULL)
+    {
       fprintf(stderr, "can not open the file!\n");
       return 1; // returning error (exit code)
     }
@@ -583,7 +595,7 @@
     return 0; // returning success (exit code)
   }
 
-  // main functions return value will return to operating system
+  // main function's return value will return to operating system
 */
 
 /*
@@ -600,8 +612,8 @@
     int x;
 
     // <--- Check Lesson_14 if statements --->
-    if (isprime(x));  // if the number is prime 
-    if (!isprime(x));  // if the number is NOT prime
+    if (isprime(x));    // if the number is prime 
+    if (!isprime(x));   // if the number is NOT prime
   }
 */
 
@@ -631,7 +643,7 @@
 
   int isleap(int y)
   {
-    return y % 4 == 0 && (y % 100 != 0 || y % 400 == 0);
+    return (y % 4 == 0) && (y % 100 != 0 || y % 400 == 0);
   }
 */
 
@@ -652,7 +664,8 @@
     return x == sum_div;
   }
 
-  int main(void){
+  int main(void)
+  {
     for (int i = 1; i < 10000; ++i)
       if (isperfect(i))
         printf("%d ", i);
@@ -687,104 +700,117 @@
 /*
   #include <ctype.h>
 
-  int main(void){
+  int main(void)
+  {
 
     // isupper()
     printf("isupper : ");
-    for (int i = 0; i < 128; ++i){
-    if (isupper(i))
-      printf("%c", i);
+    for (int i = 0; i < 128; ++i)
+    {
+      if (isupper(i))
+        printf("%c", i);
     }
     putchar('\n');
 
     // islower()
     printf("islower : ");
-    for (int i = 0; i < 128; ++i){
-    if (islower(i))
-      printf("%c", i);
+    for (int i = 0; i < 128; ++i)
+    {
+      if (islower(i))
+        printf("%c", i);
     }
     putchar('\n');
 
     // isalpha()
     printf("isalpha : ");
-    for (int i = 0; i < 128; ++i){
-    if (isalpha(i))
-      printf("%c", i);
+    for (int i = 0; i < 128; ++i)
+    {
+      if (isalpha(i))
+        printf("%c", i);
     }
     putchar('\n');
 
     // isdigit()
     printf("isdigit : ");
-    for (int i = 0; i < 128; ++i){
-    if (isdigit(i))
-      printf("%c", i);
+    for (int i = 0; i < 128; ++i)
+    {
+      if (isdigit(i))
+        printf("%c", i);
     }
     putchar('\n');
 
     // isalnum()
     printf("isalnum : ");
-    for (int i = 0; i < 128; ++i){
-    if (isalnum(i))
-      printf("%c", i);
+    for (int i = 0; i < 128; ++i)
+    {
+      if (isalnum(i))
+        printf("%c", i);
     }
     putchar('\n');
 
     // isxdigit()
     printf("isxdigit : ");
-    for (int i = 0; i < 128; ++i){
-    if (isxdigit(i))
-      printf("%c", i);
+    for (int i = 0; i < 128; ++i)
+    {
+      if (isxdigit(i))
+        printf("%c", i);
     }
     putchar('\n');
     
     // ispunct()
     printf("ispunct : ");
-    for (int i = 0; i < 128; ++i){
-    if (ispunct(i))
-      printf("%c", i);
+    for (int i = 0; i < 128; ++i)
+    {
+      if (ispunct(i))
+        printf("%c", i);
     }
     putchar('\n');
 
     // isspace() -> they are not visible 
     // will print their character codes
     printf("isspace : ");
-    for (int i = 0; i < 128; ++i){
-    if (isspace(i))
-      printf("%d ", i);
+    for (int i = 0; i < 128; ++i)
+    {
+      if (isspace(i))
+        printf("%d ", i);
     }
     putchar('\n');
 
     // isblank() -> they are not visible 
     // will print their character codes
     printf("isblank : ");
-    for (int i = 0; i < 128; ++i){
-    if (isblank(i))
-      printf("%d ", i);
+    for (int i = 0; i < 128; ++i)
+    {
+      if (isblank(i))
+        printf("%d ", i);
     }
     putchar('\n');
 
     // isprint() -> includes 32 character code space(' ')
     printf("isprint : ");
-    for (int i = 0; i < 128; ++i){
-    if (isprint(i))
-      printf("%c", i);
+    for (int i = 0; i < 128; ++i)
+    {
+      if (isprint(i))
+        printf("%c", i);
     }
     putchar('\n');
 
     // isgraph() -> DO NOT include 32 character code space(' ')
     printf("isgraph : ");
-    for (int i = 0; i < 128; ++i){
-    if (isgraph(i))
-      printf("%c", i);
+    for (int i = 0; i < 128; ++i)
+    {
+      if (isgraph(i))
+        printf("%c", i);
     }
     putchar('\n');
 
     // iscntrl() -> these characters are not visible
     // will print their character codes
     printf("iscntrl : ");
-    for (int i = 0; i < 128; ++i){
-    if (iscntrl(i))
-      printf("%d ", i);
+    for (int i = 0; i < 128; ++i)
+    {
+      if (iscntrl(i))
+        printf("%d ", i);
     }
     putchar('\n');
   }
@@ -818,7 +844,8 @@
 /*
   #include <ctype.h>
 
-  int main(void){
+  int main(void)
+  {
     int ch;
     printf("Write a character: ");
     ch = getchar();
@@ -833,7 +860,7 @@
     // output -> (A - 65) ==> (A - 65)
 
     // if a character is lowercase, toupper() function will return
-    // lowercase, if character is uppercase toupper() function
+    // uppercase, if character is uppercase toupper() function
     // returns the same character.
   }
 */
@@ -841,7 +868,8 @@
 /*
   #include <ctype.h>
 
-  int main(void){
+  int main(void)
+  {
     int ch;
     printf("Write a character: ");
     ch = getchar();
@@ -860,7 +888,8 @@
 /*
   #include <ctype.h>
 
-  int main(void){
+  int main(void)
+  {
     int c1, c2;
 
     printf("Write 2 characters : ");
@@ -884,7 +913,8 @@
 /*
   #include <ctype.h>
 
-  int main(void){
+  int main(void)
+  {
     int c1, c2;
 
     printf("Write 2 characters : ");
@@ -909,9 +939,11 @@
 */
 
 /*
-  #include <ctype.h>
+  #include <stdio.h>  // getchar
+  #include <ctype.h>  // toupper, tolower
 
-  int main(void){
+  int main(void)
+  {
     int c1, c2;
 
     printf("Write 2 characters : ");
@@ -937,11 +969,15 @@
 */
 
 /*
-  #include <stdlib.h>
+  #include <stdio.h>  // putchar
+  #include <stdlib.h> // rand
+  #inlcude <ctype.h>  // isupper, isxdigit
 
-  int main(void){
+  int main(void)
+  {
 
-    while(1){
+    while(1)
+    {
       int ch = rand() % 128;  // ch's value is a valid ASCII code.
 
       if (isupper(ch))
@@ -949,7 +985,8 @@
         // output -> CZTKEPIIODPDSVVWIMQOJWSKIUTHSYDPTZTNF ...
     }
 
-    while(1){
+    while(1)
+    {
       int ch = rand() % 128; 
 
       if (isxdigit(ch))
@@ -1000,13 +1037,15 @@
     in function declaration   
   2. "a" and "b" identifiers's scope is function prototype scope
   3. function prototype scope is only include parameter paranthesis
-    int func(int a, int a) -> syntax error
+    int func(int a, int a) -> syntax error (a identifier has been declared twice in the same scope.)
 
   4. identifiers has been used in function declaration, should not be 
     same as identifiers used in function definition
 
     int ndigit(int x);  // function declaration
-    int ndigit(int y){  // function definition
+
+    int ndigit(int y)   // function definition
+    {  
       // function code
     }
     int ndigit(int z);  // function redeclaration
@@ -1015,18 +1054,19 @@
 /*
   int foo(int, int);
 
-  int main(void){
+  int main(void)
+  {
     int x;
     x = foo(10, 20);  
     // compiler must understand what are "x" and "foo" identifiers
     // this is called name lookup.
 
     // if foo is a function compiler must see foo function's 
-    // declaration or foo functions definition
+    // declaration or foo function's definition
 
     // when compiler sees function declaration or definition
     // it will generate an assembly code depends on the 
-    // functions return type and its parameters count and types
+    // function's return type and its parameters count and types
   }
 */
 
@@ -1035,7 +1075,8 @@
   // after C99     syntax error
   //  error : implicit declaration of function 'foo'  
 
-  int main(void){
+  int main(void)
+  {
     int x;
     x = foo(12, 45);
   }
@@ -1048,7 +1089,8 @@
 
   int func(void);
 
-  int main(void){
+  int main(void)
+  {
     foo(12);              // VALID
     foo(12, 13);          // VALID
     foo(12, 13, 14);      // VALID
@@ -1095,7 +1137,8 @@
   {
     void* vp = malloc(N);
 
-    if (!vp){
+    if (!vp)
+    {
       fprintf(stderr, "Memory allocation failed!\n");
       exit(EXIT_FAILURE);
     }
@@ -1109,7 +1152,8 @@
   {
     void* vp = malloc(N);
 
-    if (!vp){
+    if (!vp)
+    {
       fprintf(stderr, "%s\n", p_err_msg);
       exit(EXIT_FAILURE);
     }
@@ -1409,7 +1453,8 @@
     va_end(args1);
     
     char* p_str = (char*)malloc(total_len + 1);
-    if (!p_str){
+    if (!p_str)
+    {
       fprintf(stderr, "Memory allocation failed!\n");
       return NULL;
     }
@@ -1463,7 +1508,8 @@
     char filename[] = "output.txt";
 
     FILE* f = fopen(filename, "r");
-    if (!f){
+    if (!f)
+    {
       print_error("file open error %s", filename);
       return 1;
     }
@@ -1492,6 +1538,7 @@
   int main(void)
   {
     func("%d hello world %f\n", 44, 3.14);
+    // output -> 44 hello world 3.14
   }
 */
 

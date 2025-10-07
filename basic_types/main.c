@@ -8,7 +8,7 @@
 
 /*
   #include <stdio.h>
-  // preprocessor will copy declerations from stdio.h to the beginning
+  // preprocessor will copy declarations from 'stdio.h' to the beginning of this file.
   // .h -> header file
 
   int main(void)
@@ -17,25 +17,25 @@
   }
 
   // defined a function idenfied as main
-  // called a function identified as prinf inside main function
+  // called a function identified as printf inside main function
 */
 
 /*
   function -> fonksiyon (işlev, yordam)
 
-  <---- Check global_local_namespaces.png ---->
+  <---- check global_local_namespaces.png ---->
   global namespace  -> includes everything 
   local namespace   -> a space inside functions
 
-  -> to define a function   (fonksiyonu tanimlamak) 
-  function definition : writing the code of the function
-
-  -> to call a function     (fonksiyonu cagirmak)   
-  function call : such an expression that runs the code of the function
-  
   -> to declare a function  (fonksiyonu bildirmek)
   function declaration - function prototype : 
     for compiler to know the identifier of the function
+
+  -> to define a function   (fonksiyonu tanımlamak) 
+  function definition : writing the code of the function
+
+  -> to call a function     (fonksiyonu çağırmak)   
+  function call : such an expression that runs the code of the function
 */
 
 /*
@@ -61,7 +61,7 @@
   #include <stdio.h>
 
   int printf(const char*, ...); 
-  // printf function declaration is coming from stdio.h
+  // printf function declaration exists in stdio.h
 
   int main(void)    // function definition 
   {
@@ -82,9 +82,9 @@
 
   char types (1 byte) 
   -------------------
-    signed char       -128 - 127
-    unsigned char        0 - 255
-    char  (depends on compiler, it can be signed or unsigned)
+  signed char       -128 - 127
+  unsigned char        0 - 255
+  char  (depends on compiler, it can be signed or unsigned)
 
   short int types (2 byte)
   -----------------------
@@ -193,19 +193,19 @@
 
 /*
           ---------------------------------------------------
-          | declaration(bildirim) and definition(tanimlama) |
+          | declaration(bildirim) and definition(tanımlama) |
           ---------------------------------------------------
 */
 
 /*
-  -> If a declaration makes compiler to allocate space for an 
-    object, it will also be called definition.
+  -> If a declaration makes compiler to allocate space 
+    for an object, it will also be called definition.
 
   -> If compiler is NOT allocating space for an object 
-    in a declaration, it has been called non-defining declaration
+    in a declaration, it's been called non-defining declaration.
 
-  -> All definitions are declarations but not all declarations 
-    are definitions.
+  -> All definitions are declarations  
+    but not all declarations are definitions.
 */
 
 /*
@@ -218,7 +218,7 @@
 
     // When compiler finds out that an identifier has been used 
     // in an expression, it has to understand which object(entity)
-    // is that identifier has been related to. 
+    // is that identifier is related to. 
     // This phase is called name lookup
 
     // 1. Name lookup
@@ -340,12 +340,12 @@
 */
 
 /*
-  int g_x;  // global variable  -> static storage duration
+  int g_x;          // global variable  -> static storage duration
 
   void func(void)
   {
     static int s_x; // static local variable -> static storage duration
-    int y;  // local variable -> automatic storage duration
+    int y;          // local variable -> automatic storage duration
   }
 
   int main(void)
@@ -367,7 +367,7 @@
     // output -> local_static_y = 0
   }
 
-  // variables which have static storage duration and 
+  // variables which have a static storage duration and 
   // is not initialized when defined, will have a value of 0.
 */
 
@@ -383,7 +383,7 @@
   int main(void)
   {
     int x;
-    int y = x + 5;  // undefined behavior (using indeterminate value)
+    int y = x + 5;  // undefined behavior(UB) (using indeterminate value)
   }
 */
 
@@ -391,7 +391,7 @@
   int main(void)
   {
     int x;
-    ++x; // undefined behavior (using indeterminate value)
+    ++x; // undefined behavior(UB) (using indeterminate value)
   }
 */
 
@@ -404,7 +404,7 @@
     -> x << y  if (y >= x) 
 
   In optimization phase, compiler assumes that there is not any
-  undefined behavior in the code!
+  undefined behavior(UB) in the code!
 */
 
 /*
@@ -413,15 +413,18 @@
     int a;
     int b = 0;
 
-    int y = a / b;  // if b = 0 -> undefined behavior
+    int y = a / b;  // if b = 0 -> undefined behavior(UB)
 
     // always false condition
-    if (b == 0){  
-      // some code
+    if (b == 0)
+    {  
+      // code that will be eleminated by compiler optimization
     }
-    // if-block will be deleted by the compiler in optimization  
+      
+    // if-block will be deleted by the compiler as an optimization  
     // because there is no chance that "b" variable can be 0  
-    // in "int y = a / b;" statement
+    // because of it has been used in "int y = a / b;" statement
+    // which makes "b" variable not possible to be equal to 0.
   }
 */
 
@@ -435,8 +438,8 @@
     static int s_l = k; // syntax error
   }
 
-  // static storage duration variables can only be initialized 
-  // with constant expression
+  // static storage duration variables CAN ONLY be initialized 
+  // with constant expression.
 */
 
 /*
@@ -450,7 +453,7 @@
   }
 
   // for local storage duration variables initialization with 
-  // constant expression is not needed
+  // constant expression is not needed.
 */
 
 /*
@@ -503,16 +506,15 @@
     x = 5;  // name lookup will find global variable x 
   }
 
-//  x:
-//    .long 10
-//  main:
-//    push rbp
-//    mov rbp, rsp
-//    mov DWORD PTR x[rip], 5
-//    mov eax, 0
-//    pop rbp
-//    ret
-
+  //  x:
+  //    .long 10
+  //  main:
+  //    push rbp
+  //    mov rbp, rsp
+  //    mov DWORD PTR x[rip], 5
+  //    mov eax, 0
+  //    pop rbp
+  //    ret
 */
 
 /*
@@ -523,26 +525,26 @@
     x(); // syntax error 
     // called object 'x' is not a function or function pointer
 
-    // name lookup will find identifier x in the file scope 
-    // context control phase will be fail
+    // name lookup will find identifier "x" in the file scope 
+    // context control phase will be fail.
   }
 */
 
 /*
-  int x = 10;     // x is an identifier and it is in file scope
+  int x = 10;     // "x" is an identifier and it is in file scope
 
-  void foo(void)  // foo is an identier and it is in file scope
+  void foo(void)  // "foo" is an identier and it is in file scope
   {
 
   }
 
-  typedef int Word; // Word is an identifier and it is in file scope
+  typedef int Word; // "Word" is an identifier and it is in file scope
 */
 
 /*
   x = 20; // NOT VALID, 
-  // x identifier has been used before its declaration
-  // name lookup will fail
+  // "x" identifier has been used before its declaration
+  // name lookup will fail.
 
   int x = 10;     // syntax error : redefinition of 'x'
 
@@ -564,7 +566,8 @@
 /*
   int main(void)
   {
-    if (1){ // enclosing block
+    if (1)
+    { // enclosing block
       {
         // nested block
       }
@@ -578,17 +581,17 @@
 /*
   int main(void)
   {
-    int x; // x identifier can be used in main functions block scope
+    int x; // "x" identifier can be used in main functions block scope
 
-    // a identifier can not be used in main functions block scope (1)
+    // "a" identifier can not be used in main functions block scope (1)
 
     {
-      // a identifier can not be used before its declearation  (2)
+      // "a" identifier can not be used before its declearation  (2)
 
       int a = 5;
 
-      // a identifier can be used after its decleration and inside 
-      // its block scope (3)
+      // "a" identifier can be used after its decleration  
+      // and inside its block scope (3)
     }
   }
 */
@@ -612,13 +615,13 @@
     }
   }
 
-  // a, b, c identifiers are in block scope 
-  // but their scopes are not same
+  // "a", "b", "c" identifiers are in block scope 
+  // but their scopes are not same.
 
   // If two identifier are in the same block scope, their scopes are 
-  // in opening and closing braces of that block
+  // in opening and closing braces of that block.
 
-  // c, d identifiers are both in block scope 
+  // "c", "d" identifiers are both in block scope 
   // and their scopes are same.
 */
 
@@ -769,7 +772,8 @@
   {
     int x = 5;
 
-    if (x > 2){
+    if (x > 2)
+    {
       int x = 3;
       x = 111;
     }
@@ -822,7 +826,7 @@
   {
     int x = x;  
     // initialization happening inside the block scope
-    // so x will initialize with its indeterminate(garbage) value
+    // so "x" will initialize with its indeterminate(garbage) value
     ++x;  // undefined behavior
   }
 
@@ -844,7 +848,7 @@
 */
 
 /*
-  -> variables should not be named ALLCAPS, 
+  -> variables should NOT be named ALLCAPS, 
   generally it has been used in preprocessor program.
   
   snake case -> tax_increase_rate

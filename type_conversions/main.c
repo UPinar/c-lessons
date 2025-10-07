@@ -101,7 +101,7 @@
         - char 
         - _Bool
 
-      those operands will promoted to int (integral promotion)
+    those operands will promoted to int (integral promotion)
 
   -------------------------------------------------------
 
@@ -135,8 +135,8 @@
       long long CAN hold every value of unsigned int
 
     long(4) + unsigned int(4)      -> unsigned long 
-      long          [-2147483648, 2147483647]
-      unsigned int  [0, 4294967295]
+      long          [-2'147'483'648, 2'147'483'647]
+      unsigned int  [0, 4'294'967'295]
       long CAN NOT hold every value of unsigned int
 
   -------------------------------------------------------
@@ -285,7 +285,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     char c = 10;
     +c; 
     // "+c" is an R value expression 
@@ -381,8 +382,8 @@
   //    push rbp
   //    mov rbp, rsp
   //    movsd xmm0, QWORD PTR .LC0[rip]     : xmm0 = 4.5
-  //    movsd QWORD PTR [rbp-8], xmm0       : dval = xmm0
-  //    movsd xmm0, QWORD PTR [rbp-8]       : xmm0 = dval
+  //    movsd QWORD PTR [rbp-8], xmm0       : dval = 4.5
+  //    movsd xmm0, QWORD PTR [rbp-8]       : 
   //    cvttsd2si eax, xmm0                 : eax = (int)dval
   //    mov DWORD PTR [rbp-12], eax         : ival = eax
   //    mov eax, 0

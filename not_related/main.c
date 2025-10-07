@@ -45,8 +45,7 @@
 
     char* p_char = (char*)&dval;  // VALID
     // this code IS NOT violating strict aliasing rule.
-    // functions like `memcpy` and `memmove` 
-    // are using this technique.
+    // functions like `memcpy` and `memmove` are using this technique.
   }
 */
 
@@ -62,7 +61,7 @@
     // `&d1`'s data type is `struct Data*`
 
     int* p_int = (int*)&d1; // VALID
-    // structure variable's address can be used 
+    // structure variable's address can be used as
     // structure variable's first member's address.
     // this code IS NOT violating strict aliasing rule.
 
@@ -97,7 +96,8 @@
     // LC_NUMERIC, 
     // LC_TIME
 
-    if (!p){
+    if (!p)
+    {
       printf("locale set failed\n");
       return 1;
     }

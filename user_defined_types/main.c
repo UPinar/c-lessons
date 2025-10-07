@@ -35,7 +35,10 @@
   struct AStruct {};
   // warning: struct has no members 
 
-  int main(void){}
+  int main(void)
+  {
+
+  }
 */
 
 /*
@@ -75,7 +78,7 @@
   };
 
   AStruct's variables order is m_x, m_y, m_d
-  AStruct's address is same as m_x's address.
+  AStruct's address is same as m_x's(it's first element's) address.
 */
 
 /*
@@ -163,8 +166,8 @@
   // then Data structure's declaration should be in header file.
 
   // if source files will not use Data structure's declaration
-  // it will only used in implementation file
-  // its declaration should be in source(.cpp) file.
+  // and it will only used in implementation(source) file
+  // its declaration should be in source(.c) file.
 */
 
 /*
@@ -241,13 +244,13 @@
     char m_str[12];
   };
 
-  struct Data g_data;
-  // struct variables are initialized with 0.
+  struct Data g_data;   // static storage duration
+  // "g_data" struct's variables are initialized with 0.
 
   int main(void)
   {
-    struct Data d1;
-    // struct variables have garbage(indeterminate) values.
+    struct Data d1;     // automatic storage duration
+    // "d1" struct's variables have garbage(indeterminate) values.
   }
 */
 
@@ -272,13 +275,13 @@
 */
 
 /*
-                      -----------------------
-                      | '.' -> dot operator |
-                      -----------------------
+                    -----------------------
+                    | '.' -> dot operator |
+                    -----------------------
 */
 
 /*
-  x.y 
+  x.m_y 
     -> left operand should be a structure variable.
     -> right operand should be a structure member.
 */
@@ -330,17 +333,17 @@
 
 /*
 
-                    --------------------------
-                    | '->' -> arrow operator |
-                    --------------------------
+                  -----------------------
+                  | '->' arrow operator |
+                  -----------------------
 */
 
 /*
-  x->y
+  p_x->m_y
     -> left operand should be an address to a structure variable.
     -> right operand should be a structure member.
 
-  compiler will convert "x->y" expression to "(*x).y"
+  compiler will convert "p_x->m_y" expression to "(*p_x).m_y"
 */
 
 /*
@@ -412,6 +415,7 @@
     int m_x, m_y, m_z;
   } g_p1; 
   // "g_p1" is a global Point structure variable.
+  // static storage duration (all members are initialized with 0).
 
   struct Point* foo(void)
   {
@@ -442,7 +446,7 @@
   };
 
   // structure tag identifier is "xyz"
-  // "struct identifier" have has a structure member named "xyz"
+  // "struct identifier" has a structure member named "xyz"
 
   int main(void)
   {
@@ -461,10 +465,12 @@
   } g_x, g_y;
 
   // "g_x" and "g_y" are global variables of type "struct Data"
+  // static storage duration (all members are initialized with 0).
 
   struct Data g_1;
   struct Data g_2;
-  // "g_1" and "g_2" are global variables of type "struct Data"
+  // "g_1" and "g_2" are global variables of type "struct Data"\
+  // static storage duration (all members are initialized with 0).
 */
 
 /*
@@ -519,6 +525,8 @@
 */
 
 /*
+  // function pointers CAN be a structure member
+
   struct Data {
     int m_x, m_y;
     int (*mp_func)(int);
@@ -615,8 +623,8 @@
 
     // -----------------------------------------------
 
-    struct Data d2;
-    d2 = d1;  // assignment
+    struct Data d2;       // declaration
+    d2 = d1;              // assignment
 
     printf("d2 = [%d, %d, %f]\n", d2.m_x, d2.m_y, d2.m_d);
     // output -> d2 = [1, 5, 3.140000]
@@ -652,8 +660,7 @@
     // error: incompatible types when assigning 
     // to type 'struct Data_1' from type 'struct Data_2'
 
-    // assignment operator's left and right operands 
-    // should be of the same type.
+    // assignment operator's left and right operands must be of the same type.
   }
 */
 
@@ -698,6 +705,7 @@
 
     struct Data d3 = { 1.1, 2.2, 3, 4, 5 }; // syntax error
     // warning: excess elements in struct initializer
+    // struct Data has only 4 member variables but trying to initialize with 5 values.
   }
 */
 
@@ -875,7 +883,7 @@
       .m_surname = "world",
       .m_salary = 11.11
      };
-     // using designated initializer in struct variable initialization
+     // using designated initializer in struct's initialization
 
     printf("e1 = [%d, %s, %s, %f]\n", 
             e1.m_id, e1.m_name, e1.m_surname, e1.m_salary);
@@ -915,11 +923,12 @@
 */
 
 /*
-  - anonymous structure, yapı değişken(structure variable) sayısının
+  - anonymous structure, yapı değişkeni (structure variable) sayısının
     önceden belli olduğu ve daha fazla bu türden değişken tanımlanması 
-    istenilmediği için kullanılır.
+    istenmediği zamanlarda kullanılır.
     Yapı türünün ismi olmadığı için bu türden bir değişken sadece
     yapı türünün tanımlandığı yerde yaratılabilir.
+
 
     struct {
       int m_x, m_y, m_z;
@@ -953,7 +962,7 @@
     // error: incompatible types when assigning to type 
     // 'struct <anonymous>' from type 'struct <anonymous>'
 
-    // different anonymous structures types are not same!
+    // different anonymous structures types are not same.
   }
 */
 
@@ -1035,19 +1044,17 @@
     int m_x, m_y, m_z;
   };
 
-  typedef struct Data Data;
-  // type alias to struct Data as Data
+  typedef struct Data Data_t;
+  // type alias to struct Data as Data_t
 
   typedef struct Data* p_Data_t;  
   // type alias to struct Data* as p_Data_t
 
-  typedef Data* p_Data_t2;
-  // Data is a type alias to struct Data
-  // Data* is a type alias to struct Data*
+  typedef Data_t* p_Data_t2;
 
   int main(void)
   {
-    Data d1;
+    Data_t d1;
     p_Data_t p_d1 = &d1;
     p_Data_t2 p_d2 = &d1;
   }
@@ -1124,8 +1131,8 @@
     // there is no way to create a structure variable
     // that "p_d1" pointer variable can point to.
 
-    // can not declare a static storage or automatic storage duration
-    // variable of that anonymous structure type
+    // CAN NOT declare a static storage duration or automatic storage duration
+    // variable from that anonymous structure type
     // only can declare a dynamic storage duration variable
 
     p_d1 = malloc(sizeof(*p_d1));
@@ -1154,7 +1161,8 @@
     This is rarely used because of data should be copied 
     when a function is called.
 
-    void func(Data_t data); -> rarely used(because of data copy)
+    void func(Data_t data); -> rarely used
+    (call by value -> Data_t object needs to be copied)
 
   -----------------------------------------------------------
 
@@ -1168,13 +1176,14 @@
   - function's return type can be a structure type.
 
     Data_t func_1(void);    -> rarely used(because of data copy)
+    (return by value -> Data_t object needs to be copied)
 
   -----------------------------------------------------------
 
   - function's return type can be a pointer to a structure type.
     -> can return static storage duration object's address.
     -> can return dynamic storage duration object's address.
-    -> can return the same address that this function is called with.
+    -> can return the same address that the function is called with.
 
     Data_t* func_2(void);
     const Data_t* func_3(void);
@@ -1195,14 +1204,17 @@
     printf("Employee: [ %d, %s, %s, %f ]\n", 
             e.m_id, e.m_name, e.m_surname, e.m_salary);
   }
+  // call by value (making a copy of the structure variable)
 
   void print_employee_2(const Employee_t* p_e)
   {
     printf("Employee: [ %d, %s, %s, %f ]\n", 
             p_e->m_id, p_e->m_name, p_e->m_surname, p_e->m_salary);
   }
+  // call by reference (using a pointer to the structure variable)
 
-  // This function can not change the original structure variable.
+
+  // This function can not change the original structure variables.
   // it will copy the structure variable to the function's parameter.
   // then it will change the copied structure variable.
   void modify_employee_1(Employee_t e)
@@ -1210,7 +1222,8 @@
     e.m_salary *= 2;
   }
 
-  // This function can change the original structure variable.
+  // This function can change the original structure variable
+  // by using a pointer to the structure variable.
   void modify_employee_2(Employee_t* p_e)
   {
     p_e->m_salary *= 2;
@@ -1239,7 +1252,7 @@
     print_employee_2(&e1);  // call by reference
     // output -> Employee: [ 1, hello, world, 11.110000 ]
 
-    // 8 bytes of data will be copied to the "print_employee_2"
+    // 8 bytes of data(pointer) will be copied to the "print_employee_2"
     // function's parameter variable.
 
     // ---------------------------------------------------------
@@ -1265,8 +1278,10 @@
   } Employee_t;
 
   Employee_t create_random_employee_1(void);
+  // returning by value
 
   Employee_t* create_random_employee_2(void);
+  // returning by reference (pointer to a structure variable)
 
   int main(void)
   {
@@ -1299,7 +1314,8 @@
   {
     Employee_t* p_e = create_random_employee_2();
     // p_e is a dangling pointer
-    // "*p_e" expression will create undefined behavior(UB)
+    // "*p_e" expression will become an undefined behavior(UB)
+    // using a value through a dangling pointer is UB
   }
 */
 
@@ -1393,11 +1409,11 @@
   struct Data;  // incomplete type
 
   extern struct Data g_data;
-  // g_data struct Data türünden, fakat başka bir modülde 
+  // "g_data" struct Data türünden fakat başka bir modülde 
   // bildirimi yapılmış(yeri hafızada ayrılmış) bir değişkendir.
 
   extern struct Data g_data_array[];
-  // g_data_array elemanları struct Data türünden 
+  // "g_data_array" elemanları struct Data türünden 
   // fakat başka bir modülde hafızadaki yeri ayrılan bir dizidir.
 */
 
@@ -1410,7 +1426,7 @@
   int main(void)
   {
     struct Data* p_data = NULL;
-    // derleyici zaten object pointer türünün kaç byte olduğunu biliyor,
+    // derleyici zaten object pointer türünün kaç byte(8 - 64 bit sistem için) olduğunu biliyor,
     // dolayısıyla struct Data* türünden bir değişken tanımlanabilir.
 
     p_data = create_data();
@@ -1425,7 +1441,7 @@
 
   struct Employee {
     int m_id;
-    struct Data* p_data;
+    struct Data* p_data;    // VALID (compiler knows size of an object pointer)
   };
 */
 
@@ -1482,6 +1498,8 @@
     struct Data m_data; // syntax error
     // error: field 'm_data' has incomplete type
   };
+
+  // compiler does not know the size of "struct Data"
 */
 
 /*
@@ -1505,10 +1523,9 @@
 
 /*
   Question : Why incomplete types are used?
-    - when header files include each other, dependencies are 
-    increased and compilation time is increased. 
-    Incomplete types can be used in header files
-    to reduce dependencies.
+    - when header files include each other,  
+    dependencies are increased and compilation time is increased. 
+    Incomplete types can be used in header files to reduce dependencies.
 */
 
 /*
@@ -1545,7 +1562,8 @@
     date_set_by_string(&dt, "04-04-2004");
     date_print(&dt);  // output -> 04 Nisan 2004 Pazar
 
-    if (!date_set_by_string(&dt, "29-02-1993")){
+    if (!date_set_by_string(&dt, "29-02-1993"))
+    {
       printf("Date is invalid!\n");
       return 1;
     }
@@ -1617,7 +1635,8 @@
 
     if (date_scan(&dt))
       date_print(&dt);
-    else {
+    else 
+    {
       printf("Invalid date!\n");
       return 1;
     }
@@ -1837,7 +1856,7 @@
 */
 
 /*
-  // incomplete types can not an element of a structure
+  // incomplete types can not be an element of a structure
 
   struct AStruct;
 
@@ -1846,6 +1865,8 @@
     struct AStruct m_AStruct;   // syntax error
     // error: field 'm_AStruct' has incomplete type
   };
+
+  // compiler does not know the size of "struct AStruct"
 */
 
 /*
@@ -1865,7 +1886,7 @@
 
     b1.m_AStruct = a1;
     // "b1.m_AStruct" is an LValue expression 
-    // its data type is "struct AStruct"
+    // and its data type is "struct AStruct"
   }
 */
 
@@ -1885,9 +1906,9 @@
     struct BStruct b2 = { 6.66, 7.77, 8, 9, 10 };
 
     struct BStruct b3 = { 
-        .m_d1 = 11.11, 
-        .m_d2 = 22.22, 
-        .m_AStruct = { 33, 44, 55 } 
+      .m_d1 = 11.11, 
+      .m_d2 = 22.22, 
+      .m_AStruct = { 33, 44, 55 } 
     };
   }
 */
@@ -1944,7 +1965,9 @@
   };
 
   // because of struct Data's definition is not completed yet
-  // struct Data is an incomplete type.
+  // struct Data is still an incomplete type.
+  // because of compiler does not know the size of struct Data
+  // it can not be an element of a structure
 */
 
 /*
@@ -2116,7 +2139,8 @@
     randomize();
     Person_t p;
 
-    for(int i = 0; i < 5; ++i) {
+    for(int i = 0; i < 5; ++i) 
+    {
       person_set_random(&p);
       person_print(&p);
     }
@@ -2162,8 +2186,8 @@
     size_t N = 1000000;
 
     Person_t* p_Person = malloc(N * sizeof(Person_t));
-
-    if (!p_Person) {
+    if (!p_Person) 
+    {
       printf("Memory allocation error!\n");
       return 1;
     }
@@ -2254,9 +2278,10 @@
   int main(void)
   {
     size_t N = 1000000;
-    Person_t* p_Person = malloc(N * sizeof(Person_t));
 
-    if (!p_Person) {
+    Person_t* p_Person = malloc(N * sizeof(Person_t));
+    if (!p_Person) 
+    {
       printf("Memory allocation error!\n");
       return 1;
     }
@@ -2341,8 +2366,8 @@
   (+)dynamic array
     reallocation can be done in amortized O(1) time complexity.
 
-  (-)in `int` linked list, int + int* will be allocated in a Node
-  (+)in `int` dynamic array, only `int` will be allocated in element.
+  (-)in `int` linked list, (int) + (int*) will be allocated in a Node
+  (+)in `int` dynamic array, only (int) will be allocated in element.
 
   (-)singly linked list is not cache friendly.
   (+)dynamic array is cache friendly.
@@ -2372,7 +2397,8 @@
     randomize();
 
     Person_t p;
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 5; ++i) 
+    {
       person_set_random(&p);
       list_push_front(&p);
     }
@@ -2403,7 +2429,8 @@
     randomize();
 
     Person_t p;
-    for (int i = 0; i < 3000000; ++i) { // 3'000'000
+    for (int i = 0; i < 3000000; ++i)   // 3'000'000
+    { 
       person_set_random(&p);
       list_push_front(&p);
     }
@@ -2426,12 +2453,14 @@
     randomize();
 
     Person_t p;
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 5; ++i) 
+    {
       person_set_random(&p);
       list_push_front(&p);
     }
 
-    while (!list_is_empty()){
+    while (!list_is_empty())
+    {
       printf("List size: %zu\n", list_get_size());
       list_print();
       list_pop_front();
@@ -2466,8 +2495,8 @@
 */
 
 /*
-  Problem in this approach is that, we can not create 
-  more than one list. Handle system will solve this problem.
+  Problem in this approach is that, we can not create more than one list.
+  Handle system will solve this problem.
 */
 
 /*
@@ -2477,24 +2506,27 @@
 
   int main(void)
   {
-
     randomize();
-    Person_t p;
 
+    Person_t p;
     List_Handle h1_list = list_create();
-    for(int i = 0; i < 3; ++i) {
+
+    for(int i = 0; i < 3; ++i) 
+    {
       person_set_random(&p);
       list_push_front(h1_list, &p);
     }
 
     List_Handle h2_list = list_create();
-    for(int i = 0; i < 5; ++i) {
+    for(int i = 0; i < 5; ++i) 
+    {
       person_set_random(&p);
       list_push_front(h2_list, &p);
     }
 
     List_Handle h3_list = list_create();
-    for(int i = 0; i < 8; ++i) {
+    for(int i = 0; i < 8; ++i) 
+    {
       person_set_random(&p);
       list_push_front(h3_list, &p);
     }
@@ -2551,11 +2583,13 @@
     List_Handle list_arr[LIST_COUNT];
 
     Person_t person;
-    for (int i = 0; i < LIST_COUNT; ++i){
+    for (int i = 0; i < LIST_COUNT; ++i)
+    {
       list_arr[i] = list_create();
 
       int N = rand() % 10 + 5;
-      while (N--){
+      while (N--)
+      {
         person_set_random(&person);
         list_push_front(list_arr[i], &person);
       }
@@ -2739,9 +2773,8 @@
 
 /*
   SIMD operasyonlarının verimli olabilmesi için  
-  bazen türlerin belli sayıların katı olan adreslerde
-  tutulması gerekebilir.
-  bunun için "_Alignas" keyword kullanılır.
+  bazen türlerin belli sayıların katı olan adreslerde tutulması gerekebilir.
+  Bunun için "_Alignas" keyword kullanılır.
 */
 
 /*
@@ -3340,7 +3373,6 @@
   {
     sData_t sd1 = { "hello", 3.14, 123, 'A' };
 
-
     uData_t ud1 = { "hello" };  
     // initializing union's first element
 
@@ -3434,7 +3466,7 @@
 
 /*
   #include <stdint.h>   // uint16_t, uint32_t, uint64_t
-  #include <inttypes.h> // PRIu64
+  #include <inttypes.h> // PRIu64(Windows)
 
   typedef union {
     struct {
@@ -3454,6 +3486,8 @@
     
     printf("%" PRIu64 "\n", d1.m_value);
     // output -> 8594229624833
+    printf("%llu\n", d1.m_value);
+    // output -> 8594229624833
 
     // Date is mapped to a distinct integer value
     // which in this case is 8594229624833
@@ -3461,6 +3495,8 @@
     d1.m_m = 12, d1.m_d = 12, d1.m_y = 2012;
 
     printf("%" PRIu64 "\n", d1.m_value);
+    // output -> 8641474985996
+    printf("%llu\n", d1.m_value);
     // output -> 8641474985996
 
     // mapped integer value is changed to 8641474985996
@@ -3485,7 +3521,7 @@
     int m_gender;
     char m_name[32];
     struct {
-      int m_status;
+      int m_military_status;
       char m_location[32];
     };
     char m_maiden_name[32];
@@ -3497,7 +3533,7 @@
     char m_name[32];
     union {
       struct {
-        int m_status;
+        int m_military_status;
         char m_location[32];
       };
       char m_maiden_name[32];
@@ -3579,53 +3615,63 @@
 
   void set_tagged(Tagged_t* p)
   {
-    switch (rand() % 4) {
-    case NAME: {
-      strcpy(p->m_name, get_random_name()); 
-      p->m_type = NAME;
-      break;
-    }
-    case DATE: {
-      date_set_random(&p->m_date); 
-      p->m_type = DATE;
-      break;
-    }
-    case DOUBLE: {
-      p->m_dval = get_random_double(); 
-      p->m_type = DOUBLE;
-      break;
-    }
-    case INT: {
-      p->m_ival = rand(); 
-      p->m_type = INT;
-      break;
-    }
+    switch (rand() % 4) 
+    {
+      case NAME: 
+      {
+        strcpy(p->m_name, get_random_name()); 
+        p->m_type = NAME;
+        break;
+      }
+      case DATE: 
+      {
+        date_set_random(&p->m_date); 
+        p->m_type = DATE;
+        break;
+      }
+      case DOUBLE: 
+      {
+        p->m_dval = get_random_double(); 
+        p->m_type = DOUBLE;
+        break;
+      }
+      case INT: 
+      {
+        p->m_ival = rand(); 
+        p->m_type = INT;
+        break;
+      }
     }
   }
 
   void print_tagged(const Tagged_t* p)
   {
-    switch (p->m_type) {
-    case NAME: {
-      printf("Type is m_name: ");
-      printf("%s\n", p->m_name); 
-      break;
-    }
-    case DATE: {
-      printf("Type is m_date: ");
-      date_print(&p->m_date); 
-      break;
-    }
-    case DOUBLE: {
-      printf("Type is m_dval: ");
-      printf("%f\n", p->m_dval); 
-      break;
-    }
-    case INT: {
-      printf("Type is m_ival: ");
-      printf("%d\n", p->m_ival); 
-      break;
-    }
+    switch (p->m_type) 
+    {
+      case NAME: 
+      {
+        printf("Type is m_name: ");
+        printf("%s\n", p->m_name); 
+        break;
+      }
+      case DATE: 
+      {
+        printf("Type is m_date: ");
+        date_print(&p->m_date); 
+        break;
+      }
+      case DOUBLE: 
+      {
+        printf("Type is m_dval: ");
+        printf("%f\n", p->m_dval); 
+        break;
+      }
+      case INT: 
+      {
+        printf("Type is m_ival: ");
+        printf("%d\n", p->m_ival); 
+        break;
+      }
     }
   }
 
@@ -3635,7 +3681,8 @@
 
     Tagged_t t1;
 
-    for(int i = 0; i < 10; ++i){
+    for(int i = 0; i < 10; ++i)
+    {
       set_tagged(&t1);
       print_tagged(&t1);
     }
@@ -3656,7 +3703,8 @@
 
     Tagged_t t_arr[SIZE]; // mixed array 
 
-    for (size_t i = 0; i < SIZE; ++i){
+    for (size_t i = 0; i < SIZE; ++i)
+    {
       set_tagged(&t_arr[i]);
       print_tagged(&t_arr[i]);
     }  
@@ -3684,8 +3732,7 @@
 
 /*
   problem domain'inde öyle varlıklar var ki, bu varlıklar
-  önceden seçilmiş bir veri kümesindeki değerlerden birine 
-  sahip olmak zorunda.
+  önceden seçilmiş bir veri kümesindeki değerlerden birine sahip olmak zorunda.
 
   örneğin 
     - haftanın günü 
@@ -3921,13 +3968,14 @@
 
   void color_picker(Color_t c)
   {
-    switch (c) {
-    case Red:
-      pick_red(); break;
-    case Green:
-      pick_green(); break;
-    case Blue:
-      pick_blue(); break;
+    switch (c) 
+    {
+      case Red:
+        pick_red(); break;
+      case Green:
+        pick_green(); break;
+      case Blue:
+        pick_blue(); break;
     }
   }
 */
@@ -4063,10 +4111,8 @@
 /*
   // identifier's(which are enumaration constants) scope
   // is same with the enumaration type itself.
-  // in "screen.h" file 
-  //  screen_color enumaration type is in file scope
-  // in "traffic_light.h" file 
-  //  traffic_light enumaration type is in file scope
+  // in "screen.h" file, screen_color enumaration type is in file scope.
+  // in "traffic_light.h" file, traffic_light enumaration type is in file scope.
 
   // screen.h
   // ----------------
@@ -4135,7 +4181,7 @@
   void foo(void)
   {
     enum Color { RED, GREEN, BLUE };
-    // `enum Color` type is in foo function scope 
+    // `enum Color` type is in foo function's scope 
   }
 
   int main(void)
@@ -4153,16 +4199,14 @@
   // macros don't have scope
 
   enum { ARRAY_SIZE_2 = 100 };  
-  // ARRAY_SIZE_2 enumaration constant can be used 
-  // in this enumaration type's scope which is file scope.
+  // ARRAY_SIZE_2 enumaration constant can be used in file scope.
 
   int global_arr[ARRAY_SIZE_2];
 
   void foo(void)
   {
     enum { ARRAY_SIZE_3 = 100 };
-    // ARRAY_SIZE_3 enumaration constant can be used 
-    // in this enumaration type's scope which is function scope.
+    // ARRAY_SIZE_3 enumaration constant can be used in foo function's scope.
 
     int local_arr[ARRAY_SIZE_3];
   }

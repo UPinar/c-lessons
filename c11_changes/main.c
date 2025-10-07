@@ -17,8 +17,7 @@
 
   - "_Generic" keyword is added in C11 standard. 
   - generic selection will be done in compile time.
-  - generic selection is used in macros for simulating 
-    function overloading.
+  - generic selection is used in macros for simulating function overloading.
 
   -----------------------------------------------------
 

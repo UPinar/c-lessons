@@ -24,7 +24,8 @@ typedef struct List List_t;
 static Node_t* create_node(void)
 {
   Node_t* p_node = malloc(sizeof(Node_t));
-  if (!p_node) {
+  if (!p_node) 
+  {
     printf("Memory allocation error!\n");
     exit(EXIT_FAILURE);
   }
@@ -67,7 +68,8 @@ void list_push_front( List_t* p_list,
 
 void list_pop_front(List_t* p_list)
 {
-  if (p_list->m_count == 0) {
+  if (p_list->m_count == 0) 
+  {
     printf("List is empty!\n");
     exit(EXIT_FAILURE);
   }
@@ -80,7 +82,8 @@ void list_pop_front(List_t* p_list)
 
 void list_get_first(List_t* p_list, Person_t* p_person)
 {
-  if (p_list->m_count == 0) {
+  if (p_list->m_count == 0)
+  {
     printf("List is empty!\n");
     exit(EXIT_FAILURE);
   }

@@ -22,20 +22,20 @@
   y++   -> unary (postfix) operator
 
 
-  operator return, generates a value
+  operator returns, generates a value
   10 + 20 -> addition operator generates 30
   a > b (generates signed int 1 or 0)
   In C language, every operator generates a value
-
   
   --> constraints
     - can be related with operand(s) types 
-    - can be related wit operand(s) value categories (L, R value)
+    - can be related with operand(s) value categories (L, R value)
 */
 
 /*
-  // modulus operators constraint related with its operands types 
-  int main(void){
+  // modulus operator's constraint is related with its operand's types 
+  int main(void)
+  {
     double d1 = 282.1827;
     double d2 = 19.234;
 
@@ -45,9 +45,9 @@
 */
 
 /*
-  // assignment operators constraint related with its operands
-  // value category 
-  int main(void){
+  // assignment operator's constraint is related with its operand's value category
+  int main(void)
+  {
     int x =  56;
 
     45 = x; // syntax error
@@ -158,19 +158,21 @@
 
 /*
   // + and - operators (addition, substraction) [additive operators]
-  #include <limits.h>
+  #include <limits.h> // UINT_MAX
 
-  int main(void){
+  int main(void)
+  {
     int x = 2000000000; // 2'000'000'000
     int y = 2000000000; // 2'000'000'000
     printf("%d + %d = %d\n", x, y, x + y);  // Undefined behavior(ub)
+    // overflow in signed int type will cause undefined behavior(UB)
 
 
     unsigned int a = 3000000000; // 3'000'000'000
     unsigned int b = 3000000000; // 3'000'000'000
     printf("%u + %u = %u\n", a, b, a + b);  
     // output -> 3000000000 + 3000000000 = 1'705'032'704
-    // overflow happened but code is VALID
+    // overflow happened but code is VALID -> NO Undefined Behavior.
 
     printf("%u", (6000000000 % UINT_MAX) - 1); 
     // output -> 1'705'032'704
@@ -234,7 +236,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int hour, n;
 
     printf("what time is it now : ");
@@ -247,7 +250,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 8723;
 
     printf("binler basamagi = %d\n", x / 1000);
@@ -272,16 +276,17 @@
 /*
   increment(++) and decrement(--) operators
   ++x -> prefix increment,  R value expression
-  ++x -> postfix increment, R value expression
+  x++ -> postfix increment, R value expression
   --x -> prefix decrement,  R value expression
-  ++x -> postfix decrement, R value expression
+  x-- -> postfix decrement, R value expression
 
-  These operators operand must be L value expression
+  These operator's operand must be L value expression
   Those operators both have side effects.
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     ++23; // syntax error
     // output -> lvalue required as increment operand
 
@@ -298,7 +303,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10;
 
     x + 5;  // addition operator did not have a side effect  
@@ -316,7 +322,8 @@
   
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 34;
 
     printf("x = %d\n", x);  // output -> x = 34
@@ -332,7 +339,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 34;
 
     printf("x = %d\n", x);  // output -> x = 34
@@ -348,7 +356,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 34;
     printf("x++ = %d\n", x++);  // output -> x++ = 34
 
@@ -361,7 +370,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 34;
     printf("++x = %d\n", ++x);  // output -> ++x = 35
 
@@ -377,11 +387,13 @@
 */
 
 /*
-  void iprint(int i){
+  void iprint(int i)
+  {
     printf("i = %d\n", i);
   }
 
-  int main(void){
+  int main(void)
+  {
     int x = 34;
     iprint(x++);  // output -> i = 34
 
@@ -391,7 +403,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 34;
     int y;
 
@@ -403,7 +416,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 34;
     int y;
 
@@ -415,19 +429,21 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 23;
     int y = 7;
 
     printf("%d\n", x-- % ++y);    // output -> 7
-    // x = 22, y = 8 in here
+    // ----> x = 22, y = 8 in here
 
     printf("%d\n", x % y);        // output -> 6
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 11;
 
     printf("%d\n", x++);  // output -> 11
@@ -441,7 +457,8 @@
 
   void foo(int);
 
-  int main(void){
+  int main(void)
+  {
     int x, y;
 
     // Example 1 
@@ -495,7 +512,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 20;
     int y = 30;
 
@@ -508,7 +526,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 20;
 
     // Question : is ++++x expression is syntax error in C?
@@ -524,7 +543,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 20;
 
     // Question : is +++x expression is syntax error in C?
@@ -563,8 +583,8 @@
       return 0;
   }
 
-  int main(void){
-
+  int main(void)
+  {
     int x = 12;
     int y = -15;
     int z = 0;
@@ -589,7 +609,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 12, y = 45, z = 67, t = 34;
     int ival = 39;
     int ival_2 = 14;
@@ -610,18 +631,19 @@
 */
 
 /*
-  #include <math.h>
+  #include <math.h> // fabs
 
   double foo(void);
 
-  int main(void){
+  int main(void)
+  {
     double dval = foo();
 
-    if (dval == 3.4)  // will not generate wanted result
+    if (dval == 3.4)  // will not generate the wanted result
 
     if (fabs(dval - 3.4) < 1E-4);
     if (fabs(dval - 3.4) < 0.0001);
-    // will generate wanted result
+    // will generate the wanted result
   }
 */
 
@@ -665,10 +687,10 @@
 */
 
 /*
-  logic operators operands can be integral types, floating types 
+  logic operator's operands can be integral types, floating types 
   and also adresses.
 
-  in logical interpretation, expressions value will be calculated
+  in logical interpretation, expression's value will be calculated
     if value non-zero -> TRUE
     if value zero     -> FALSE
 
@@ -686,11 +708,12 @@
 
 /*
   !op (logical NOT), does not have a side effect
-  !op expressions type is int, its value can be 1 or 0
+  !op expression's type is int, its value can be 1 or 0
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10, y = 0;
 
     printf("!(%d) = %d\n", x, !x);  // output -> !(10) = 0
@@ -700,7 +723,8 @@
 
 /*
   // logical NOT operator is right associative
-  int main(void){
+  int main(void)
+  {
     int x = 1, y = 0, z = 45, t = -3;
 
     printf("!!%d = !(!%d) = %d\n", x, x, !!x);  
@@ -720,8 +744,8 @@
 */
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     int x = 10, y = 23;
     printf("(%d) && (%d) = %d\n", x, y, x && y); 
     // output -> (10) && (23) = 1
@@ -750,43 +774,48 @@
 */
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     int x = 10, y = 20;
 
     if (x && y)
       printf("logical AND - TRUE\n");
     else
       printf("logical AND - FALSE\n");
+
+    // output -> 
+    //  logical AND - TRUE
     
     if (x & y)
       printf("bitwise AND - TRUE\n");
     else
       printf("bitwise AND - FALSE\n");
 
-    // generally 9/10 logical and bitwise operations results are same
-    // that is why accidently using bitwise AND is dangerous!!
-    // logical AND - TRUE
-    // bitwise AND - FALSE
+    // output -> 
+    //  bitwise AND - FALSE
   }
+
+  // generally 9/10 logical and bitwise operations results are same
+  // that is why accidently using bitwise AND is dangerous!! 
 */
 
 /*
-          --------------------------------------------------
+          -------------------------------------------------
           | short circuit behavior (kısa devre davranışı) |
-          --------------------------------------------------
+          -------------------------------------------------
 */
 
 /*
   exp1 && exp2  
-    if exp1 is FALSE exp2 WILL NOT BE calculated
+    if exp1 is FALSE, exp2 WILL NOT BE calculated
 
   exp1 || exp2
-    if exp1 is TRUE exp2 WILL NOT BE calculated
+    if exp1 is TRUE, exp2 WILL NOT BE calculated
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 0;
     int y = 555;
 
@@ -799,12 +828,14 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     int y = 555;
 
     int z = x && ++y;
     // no short circuit behavior in this code
+    // both expressions will be evaluated.
 
     printf("z = %d\n", z);  // output -> z = 1
     printf("y = %d\n", y);  // output -> y = 556
@@ -812,7 +843,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     int y = 555;
 
@@ -825,13 +857,15 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int arr[10] = { 0 };
 
-    for (int i = 0; i < 10 && arr[i] == 5; ++i){
+    for (int i = 0; i < 10 && arr[i] == 5; ++i)
+    {
       // using short circuit behavior in the expression 
-      // there is no way that reaching out of arrays boundries.
-      // because of the left operand of logical AND
+      // there is no way that reaching out of the array's boundry
+      // because of the left operand(i < 10) of logical AND.
     }
   }
 */
@@ -840,10 +874,12 @@
   int foo(void);
   int bar(void);
 
-  int main(void){
-    if (foo() && bar()){
+  int main(void)
+  {
+    if (foo() && bar())
+    {
       // there is no guarantee that bar() function will be called
-      // if foo() functions return value is 0 
+      // if foo() function's return value is 0 
     }
   }
 */
@@ -853,7 +889,8 @@
   int bar(void) { printf("bar has been called\n"); return 5;}
   int baz(void) { printf("baz has been called\n"); return -2;}
 
-  int main(void){
+  int main(void)
+  {
     printf("First\n");
     foo() && bar();
 
@@ -870,7 +907,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     // think about there is only "<" comparison operator in a language
 
     int x = 10, y = 12;
@@ -916,13 +954,15 @@
   if (0 < 20) -> true
   if (10 < x < 20) -> always true
 
-  if (x > 10 && x < 20) is the way to control 
+  if (x > 10 && x < 20) -> correct way to control 
+
 */
 
 /*
   // logical XOR can be expressed like this 
 
-  int main(void){
+  int main(void)
+  {
     int x = 12, y = -5;
     printf("%d logical XOR %d = %d\n", x, y, !!x != !!y);
     // output -> 12 logical XOR -5 = 0
@@ -942,7 +982,8 @@
 */
 
 /*
-  int get_mid(int x, int y, int z){
+  int get_mid(int x, int y, int z)
+  {
     if (!((x > y && x > z) || (x < y && x < z)))
       return x;
     
@@ -962,25 +1003,27 @@
 
 /*
   = (assignment operator) have side effect and will generate a value.
-  Lots of idioms using value generated by assignment operator
+  Lots of idioms are using the value generated by assignment operator
 
-  Generated value by assignment operators, is the value 
+  Generated value by assignment operator's, is the value 
   that assigned to the object.
-  x = 5 expressions value is 5, because 5 is assigned to x variable.
-  y = 0 expressions value is 0
+  x = 5 expression's value is 5, because 5 is assigned to x variable.
+  y = 0 expression's value is 0
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 5;  // this is not an assigment operator
     // this is initialization syntax
 
-    x = 12; // this is assignment operator
+    x = 12; // this is an assignment operator
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x; 
 
     x = 12; 
@@ -990,7 +1033,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 5;
     double dval = 5.9;
 
@@ -1000,21 +1044,23 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x;
 
     printf("%d\n", x = 7);  // output -> 7
-    // x = 7 expressions value is 7
+    // x = 7 expression's value is 7
 
     printf("%d\n", x = 0);  // output -> 0
-    // x = 0 expressions value is 0
+    // x = 0 expression's value is 0
   }
 */
 
 /*
   int foo(void);
 
-  int main(void){
+  int main(void)
+  {
     int x;
     int a = 6;
 
@@ -1023,38 +1069,41 @@
       ++a;
   }
 
-  int main_2(void){
+  int main_2(void)
+  {
     int x;
     int a = 6;
 
-    if ((x = foo()) > 10){  
+    if ((x = foo()) > 10)
       ++a;
-    }
   }
-  // Those 2 main functions are same, in main_2 value generated 
+  // Those 2 main functions are same, in main_2, value generated 
   // by the assignment operator has been used in if statement
 */
 
 /*
-  #include <stdlib.h>
+  #include <stdlib.h> // malloc
 
-  int main(void){
+  int main(void)
+  {
     int n = 10;
     void* vp;
 
-    if ((vp = malloc(n * sizeof(int))) != NULL){
-
+    if ((vp = malloc(n * sizeof(int))) != NULL)
+    {
     }
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int c;
 
     // <---- FIRST WAY ---->
     c = getchar();
-    while(c != '\n'){
+    while(c != '\n')
+    {
       printf("%c %d\n", c, c);
       c = getchar();
     }
@@ -1075,11 +1124,12 @@
 
 
     // <---- SECOND WAY ---->
-    while(1){ // infinite loop idiom
+    while(1)  // infinite loop idiom
+    { 
       c = getchar();
       if (c == '\n')
         break;
-        printf("%c %d\n", c, c);
+      printf("%c %d\n", c, c);
     }
     // input -> Istanbul
     // output ->
@@ -1113,15 +1163,18 @@
 */
 
 /*
-  int foo(void){
+  int foo(void)
+  {
     return 5;
   }
 
-  int bar(void){
+  int bar(void)
+  {
     return 7;
   }
 
-  int main(void){
+  int main(void)
+  {
     int x, y, z, t;
 
     // <---- FIRST WAY ---->
@@ -1148,7 +1201,7 @@
 
 /*
   generally equal operator "==" and assignment operator "=" 
-  is mixed by programmers. This problem can be solved by 
+  is confused by programmers. This problem can be solved by 
 
   if (x = 5)  -> VALID
   if (5 = x)  -> SYNTAX ERROR (left operand can not be R value)
@@ -1172,7 +1225,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     printf("x = %d\n", x);  // output -> x = 10
 
@@ -1182,7 +1236,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     int y = 20;
     int z = 40;
@@ -1201,7 +1256,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int day = 2;
     int hour = 98;
     int min = 198;
@@ -1241,7 +1297,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 235;
     int y;
     ++x;  
@@ -1252,7 +1309,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int a = 1 , b = 1;
     int x = 5;
 
@@ -1268,11 +1326,13 @@
 */
 
 /*
-  void foo(int ival){
+  void foo(int ival)
+  {
     printf("foo has been called with = %d\n", ival);
   }
 
-  int main(void){
+  int main(void)
+  {
     int x = 0;
 
     // while statement paranthesis is a sequence point
@@ -1299,17 +1359,19 @@
   &&(logical AND) and ||(logical OR) operators creates a sequence
   point
 
-  ternary operators first operands end have a sequence point
+  ternary operator's first operand's end, have a sequence point
   op1 ? op2 : op3
   */
 
 /*
-  int foo(int a){
+  int foo(int a)
+  {
     printf("foo has been called a = %d\n", a);
     return 5;
   }
 
-  int main(void){
+  int main(void)
+  {
     int x = 5;
     
     x++ && foo(x);  // output -> foo has been called a = 6
@@ -1319,12 +1381,14 @@
 */
 
 /*
-  int foo(int a){
+  int foo(int a)
+  {
     printf("foo has been called a = %d\n", a);
     return 5;
   }
 
-  int main(void){
+  int main(void)
+  {
     int x = -1;
 
     ++x || foo(x);  // output -> foo has been called a = 0
@@ -1332,7 +1396,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     // initialization syntax also have sequnce point
 
     int x = 5, y = x++, z = y + x;
@@ -1346,12 +1411,13 @@
 
 /*
   when side effect applied to an object and there is no sequence point
-  and that object has been used more than once in an expression
-    -> Undefined behavior (ub)
+  at the end of it, and that object has been used more than once in an expression
+  it will be an Undefined behavior (ub)
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 5;
 
     int y = ++x + x;  // Undefined behavior(ub)
@@ -1364,7 +1430,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 5;
 
     x = x++;  // Undefined behavior(ub)
@@ -1373,7 +1440,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 5;
     int y =  x + (x = 9);   // undefined behavior (UB)
 
@@ -1392,7 +1460,8 @@
 
   int sum(int a, int b);  // seperator
 
-  int main(void){
+  int main(void)
+  {
     int ar[] = {1, 2, 3, 4, 5}; // seperator
 
     int x = 5, y = 9;     // seperator
@@ -1426,7 +1495,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int y = 10;
     int x = 7;
 
@@ -1435,12 +1505,12 @@
     // Those 2 lines are same with 
 
     y++, x = y;
-    // This line
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     int y = 7;
     int temp;
@@ -1457,7 +1527,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int a = 1, b = 2, c = 3, d = 4;
 
     if (a > 10)
@@ -1468,7 +1539,8 @@
     // but "c" and "d" will always been increased, 
     // "c" and "d" are dependent from the condition
 
-    if (a > 10){
+    if (a > 10)
+    {
       ++b;
       ++c;
       ++d;
@@ -1488,7 +1560,8 @@
   // comma operator generates a value and 
   // generated value is the value of the right operand
 
-  int main(void){
+  int main(void)
+  {
     int x = 7;
     int y = 3;
     int z;
@@ -1502,7 +1575,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 2;
     int y;
 
@@ -1516,7 +1590,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     double d = 4.7;
 
     if (d > 3,0)    // probably "." and "," is not used correctly
@@ -1527,7 +1602,7 @@
     // output -> FALSE
 
     // first operand (d > 3) generates 1
-    // second operand is the value of the comma operator which is 0
+    // second operand is the value that the comma operator generates, which is 0
 
 
     if (d > 3.0)    
@@ -1543,27 +1618,30 @@
   void foo(int, int);
   void bar(int);
 
-  int main(void){
-
+  int main(void)
+  {
     foo(2, 5);    // comma is a seperator
     bar((2, 5));  // when used paranthesis, comma becomes seperator
   }
 */
 
 /*
-  int main(void){
-    int ar[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+  int main(void)
+  {
+    int ar[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-    for (int i = 0; i < 10; ++i){
+    for (int i = 0; i < 10; ++i)
+    {
       printf("%d ", ar[i]);
     }
     // output -> 0 1 2 3 4 5 6 7 8 9
 
 
     printf("\n");
-    int ar2[10] = {0, 1, 2, 3};
+    int ar2[10] = { 0, 1, 2, 3 };
 
-    for (int i = 0; i < 10; ++i){
+    for (int i = 0; i < 10; ++i)
+    {
       printf("%d ", ar2[i]);
     }
     // output -> 0 1 2 3 0 0 0 0 0 0
@@ -1571,7 +1649,8 @@
     printf("\n");
     int ar3[10] = {(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)};
 
-    for (int i = 0; i < 10; ++i){
+    for (int i = 0; i < 10; ++i)
+    {
       printf("%d ", ar3[i]);
     }
     // output -> 9 0 0 0 0 0 0 0 0 0
@@ -1579,7 +1658,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int ch;
 
     while (ch = getchar(), ch != '\n')
@@ -1618,7 +1698,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10;
     printf("|%d| = %d\n", x, x > 0 ? x : -x);
     // output -> |10| = 10
@@ -1659,8 +1740,6 @@
   else
     i = y;
 
-  // we can not use if statement in for statement
-
   for (int i = x > y ? x : y; i < 100; ++i)
 */
 
@@ -1674,8 +1753,8 @@
 */
 
 /*
-  int foo(int x){
-
+  int foo(int x)
+  {
     if (x > 0)
       return a;
     else 
@@ -1714,7 +1793,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10, y = 20, z = 30;
 
     if (x > 5)
@@ -1730,7 +1810,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 7;
 
     int a = x == 5  ? 121 : 
@@ -1775,12 +1856,13 @@
     size_t is a type alias, not a type 
       typedef unsigned int size_t;
       typedef unsigned long size_t;
-    and which type's alias is that size_t is compiler dependent
+    and which type's alias is that size_t is, compiler dependent
     size_t's underlying type is implementation defined
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     // %zu is a format specifier for size_t
 
     printf("sizeof(_Bool) = %zu\n", sizeof(_Bool));
@@ -1809,7 +1891,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 20;
 
     int ar[x];  // syntax error
@@ -1821,12 +1904,13 @@
 */
 
 /*
-  // sizeof operators operand can be any expression 
+  // sizeof operator's operand can be any expression 
   // except void type expression
 
   // in this case sizeof operator will generate size of the expression's type
 
-  int main(void){
+  int main(void)
+  {
     double dval = 4.5;
 
     printf("%zu\n", sizeof dval);   // output -> 8
@@ -1837,7 +1921,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     double dval = 4.5;
     printf("%zu\n", sizeof dval + 2);   // output -> 10
     // sizeof operator has higher precedence than + operator
@@ -1848,7 +1933,8 @@
 
 
 /*
-  int main(void){
+  int main(void)
+  {
     char c1 = 5;
     char c2 = 5;
 
@@ -1862,7 +1948,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     printf("%zu\n", sizeof(int[10]));   // output -> 40
     // int[10] is a type
 
@@ -1871,7 +1958,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int a[100];
 
     printf("%zu\n", sizeof a);   // output -> 400
@@ -1888,7 +1976,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int a[100];
     char b[40];
     short c[20];
@@ -1904,10 +1993,12 @@
 /*
   #define   asize(x)    (sizeof(x) / sizeof(x[0]))
 
-  int main(void){
-    int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int main(void)
+  {
+    int a[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-    for (int i = 0; i < asize(a); ++i){
+    for (int i = 0; i < asize(a); ++i)
+    {
       printf("%d ", a[i]);
     }
     // output -> 1 2 3 4 5 6 7 8 9 10
@@ -1917,15 +2008,17 @@
 /*
   #define   asize(x)    (sizeof(x) / sizeof(x[0]))
 
-  int main(void){
-    int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int main(void)
+  {
+    int a[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
     int b[2 * asize(a)];  // VALID
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 99;
     unsigned int y = sizeof(x++);
 
@@ -1942,17 +2035,20 @@
 */
 
 /*
-  int foo(void){
+  int foo(void)
+  {
     printf("foo has been called\n");
     return 1;
   }
 
-  double bar(void){
+  double bar(void)
+  {
     printf("bar has been called\n");
     return 1.3;
   }
 
-  int main(void){
+  int main(void)
+  {
     unsigned int x = sizeof(foo() + bar());
     printf("x = %u\n", x);  
     // output -> x = 8
@@ -1968,7 +2064,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int a[10] = { 0 };
     unsigned x = sizeof(a[20]); // VALID 
     // no code will be generated for a[20] expression
@@ -1979,7 +2076,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 6;
     int y = 0;
 
@@ -1993,8 +2091,9 @@
 /*
   #define  asize(x)    (sizeof(x) / sizeof(x[0]))
 
-  int main(void){
-    int a[5] = {1, 2, 3, 4, 5};
+  int main(void)
+  {
+    int a[5] = { 1, 2, 3, 4, 5 };
 
     for (int i = -2; i < asize(a) - 2; ++i)
       printf("%d ", a[i + 2]);

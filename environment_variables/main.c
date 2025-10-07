@@ -37,13 +37,15 @@
   {
     const char* p_str = getenv("PATH");
 
-    if (p_str == NULL) {
+    if (p_str == NULL) 
+    {
       fprintf(stderr,"PATH environment variable not found\n");
       exit(EXIT_FAILURE);
     }
 
     FILE* f = fopen("out.txt", "w");
-    if (f == NULL) {
+    if (f == NULL)
+    {
       fprintf(stderr, "cannot open file\n");
       exit(EXIT_FAILURE);
     }
@@ -86,7 +88,8 @@
 
     const char* env_str;
 
-    for (size_t i = 0; i < asize(p_env); ++i) {
+    for (size_t i = 0; i < asize(p_env); ++i) 
+    {
       if ((env_str = getenv(p_env[i])) != NULL)
         printf("%-20s = %s\n", p_env[i], env_str);
     }
@@ -101,22 +104,21 @@
 */
 
 /*
-  // for windows "_putenv" function 
-  // is for setting environment variables
+  // for windows "_putenv" function is for setting environment variables
 
   #include <stdlib.h>
 
   int main(void)
   {
-    if (_putenv("UNIQUE_ENV_VAR=111")) {
+    if (_putenv("UNIQUE_ENV_VAR=111")) 
+    {
       fprintf(stderr, "cannot set environment variable\n");
       return 1;
     }
 
     const char* p_str;
 
-    if ((p_str = getenv("UNIQUE_ENV_VAR")) != NULL) {
+    if ((p_str = getenv("UNIQUE_ENV_VAR")) != NULL)
       printf("UNIQUE_ENV_VAR = %s\n", p_str);
-    }
   }
 */

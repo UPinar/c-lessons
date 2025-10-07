@@ -40,7 +40,7 @@
       |=      assignment by bitwise OR
       >>=     assignment by bitwise left shift 
       <<=     assignment by bitwise right shift 
-      (bitwise compound assignment operators)   [RIGHT ASSOCIATIVE]
+    (bitwise compound assignment operators)   [RIGHT ASSOCIATIVE]
   ----------------------------------------------------------------
 */
 
@@ -154,9 +154,9 @@
 
 /*
   RIGHT OPERAND
-    - is negative
-    - equal or greater than the number of bits in the left operand
-    it will be undefined behavior(UB)
+  - is negative
+  - equal or greater than the number of bits in the left operand
+  it will be undefined behavior(UB)
 
   LEFT OPERAND
   - if left operand is UNSIGNED
@@ -229,10 +229,11 @@
   {
     unsigned int x = 1;
 
-    while(x != 0) {
+    while(x != 0) 
+    {
       print_bits(x);
       x <<= 1;
-    };
+    }
 
     // output ->
     //  00000000000000000000000000000001
@@ -271,19 +272,18 @@
 */
 
 /*
-  // those type of constants(only 1 bit is set) are called 
-  // "bitmask" constants
+  // those type of constants(only 1 bit is set) are called "bitmask" constants
 
   int main(void)
   {
     int N = 2;
-    1u <= N; // (2^2)
+    1u <<= N; // (2^2)
 
     N = 3;
-    1u <= N; // (2^3)
+    1u <<= N; // (2^3)
 
     N = 4;
-    1u <= N; // (2^4)
+    1u <<= N; // (2^4)
   }
 */
 
@@ -295,9 +295,9 @@
 
 /*
   RIGHT OPERAND 
-    - is negative
-    - equal or greater than the number of bits in the left operand
-    it will be undefined behavior(UB)
+  - is negative
+  - equal or greater than the number of bits in the left operand
+  it will be undefined behavior(UB)
 
   LEFT OPERAND
   - if left operand is UNSIGNED 
@@ -402,13 +402,13 @@
     print_bits(x);
     // output -> 10000000000000000000000000000000
 
-    while (x) {
+    while (x) 
+    {
       print_bits(x);
       x >>= 1;
     }
 
     // output ->
-    //  10000000000000000000000000000000
     //  10000000000000000000000000000000
     //  01000000000000000000000000000000
     //  00100000000000000000000000000000
@@ -477,9 +477,6 @@
 */
 
 /*
-*/
-
-/*
   #include "../headers/nutility.h"
 
   int main(void)
@@ -513,8 +510,8 @@
     // output -> Bitwise AND is true
 
     // both operations GENERALLY giving the same result,
-    // so it is hard to understand when '&&' is used
-    // instead of '&', so need to be very careful.
+    // it can easily be confused when '&&' is used instead of '&'
+    // so need to be very careful!
 
     // -------------------------------------------------
   }
@@ -610,7 +607,8 @@
   int set_bit_count(int x)
   {
     int cnt = 0;
-    while (x) {
+    while (x) 
+    {
       x &= x - 1;
       ++cnt;
     }
@@ -824,16 +822,6 @@
 */
 
 /*
-  01010011
-  10111000
-  --------^
-  11101011
-
-  - 1 is flipping (toggling) the bit of the first operand
-  - 0 is not changing the bit of the first operand
-*/
-
-/*
   Tip : iki adet varsa birbirini sıfırlar.
 
   --------------------------------
@@ -914,7 +902,7 @@
       x |= 1 << rand() % 32;
 
       ++counter;
-      if (counter %10 == 0)
+      if (counter % 10 == 0)
         print_bits(x);
     } while (x != -1);
 
@@ -978,9 +966,8 @@
       x &= ~(1 << (rand() % 32));
 
       ++counter;
-      if (counter %10 == 0){
+      if (counter % 10 == 0)
         print_bits(x);
-      }
     } while (x);
 
     // output ->
@@ -1201,7 +1188,8 @@
   {
     int cnt = 0;
 
-    while (x){
+    while (x)
+    {
       x &= x - 1;
       ++cnt;
     }
@@ -1279,8 +1267,8 @@
     print_bits(x);  // output -> 01111111111111111111111111111111
 
 
-  printf("total bit count = %d\n",
-      arr[x & 255] + arr[(x >> 8) & 255] + 
+    printf("total bit count = %d\n",
+        arr[x & 255] + arr[(x >> 8) & 255] + 
         arr[(x >> 16) & 255] + arr[(x >> 24) & 255]);
     // output -> total bit count = 31
 
@@ -1403,7 +1391,7 @@
 
     // -------------------------------------------------
 
-    // to change the read-only flag
+    // to flip the read-only flag
     fi.m_file_flags ^= READ_ONLY;
 
     // -------------------------------------------------
@@ -1456,14 +1444,14 @@
       if (i && i % 8 == 0)
         printf("\n");
 
-      if (isupper(i)) flag |= UPPER;
-      if (islower(i)) flag |= LOWER;
-      if (isdigit(i)) flag |= DIGIT;
-      if (isxdigit(i)) flag |= XDIGIT;
-      if (ispunct(i)) flag |= PUNCT;
-      if (isspace(i)) flag |= SPACE;
-      if (isprint(i)) flag |= PRINT;
-      if (iscntrl(i)) flag |= CNTRL;
+      if (isupper(i))   flag |= UPPER;
+      if (islower(i))   flag |= LOWER;
+      if (isdigit(i))   flag |= DIGIT;
+      if (isxdigit(i))  flag |= XDIGIT;
+      if (ispunct(i))   flag |= PUNCT;
+      if (isspace(i))   flag |= SPACE;
+      if (isprint(i))   flag |= PRINT;
+      if (iscntrl(i))   flag |= CNTRL;
       printf("%3d, ", flag);
     }
   }
@@ -1716,8 +1704,8 @@
     // mb_a bitfield member can not hold 17 which is out of range
     // because of type is `unsigned int` it WILL NOT be UB
 
-    // 1111 + 0001 = 0000 (15 + 1 = 16)
-    // 0000 + 0001 = 0001 (16 + 1 = 17)
+    // 0001 0001 -> 17
+    //      0001 -> first 4 bits of (17)
 
     printf("d1.mb_a = %u\n", d1.mb_a);
     // output -> d1.mb_a = 1
@@ -1805,7 +1793,7 @@
     unsigned int mb_b : 5;
   } Data2_t;
 
-  // when Data2_t is used, mb_a and mb_b bits will be stored 
+  // when padding bits are used, mb_a and mb_b bits will be stored 
   // in different bytes like below 
 
   // aaaa 0000

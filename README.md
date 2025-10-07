@@ -1,5 +1,9 @@
 <h1 align="center"> CLessons </h1>
 
+<p>Repo dili İnglizce - Türkçe karışıktır.</p>
+<p>Notlar ders zamanlamasıyla birebir gitmiyor dolasıyla
+bazı dosyalardaki konular ileri dosyalardaki pratikler üzerine inşa edilmiş olabilir.</p>
+
 ### [C Language](https://github.com/UPinar/CLessons/tree/master/c_language) 
   - C language characteristics
   - C Standarts

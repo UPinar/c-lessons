@@ -114,7 +114,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 5;
 
     if (x > 10);
@@ -130,7 +131,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 10;
 
     if (x > 10) // syntax error : expected expression before 'else'
@@ -225,17 +227,21 @@
 /*
   #include <math.h>
 
-  int main(void){
+  int main(void)
+  {
     int a = 5, b = 4, c = 2;
     double delta = b * b - 4 * a * c;
 
-    if (delta < 0){
+    if (delta < 0)
+    {
       printf("no real root \n");
     }
-    else if (delta == 0){
+    else if (delta == 0)
+    {
       printf("there is one root : %f\n", -b / (2 * a));
     }
-    else{
+    else
+    {
       printf("two real root\n");
 
       double root_delta = sqrt(delta);
@@ -254,14 +260,14 @@
 
 /*
   while (expr)
-    statement;  ---> while statements body
+    statement;  ---> while statement's body
   ----------------------------------------------------
   while (expr)
     statement1;
     statement2; 
     statement3;
-  ---> while statements body is statement1
-      statement2 and statement3 is not inside while statements body
+  ---> while statement's body is statement1
+      statement2 and statement3 is not inside while statement's body
   ----------------------------------------------------
   while (expr)
   {
@@ -269,7 +275,7 @@
     statement2; 
     statement3;
   } 
-  ---> while statements body is a compound statement
+  ---> while statement's body is a compound statement
       it includes statement1, statament2 and statement3
   ----------------------------------------------------
   while (expr)
@@ -283,7 +289,7 @@
   while(x < 10;) // this is a statement not an expression SYNTAX ERROR
   ----------------------------------------------------
   void foo(int);
-  while(foo(12))  // expressions type is void SYNTAX ERROR
+  while(foo(12))  // expression's type is void -> SYNTAX ERROR
   ----------------------------------------------------
 
   there is no guarantee that body of the while statement 
@@ -291,10 +297,12 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i = 0;
 
-    while(i < 10){
+    while(i < 10)
+    {
       printf("%d ", i);
       ++i;
     }
@@ -303,7 +311,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i = 0;
 
     while(i < 10)
@@ -314,7 +323,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i = 0;
 
     while(i < 10)
@@ -325,7 +335,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i = 0;
 
     while(i < 10)
@@ -336,12 +347,14 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int ch;
 
     printf("Write a word : ");
 
-    while((ch = getchar()) != '\n'){
+    while((ch = getchar()) != '\n')
+    {
       printf("%c %d\n", ch, ch);
     }
     // input -> Write a word : ISTANBUL
@@ -369,11 +382,13 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i  = 100;
 
     int d1, d2, d3;
-    while(i < 1000){
+    while(i < 1000)
+    {
       d1 = i / 100;
       d2 = i / 10 % 10;
       d3 = i % 10;
@@ -387,11 +402,13 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i  = 1000;
 
     int d1, d2, d3, d4;
-    while(i < 10000){
+    while(i < 10000)
+    {
       d1 = i / 1000;
       d2 = i / 100 % 10;
       d3 = i / 10 % 10;
@@ -410,19 +427,22 @@
 */
 
 /*
-  int ndigit(int x){
+  int ndigit(int x)
+  {
     if (x == 0)
       return 1;
 
     int digit_count = 0;
-    while(x != 0){
+    while(x != 0)
+    {
       ++digit_count; 
       x /= 10;
     }
     return digit_count;
   }
 
-  int main(void){
+  int main(void)
+  {
     int number1 = 345;
     int number2 = 110129394;
     int number3 = 0;
@@ -439,17 +459,19 @@
 
 /*
   // 762345 -> 7 + 6 + 2 + 3 + 4 + 5 = 27
-  int sumdigit(int x){
+  int sumdigit(int x)
+  {
     int digit_sum  = 0;
-    while(x){
+    while(x)
+    {
       digit_sum += x % 10;
       x /= 10;
     }
     return digit_sum;
   }
 
-  int main(void){
-
+  int main(void)
+  {
     int number1 = 762345;
     int number2 = 110129394;
     int number3 = 0;
@@ -464,7 +486,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 0;
 
     while(x++ < 5); // while statements body have a null statement
@@ -474,7 +497,8 @@
   }
 
   // CAN BE WRITTEN LIKE THIS
-  int main(void){
+  int main(void)
+  {
     int x = 0;
 
     while(x++ < 5)
@@ -487,10 +511,12 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     double d = 4.5;
 
-    while(d < 7,0){    // always false --> while(0)
+    while(d < 7,0)      // always false --> while(0)
+    {    
       printf("%f\n", d);
       d += .3;
     }
@@ -498,7 +524,8 @@
     // if "," comma operator has been used instead of "."
 
 
-    while(d < 7.0){    
+    while(d < 7.0)
+    {    
       printf("%f\n", d);
       d += .3;
     }
@@ -522,7 +549,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int n = 5;
     while (n-- > 0)
       printf("x "); 
@@ -539,7 +567,8 @@
 
 /*
   // function will calculate (base ^ exp)
-  int power(int base, int exp){
+  int power(int base, int exp)
+  {
     int result = 1;
 
     while(exp--)
@@ -548,7 +577,8 @@
     return result;
   }
 
-  int main(void){
+  int main(void)
+  {
     int a = 0, b = 1, c = 2, d = 3, e = 4, f = 5;
 
     printf("%d to the power of %d = %d\n", c, a, power(c, a));
@@ -562,7 +592,8 @@
 */
 
 /*
-  void clear_standart_input_buffer(void){
+  void clear_standart_input_buffer(void)
+  {
     int ch;
     while((ch = getchar()) != '\n' && ch != EOF) 
       ; // null statement
@@ -572,7 +603,8 @@
     //  { }
   }
 
-  int main(void){
+  int main(void)
+  {
     int number;
     printf("write a number : ");
     scanf("%d", &number);
@@ -582,7 +614,7 @@
     // output -> number = 726
     // number = 726 and "Hello" character codes are in the buffer
 
-    clear_input_buffer();
+    clear_standart_input_buffer();
 
     printf("write a number : ");
     scanf("%d", &number);
@@ -596,7 +628,8 @@
   // write "Hello" to standart output 
   // without using ";(semi-colon) in the code"
 
-  int main(void){
+  int main(void)
+  {
     // <--- FIRST WAY --->
     if (printf("Hello\n"))
     {}
@@ -612,7 +645,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int ch;
     int temp = 0;
 
@@ -631,7 +665,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int ch;
     int temp = 0;
 
@@ -655,7 +690,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int ch;
     int temp = 0;
 
@@ -679,13 +715,15 @@
 /*
   #include <ctype.h>
 
-  int main(void){
+  int main(void)
+  {
     int ch;
     int temp = 0;
 
     printf("Write an hexadecimal number : ");
 
-    while ((ch = getchar()) != '\n'){
+    while ((ch = getchar()) != '\n')
+    {
       if (isdigit(ch))
         temp  = temp * 16 + ch - '0';
       else if(isxdigit(ch))   // 0-9 a-f A-F
@@ -714,35 +752,43 @@
 */ 
 
 /*
-  int return_func(int x){
+  int return_func(int x)
+  {
     // code 
 
-    while(1){
+    while(1)
+    {
       if (expr)
         return x + 56;  
         // return statement will also ends functions execution
     }
   }
 
-  int break_func(int x){
+  int break_func(int x)
+  {
     // code 
 
-    while(1){
+    while(1)
+    {
       if (expr)
         break;
     }
+    // ----->
     // function will continue its execution from here
   }
 
-  int goto_func(int x){
+  int goto_func(int x)
+  {
     // code 
 
-    while(1){
+    while(1)
+    {
       if (expr)
         goto out;
     }
     
   out:
+    // ----->
     // function will continue its execution from here
   }
 */
@@ -754,11 +800,14 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i = 5;
 
-    while(i < 26){
-      if (i % 5 == 0){
+    while(i < 26)
+    {
+      if (i % 5 == 0)
+      {
         printf("%d", i);
         ++i;
       }
@@ -768,10 +817,12 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i = 5;
 
-    while(i < 26){
+    while(i < 26)
+    {
       if (i % 5 == 0)
         printf("%d ", i);
         ++i;
@@ -779,7 +830,8 @@
   }
   // output -> 5 10 15 20 25
 
-  int main_act(void){
+  int main_acts_like(void)
+  {
     int i = 5;
 
     while(i < 26){
@@ -792,18 +844,19 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i = 5;
 
     while(i < 26)
       if (i % 5 == 0)
         printf("%d ", i);
-        ++i;
-    
+        ++i;  
   }
   // output -> 5 5 5 5 5 ...... infinite loop
 
-  int main_act(void){
+  int main_acts_like(void)
+  {
     int i = 5;
 
     while(i < 26)
@@ -815,7 +868,8 @@
 */
 
 /*
-  while(1){
+  while(1)
+  {
     // idiomatic way for infinite loop
   }
 */
@@ -836,7 +890,8 @@
 /*
   // <---- Check break_statement.png ---->
 
-  while (control_expr1){
+  while (control_expr1)
+  {
     // statement 1
     // statement 2
     // statement 3
@@ -852,14 +907,17 @@
 */
 
 /*
-  while (expr1){
+  while (expr1)
+  {
     // statement 1
     // statement 2
     // statement 3
   }
 
-  while (1){
-    if (!expr1){
+  while (1)
+  {
+    if (!expr1)
+    {
       break;
     }
     // statement 1
@@ -871,11 +929,13 @@
 */
 
 /*
-  while (1){
+  while (1)
+  {
     // statement 1
     // statement 2
     // statement 3
-    if (!expr1){
+    if (!expr1)
+    {
       break;
     }
   }
@@ -900,7 +960,8 @@
   int _getch(void);   // not echoing, not lined buffer(new line need)
   int _getche(void);  // echoing, not lined buffer
 
-  int main(void){
+  int main(void)
+  {
     printf("Istanbul(i) or Ankara(a) : ");
     int ch = getchar();
 
@@ -948,7 +1009,8 @@
 /*
   #include <conio.h>
 
-  int main(void){
+  int main(void)
+  {
     printf("Write your 4 digit passcode: ");
     int c1 = _getch();  putchar('*');
     int c2 = _getch();  putchar('*');
@@ -968,14 +1030,17 @@
 
   #include <ctype.h>
 
-  int main(void){
+  int main(void)
+  {
     int cnt = 5;
 
     printf("Write 5 hex characters: ");
     int ch;
 
-    while(cnt--){
-      while(1){
+    while(cnt--)
+    {
+      while(1)
+      {
         ch = _getch();
         if (isxdigit(ch))
           break;
@@ -991,13 +1056,15 @@
 
   #include <ctype.h>
 
-  int main(void){
+  int main(void)
+  {
     int cnt = 5;
 
     printf("Write 5 hex characters: ");
     int ch;
 
-    while(cnt--){
+    while(cnt--)
+    {
       while(!isxdigit(ch = _getch()))
         ; // null statement
       putchar(ch);
@@ -1010,15 +1077,16 @@
   #include <conio.h>
   #include <stdlib.h>
 
-  int main(void){
-
+  int main(void)
+  {
     int ch;
     int val;
     int cnt = 0;
     int sum = 0;
     int min, max;
 
-    while (1){
+    while (1)
+    {
       printf("integer or not (i) (n) : ");
 
       while ((ch = _getch()) != 'i' && ch != 'n')
@@ -1043,7 +1111,8 @@
       sum += val;
     }
 
-    if (cnt == 0){
+    if (cnt == 0)
+    {
       printf("no integer input\n");
       return 0;
     }
@@ -1077,14 +1146,16 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     continue; // syntax error
     // continue statement not within a loop
   }
 */
 
 /*
-  while(expr1){
+  while(expr1)
+  {
     statement1;
     statement2;
     statement3;
@@ -1095,12 +1166,14 @@
     statement5;
   }
 
-  while(expr1){
+  while(expr1)
+  {
     statement1;
     statement2;
     statement3;
     
-    if (!c_ex){
+    if (!c_ex)
+    {
       statement4;
       statement5;
     }
@@ -1115,19 +1188,22 @@
 */
 
 /*
-  int ndigit(int x){
+  int ndigit(int x)
+  {
     if (x == 0)
       return 1;
 
     int digit_count = 0;
-    while(x != 0){
+    while(x != 0)
+    {
       ++digit_count; 
       x /= 10;
     }
     return digit_count;
   }
 
-  int dowhile_ndigit(int x){
+  int dowhile_ndigit(int x)
+  {
     int digit_count = 0;
 
     do {
@@ -1140,7 +1216,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x;
     do {
       printf("Write an integer between 0 - 100: ");
@@ -1162,76 +1239,81 @@
 /*
   <----  FIRST WAY ----> using goto statement
 
-  loop1 (){
-    statementx;
-    statementx;
-    statementx;
+  loop1 ()
+  {
+    statement_x;
+    statement_x;
+    statement_x;
 
-    loop2 (){
-      statementy;
-      statementy;
-      statementy;
+    loop2 ()
+    {
+      statement_y;
+      statement_y;
+      statement_y;
       
-      loop3 (){
-        statementz;
-        statementz;
-        statementz;
+      loop3 ()
+      {
+        statement_z;
+        statement_z;
+        statement_z;
 
         if (c_exp)
-        goto out;
-          break;  // we want to go to statementk from here
+          goto out;   // we want to go to statement_k from here
       }
-      statementy;
-      statementy;
+      statement_y;
+      statement_y;
     }
-    statementx;
-    statementx;
+    statement_x;
+    statement_x;
   }
 
   out:
-    statementk
-    statementk
+    statement_k
+    statement_k
 
 
   <----  SECOND WAY ----> using flag variable
 
     int flag = 0;
 
-    loop1 (){
-    statementx;
-    statementx;
-    statementx;
-
-    loop2 (){
-      statementy;
-      statementy;
-      statementy;
+    loop1 ()
+    {
+    statement_x;
+    statement_x;
+    statement_x;
+      loop2 ()
+      {
+        statement_y;
+        statement_y;
+        statement_y;
       
-      loop3 (){
-        statementz;
-        statementz;
-        statementz;
+        loop3 ()
+        {
+          statement_z;
+          statement_z;
+          statement_z;
 
-        if (c_exp){
+        if (c_exp)
+        {
           flag = 1;
-          break;  // we want to go to statementk from here
+          break;  // we want to go to statement_k from here
         }
       }
       if (flag)
         break;
 
-      statementy;
-      statementy;
+      statement_y;
+      statement_y;
     }
     if (flag)
       break;
 
-    statementx;
-    statementx;
+    statement_x;
+    statement_x;
   }
 
-  statementk
-  statementk
+  statement_k
+  statement_k
 */
 
 /*
@@ -1255,8 +1337,8 @@
   int baz(void);
   int bom(void);
 
-  int main(void){
-
+  int main(void)
+  {
     for (foo(); bar(); baz())
       bom();
 
@@ -1265,8 +1347,8 @@
 */
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     int i;
 
     for (i = 0; i < 10; ++i)
@@ -1276,8 +1358,8 @@
 */
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     int i = 0;
 
     for (; i < 10; ++i)
@@ -1287,11 +1369,12 @@
 */
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     int i = 0;
 
-    for (; i < 10;){
+    for (; i < 10;)
+    {
       printf("%d ", i);
       ++i;
     }
@@ -1300,27 +1383,29 @@
 */
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     int i = 0;
 
-    for (;1;){
+    for (;1;)
+    {
       printf("%d ", i);
       ++i;
     }
     // output -> 
     //  0 1 2 3 4 5 6 7 8 9 10 11 12 
     //  13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 
-    //  ... inifinite
+    //  ... infinite
 
-    for (;;){
+    for (;;)
+    {
       printf("%d ", i);
       ++i;
     }
     // output -> 
     //  0 1 2 3 4 5 6 7 8 9 10 11 12 
     //  13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 
-    //  ... inifinite
+    //  ... infinite
 
     // If 2nd(control) expression is empty, 
     // it will act like(same as) logic true(1)
@@ -1334,7 +1419,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     for(;;)
       printf("x-o-");
 
@@ -1345,7 +1431,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i;
 
     for (i = 0; i < 10; ++i)
@@ -1354,46 +1441,46 @@
     i = 23;   // VALID (block scope)
     
 
-    for (int a = 0; a < 10; ++a){
+    for (int a = 0; a < 10; ++a)
       printf("%d\n", a);
-    }
 
     a = 33;   // syntax error -> identifier "a" is undefined
   }
 */
 
 /*
-  int main(void){
-
+  int main(void)
+  {
     for (int i = 0, k = 0; i < 10; ++i)
       printf("%d\n", i);
-    // can define more than 1 variable with same type
-    // in for loop
+    // can define more than 1 variable with same type in for loop
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
+    for (int i = 0; i < 10; ++i)
+      int i = 67; // VALID 
 
-  for (int i = 0; i < 10; ++i){
-    int i = 67; // VALID 
-  }
-
-  // <-------- WHAT COMPILER SEES ------->
-  for (int i = 0; i < 10; ++i){
+    // <-------- WHAT COMPILER SEES ------->
+    for (int i = 0; i < 10; ++i)
     {
-      int i = 67;  
-    }  // inner i
-  } // outer i
-  // <-------- WHAT COMPILER SEES ------->
-}
+      {
+        int i = 67;  
+      }  // inner i
+    } // outer i
+    // <-------- WHAT COMPILER SEES ------->
+  }
 */
 
 /*
-  int main(void){
-    for (int i = 0; i < 5; ++i){
-        int i = 67;
-        i += 2;
+  int main(void)
+  {
+    for (int i = 0; i < 5; ++i)
+    {
+      int i = 67;
+      i += 2;
     }
   }
 
@@ -1416,8 +1503,10 @@
 */
 
 /*
-  int main(void){
-    for (int i = 0; i < 5; ++i){
+  int main(void)
+  {
+    for (int i = 0; i < 5; ++i)
+    {
       int i = 67;
       printf("%d ", i);
     }
@@ -1426,10 +1515,11 @@
 */
 
 /*
-  int main(void){
-    for (int i = 1; i < 10000; i *= 2){
+  int main(void)
+  {
+    for (int i = 1; i < 10000; i *= 2)
       printf("%d ", i);
-    }
+    
     // output ->
     //  1 2 4 8 16 32 64 128 256 512 1024 2048 4096 8192  
   }
@@ -1438,16 +1528,16 @@
 /*
   int foo(int);
 
-  int main(void){
+  int main(void)
+  {
     int arr[10];
 
-    for (int k = 0; k < 10; ++k){
+    for (int k = 0; k < 10; ++k)
       arr[k] = foo(k);
-    }
 
     int sval = 56;
-
-    for (int i = 0; i < 10; ++i){
+    for (int i = 0; i < 10; ++i)
+    {
       if (arr[i] == sval)
         break;
     }
@@ -1457,17 +1547,18 @@
   }
 
   // <---- FIRST WAY ---->
-  int FLAG_VARIABLE_main(void){
+  int FLAG_VARIABLE_main(void)
+  {
     int arr[10];
 
-    for (int k = 0; k < 10; ++k){
+    for (int k = 0; k < 10; ++k)
       arr[k] = foo(k);
-    }
 
     int sval = 56;
     int flag = 0; // flag variable
 
-    for (int i = 0; i < 10; ++i){
+    for (int i = 0; i < 10; ++i)
+    {
       if (arr[i] == sval){
         flag = 1;
         break;
@@ -1480,20 +1571,21 @@
   }
 
   // <---- SECOND WAY ---->
-  int LOOP_VARIABLE_main(void){
+  int LOOP_VARIABLE_main(void)
+  {
     int arr[10];
 
-    for (int k = 0; k < 10; ++k){
+    for (int k = 0; k < 10; ++k)
       arr[k] = foo(k);
-    }
 
     int sval = 56;
-    
     int i;  // loop variable 
-    for (i = 0; i < 10; ++i){
+    for (i = 0; i < 10; ++i)
+    {
       if (arr[i] == sval)
         break;
     }
+
     if (i < 10)
       printf("value is inside array in %d'th index", i);
     else
@@ -1501,15 +1593,14 @@
   }
 
   // <---- IDIOMATIC WAY ---->
-  int IDIOMATIC_main(void){
+  int IDIOMATIC_main(void)
+  {
     int arr[10];
 
-    for (int k = 0; k < 10; ++k){
+    for (int k = 0; k < 10; ++k)
       arr[k] = foo(k);
-    }
 
     int sval = 56;
-    
     int i;
     for (i = 0; i < 10 && arr[i] != sval; ++i)
       ; // null statement
@@ -1519,18 +1610,19 @@
     else
       printf("value is not inside array");
   }
-
 */
 
 /*
   // https://en.wikipedia.org/wiki/Collatz_conjecture
-  int main(void){
+  int main(void)
+  {
     unsigned long long uval;
 
     printf("first positive integer of the sequence: ");
     scanf("%llu", &uval);
 
-    for (unsigned long long i = uval; i != 1;){
+    for (unsigned long long i = uval; i != 1;)
+    {
       printf("%llu ", i);
       if (i % 2 == 0)
         i /= 2;
@@ -1554,16 +1646,18 @@
   // convergence to the number e (e sayısına yakınsama)
   // https://en.wikipedia.org/wiki/E_(mathematical_constant)
 
-  int factorial(int x){
+  int factorial(int x)
+  {
     int result = 1;
 
-    for (int i = 1; i <= x; ++i){
+    for (int i = 1; i <= x; ++i)
       result *= i;
-    }
+    
     return result;
   }
 
-  void calculate_sum(int count){
+  void calculate_sum(int count)
+  {
     double sum = 0.;
 
     for (int i = 0; i < count; ++i)
@@ -1572,7 +1666,8 @@
     printf("count = %2d, sum = %f\n", count, sum);
   }
 
-  int main(void){
+  int main(void)
+  {
     for (int i = 0; i < 13; ++i)
       calculate_sum(i);
     // should be max 12, 13! will overflow
@@ -1599,10 +1694,12 @@
   // convergence to pi/4
   // https://en.wikipedia.org/wiki/Pi
 
-  void calculate_sum(int count){
+  void calculate_sum(int count)
+  {
     double sum = 0.;
 
-    for (int i = 0; i < count; ++i){
+    for (int i = 0; i < count; ++i)
+    {
       if (i % 2 == 0)
         sum += 1. / (2 * i + 1);  
       else
@@ -1612,7 +1709,8 @@
     printf("count = %4d, sum = %f\n", count, 4 * sum);
   }
 
-  int main(void){
+  int main(void)
+  {
     for (int i = 0; i < 10000; ++i)
       calculate_sum(i);
     
@@ -1635,7 +1733,8 @@
 */
 
 /*
-  int isprime(int x){
+  int isprime(int x)
+  {
     if (x < 2)
       return 0;
 
@@ -1643,23 +1742,21 @@
     if (x % 3 == 0) return x == 3;
     if (x % 5 == 0) return x == 5;
 
-    for (int i  = 7; i * i <= x; i += 2){
+    for (int i  = 7; i * i <= x; i += 2)
       if (x % i == 0)
         return 0;
-    }
 
     return 1;
   }
 
-  int main(void){
-
+  int main(void)
+  {
     int low = 0, high = 100;
 
-    for (int i = low; i < high; ++i){
-      if (isprime(i)){
+    for (int i = low; i < high; ++i)
+      if (isprime(i))
         printf("%d ", i);
-      }
-    }
+
     // output -> 
     //  2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 
     //  59 61 67 71 73 79 83 89 97
@@ -1749,7 +1846,7 @@
   -> easy to read
   -> easy to write
   -> compiler can optimize switch statements better(depending on the case)
-  -> decrease coding errors
+  -> decrease in coding errors
 */
 
 /*
@@ -1809,26 +1906,31 @@
   int foo(int);
   double bar(int);
 
-  int main(void){
+  int main(void)
+  {
     int ival = foo(123);
 
-    switch (foo(123)){ // VALID
+    switch (foo(123))     // VALID
+    { 
       // code
     }
 
-    switch (bar(ival)){ // syntax error
-      // coode
+    switch (bar(ival))    // syntax error
+    { 
+      // code
     }
     // error: switch quantity not an integer
+    //  expression's type inside switch statement paranthesis should be an integer.
   }
 */
 
 /*
   #define SIZE 100
 
-  int foo();
+  int foo(int);
 
-  int main(void){
+  int main(void)
+  {
 
     switch (foo(123))
     { 
@@ -1844,8 +1946,10 @@
 */
 
 /*
-  int main(void){
-    switch(printf("hello world\n")){
+  int main(void)
+  {
+    switch(printf("hello world\n"))
+    {
       // no case label in switch statement is VALID
     }
     // output -> hello world
@@ -1853,10 +1957,12 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 1;
 
-    switch(x){
+    switch(x)
+    {
       case 1: printf("1\n");
       case 2: printf("2\n");
       case 3:
@@ -1868,7 +1974,8 @@
 
 
     // ; null statement should be used 
-    switch(x){
+    switch(x)
+    {
       case 1: printf("1\n");
       case 2: printf("2\n");
       case 3:
@@ -1878,32 +1985,36 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 1;
 
-    switch (x){
+    switch (x)
+    {
       case 1: 
       case 2:
       case 3: printf("1 2 3\n");
-      // when the lase case label has a statement VALID
+      // when the last case label has a statement -> VALID
       // output -> 1 2 3
     }
   }
 */
 
 /*
-  int main(void){
-    
-    for (int i = 1; i < 10; ++i){
-      switch (i){
-        case 1: printf("day = %d, monday\n", i);       break;
-        case 2: printf("day = %d, tuesday\n", i);      break;
-        case 3: printf("day = %d, wednesday\n", i);    break;
-        case 4: printf("day = %d, thursday\n", i);     break;
-        case 5: printf("day = %d, friday\n", i);       break;
-        case 6: printf("day = %d, saturday\n", i);     break;
-        case 7: printf("day = %d, sunday\n", i);       break;
-        default: printf("day = %d, invalid\n", i);   
+  int main(void)
+  {
+    for (int i = 1; i < 10; ++i)
+    {
+      switch (i)
+      {
+        case 1:   printf("day = %d, monday\n", i);       break;
+        case 2:   printf("day = %d, tuesday\n", i);      break;
+        case 3:   printf("day = %d, wednesday\n", i);    break;
+        case 4:   printf("day = %d, thursday\n", i);     break;
+        case 5:   printf("day = %d, friday\n", i);       break;
+        case 6:   printf("day = %d, saturday\n", i);     break;
+        case 7:   printf("day = %d, sunday\n", i);       break;
+        default:  printf("day = %d, invalid\n", i);   
       }
     }
 
@@ -1921,18 +2032,20 @@
 */
 
 /*
-  int main(void){
-    
-    for (int i = 1; i < 10; ++i){
-      switch (i){
-        case 1: printf("day = %d, monday\n", i);       break;
-        case 2: printf("day = %d, tuesday\n", i);      break;
-        case 3: printf("day = %d, wednesday\n", i);    break;
-        default: printf("day = %d, invalid\n", i);     break;
-        case 4: printf("day = %d, thursday\n", i);     break;
-        case 5: printf("day = %d, friday\n", i);       break;
-        case 6: printf("day = %d, saturday\n", i);     break;
-        case 7: printf("day = %d, sunday\n", i);       break;
+  int main(void)
+  {
+    for (int i = 1; i < 10; ++i)
+    {
+      switch (i)
+      {
+        case 1:   printf("day = %d, monday\n", i);       break;
+        case 2:   printf("day = %d, tuesday\n", i);      break;
+        case 3:   printf("day = %d, wednesday\n", i);    break;
+        default:  printf("day = %d, invalid\n", i);      break;
+        case 4:   printf("day = %d, thursday\n", i);     break;
+        case 5:   printf("day = %d, friday\n", i);       break;
+        case 6:   printf("day = %d, saturday\n", i);     break;
+        case 7:   printf("day = %d, sunday\n", i);       break;
       }
     }
 
@@ -1955,39 +2068,43 @@
 /*
   int get_menu_option(void);
 
-  switch(get_menu_option()){
+  switch(get_menu_option())
+  {
     case ADD_RECORD : add_record(); break;
     case DEL_RECORD : del_record(); break;
     case UPD_RECORD : upd_record(); break;
   }
 
-  switch(get_text_font){
-    case TIMES_NEW_ROMAN : set_times_new_roman(); break;
-    case ARIAL : set_arial(); break;
-    case COURIER_NEW : set_courier_new(); break;
+  switch(get_text_font)
+  {
+    case TIMES_NEW_ROMAN  : set_times_new_roman();  break;
+    case ARIAL            : set_arial();            break;
+    case COURIER_NEW      : set_courier_new();      break;
   }
 
-  switch(get_card_suit){
-    case HEARTS : set_hearts(); break;
+  switch(get_card_suit)
+  {
+    case HEARTS   : set_hearts();   break;
     case DIAMONDS : set_diamonds(); break;
-    case CLUBS : set_clubs(); break;
-    case SPADES : set_spades(); break;
+    case CLUBS    : set_clubs();    break;
+    case SPADES   : set_spades();   break;
   }
 
-  switch(get_card_face){
-    case ACE : set_ace(); break;
-    case KING : set_king(); break;
-    case QUEEN : set_queen(); break;
-    case JACK : set_jack(); break;
-    case TEN : set_ten(); break;
-    case NINE : set_nine(); break;
-    case EIGHT : set_eight(); break;
-    case SEVEN : set_seven(); break;
-    case SIX : set_six(); break;
-    case FIVE : set_five(); break;
-    case FOUR : set_four(); break;
-    case THREE : set_three(); break;
-    case TWO : set_two(); break;  
+  switch(get_card_face)
+  {
+    case ACE    : set_ace();    break;
+    case KING   : set_king();   break;
+    case QUEEN  : set_queen();  break;
+    case JACK   : set_jack();   break;
+    case TEN    : set_ten();    break;
+    case NINE   : set_nine();   break;
+    case EIGHT  : set_eight();  break;
+    case SEVEN  : set_seven();  break;
+    case SIX    : set_six();    break;
+    case FIVE   : set_five();   break;
+    case FOUR   : set_four();   break;
+    case THREE  : set_three();  break;
+    case TWO    : set_two();    break;  
   }
 
   // generally case values are symbolic constants(macros) 
@@ -2002,23 +2119,26 @@
   else if (x == 19 || x == 23)
     statement3;
 
-  switch(x){
-    case 5:
-    case 7: statement1; break;
-    case 9:
-    case 13:
-    case 17: statement2; break;
-    case 19:
-    case 23: statement3; break;
+  switch(x)
+  {
+    case 5  :
+    case 7  : statement1; break;
+    case 9  :
+    case 13 :
+    case 17 : statement2; break;
+    case 19 :
+    case 23 : statement3; break;
   }
 */
 
 /*
   // compiler will generate jump table (switch statement optimization)
 
-  int main(void){
+  int main(void)
+  {
     int x = 1;
-    switch (x){
+    switch (x)
+    {
         case 1:     x = 11;   break;
         case 2:     x = 12;   break;
         case 3:     x = 13;   break;
@@ -2033,8 +2153,8 @@
   //    push rbp
   //    mov rbp, rsp
   //    mov DWORD PTR [rbp-4], 1         
-  //    cmp DWORD PTR [rbp-4], 5          
-  //    ja .L2                            --> checking default case
+  //    cmp DWORD PTR [rbp-4], 5          --> checking default case
+  //    ja .L2                            
   //    mov eax, DWORD PTR [rbp-4]        --> eax = x
   //    mov rax, QWORD PTR .L4[0+rax*8]   --> check jump-table using x's value
   //    jmp rax   
@@ -2070,10 +2190,12 @@
 */
 
 /*
-  void print_date(int day, int mon, int year){
+  void print_date(int day, int mon, int year)
+  {
     printf("%02d", day);
 
-    switch(day){
+    switch(day)
+    {
       case 1: 
       case 21: 
       case 31: 
@@ -2088,7 +2210,8 @@
         printf("th "); break;
     }
 
-    switch (mon){
+    switch (mon)
+    {
       case 1:   printf("Jan "); break;
       case 2:   printf("Feb "); break;
       case 3:   printf("Mar "); break;
@@ -2106,7 +2229,8 @@
     printf("%d\n", year);
   }
 
-  int main(void){
+  int main(void)
+  {
     int day = 1, mon = 1, year = 2001;
     print_date(day, mon, year); // output -> 01st Jan 2001
 
@@ -2124,11 +2248,13 @@
 /*
   int foo(void);
 
-  int main(void){
+  int main(void)
+  {
     const int a = 5;    // not a constant expression
     const int b = 7;
 
-    switch (foo()){
+    switch (foo())
+    {
       case a:   // syntax error
       case b:   // syntax error
         ;
@@ -2138,7 +2264,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int x = 5;
 
     switch (x)
@@ -2146,12 +2273,13 @@
       case 5: printf("5\n");   // syntax error
       // error: case label not within a switch statement
 
-      // we need compound statement for multiple case labels
+      // we need to use compound statement for multiple case labels
   }
 */
 
 /*
-  switch (x){
+  switch (x)
+  {
     case 1: foo();  // fallthrough
     case 2: bar();  break;
     case 3: baz();  break;
@@ -2163,32 +2291,36 @@
 */
 
 /*
-  int isleap(int x){
+  int isleap(int x)
+  {
     return x % 4 == 0 && (x % 100 != 0 || x % 400 == 0);
   }
 
   // 5 9 1987
-  int total_day_in_year(int d, int m, int y){
+  int total_day_in_year(int d, int m, int y)
+  {
     int sum = d;
 
-    switch(m - 1){
-      case 11: sum += 30;   // fallthrough
-      case 10: sum += 31;   // fallthrough
-      case 9: sum += 30;    // fallthrough
-      case 8: sum += 31;    // fallthrough
-      case 7: sum += 31;    // fallthrough
-      case 6: sum += 30;    // fallthrough
-      case 5: sum += 31;    // fallthrough
-      case 4: sum += 30;    // fallthrough
-      case 3: sum += 31;    // fallthrough
-      case 2: sum += isleap(y) ? 29 : 28;   // fallthrough
-      case 1: sum += 31;
+    switch(m - 1)
+    {
+      case 11 : sum += 30;                    // fallthrough
+      case 10 : sum += 31;                    // fallthrough
+      case 9  : sum += 30;                    // fallthrough
+      case 8  : sum += 31;                    // fallthrough
+      case 7  : sum += 31;                    // fallthrough
+      case 6  : sum += 30;                    // fallthrough
+      case 5  : sum += 31;                    // fallthrough
+      case 4  : sum += 30;                    // fallthrough
+      case 3  : sum += 31;                    // fallthrough
+      case 2  : sum += isleap(y) ? 29 : 28;   // fallthrough
+      case 1  : sum += 31;
     }
 
     return sum;
   }
 
-  int main(void){
+  int main(void)
+  {
     int d = 5, m = 9, y = 1987;
     printf("%dth day of the year\n", total_day_in_year(d, m, y));
     // output -> 248th day of the year
@@ -2213,7 +2345,8 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     // code
     goto hello; // VALID
 
@@ -2227,8 +2360,11 @@
 */
 
 /*
-  int main(void){
-  hello:  // hello label is in function scope
+  // check https://stackoverflow.com/questions/28574670/difference-between-function-and-block-scope-in-c
+
+  int main(void)
+  {
+  hello:  // 'hello' label is in function scope
     ;
 
     int hello = 1;  // hello variable is in block scope
@@ -2237,7 +2373,8 @@
 */
 
 /*
-  while(expr_1){
+  while(expr_1)
+  {
     if (expr_2)
       goto out;
 
@@ -2248,7 +2385,8 @@
     ;
   }
 
-  while(expr_1){
+  while(expr_1)
+  {
     if (expr_2)
       continue;
 
@@ -2263,12 +2401,12 @@
 /*
   // goto will exit all of the loops in this scenario
 
-  loop(){
-
-    loop(){
-
-      loop(){
-
+  loop()
+  {
+    loop()
+    {
+      loop()
+      {
         if (c_exp)
           goto out;
       }
@@ -2282,10 +2420,12 @@
 /*
   // goto will both exit from switch and the for loop in this scenario
 
-  for(;;){
+  for(;;)
+  {
     statement;
 
-    switch(int_ex){
+    switch(int_ex)
+    {
       case 1: statement; break;
       case 2: statement; break;
       case 3: 
@@ -2299,21 +2439,18 @@
 */
 
 /*
-  // TODO : THIS WILL BE IMPLEMENTED LATER IN THIS COURSE
-  // goto will also used in ERROR HANDLING
-  // goto is used for giving back resources and memory
-*/
-
-/*
                         ----------------
                         | nested loops |
                         ----------------
 */
 
 /*
-  loop(){
-    loop(){
-      loop(){
+  loop()
+  {
+    loop()
+    {
+      loop()
+      {
         statement;
       }
     }
@@ -2321,11 +2458,13 @@
 */
 
 /*
-  int main(void){
-    for (int i = 0; i < 5; ++i){
-      for (int j = 0; j < 10; ++j){
+  int main(void)
+  {
+    for (int i = 0; i < 5; ++i)
+    {
+      for (int j = 0; j < 10; ++j)
         printf("(%d %d) ", i, j);
-      }
+ 
       printf("\n");
     }
   }
@@ -2338,18 +2477,20 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i, k;
-    for (i = 0; i < 5; ++i){
-      for (k = 0; k < 10; ++k){
-      }
-    }
+    for (i = 0; i < 5; ++i)
+      for (k = 0; k < 10; ++k)
+        ;
+
     printf("(%d %d)\n", i, k);  // output -> (5 10)
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int i, k;
     for (i = 0; i < 5; ++i)
       for (k = 0; k < 10; ++k); // there is a null statement here
@@ -2358,24 +2499,26 @@
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     int count = 0;
-    for (int i = 0; i < 10; ++i){
-      for (int j = 0; j < 20; ++j){
-        for (int k = 0; k < 7; ++k){
+
+    for (int i = 0; i < 10; ++i)
+      for (int j = 0; j < 20; ++j)
+        for (int k = 0; k < 7; ++k)
           ++count;
-        }
-      }
-    }
+
     printf("count = %d\n", count);  // output -> count = 1400
     // 10 * 20 * 7 = 1400
   }
 */
 
 /*
-  int main(void){
+  int main(void)
+  {
     // <--- armstrong number_1 --->
-    for (int i = 100; i < 1000; ++i){
+    for (int i = 100; i < 1000; ++i)
+    {
       int d1 = i / 100;
       int d2 = i / 10 % 10;
       int d3 = i % 10;
@@ -2389,13 +2532,14 @@
 
     // <--- armstrong number_2 --->
     int ival = 100;
-    for (int i = 1; i <= 9; ++i){
-      for (int j = 0; j <= 9; ++j){
-        for (int k = 0; k <= 9; ++k){
-          if (i * i * i + j * j * j + k * k * k == ival){
+    for (int i = 1; i <= 9; ++i)
+      for (int j = 0; j <= 9; ++j)
+        for (int k = 0; k <= 9; ++k)
+        {
+          if (i * i * i + j * j * j + k * k * k == ival)
             printf("%d ", ival);
-          }
-            ++ival;
+       
+          ++ival;
         }
       }
     }
@@ -2418,14 +2562,16 @@
     printf("\n");
   }
 
-  int main(void){
+  int main(void)
+  {
     int n = 5;
 
     // <--- WAY 1 --->
-    for (int i = 1; i <= n; ++i){
-      for (int j = 0; j < i; ++j){
+    for (int i = 1; i <= n; ++i)
+    {
+      for (int j = 0; j < i; ++j)
         putchar('*');
-      }
+
       printf("\n");
     }
 

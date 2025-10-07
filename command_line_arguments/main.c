@@ -85,26 +85,28 @@
     int num1 = atoi(argv[1]);
     int num2 = atoi(argv[3]);
 
-    switch (*argv[2]){
-    case '+': 
-      printf("%d + %d = %d\n", num1, num2, num1 + num2); 
-      break;
-    case '-': 
-      printf("%d - %d = %d\n", num1, num2, num1 - num2); 
-      break;
-    case 'x': 
-      printf("%d x %d = %d\n", num1, num2, num1 * num2); 
-      break;
-    case '/': 
-      if (num2 == 0) {
-        printf("Division by zero\n");
-        exit(EXIT_FAILURE);
-      }
-      printf("%d / %d = %f\n", num1, num2, (double)num1 / num2); 
-      break;
-    default: 
-      printf("Invalid operator\n");
-      break;
+    switch (*argv[2])
+    {
+      case '+': 
+        printf("%d + %d = %d\n", num1, num2, num1 + num2); 
+        break;
+      case '-': 
+        printf("%d - %d = %d\n", num1, num2, num1 - num2); 
+        break;
+      case 'x': 
+        printf("%d x %d = %d\n", num1, num2, num1 * num2); 
+        break;
+      case '/': 
+        if (num2 == 0) 
+        {
+          printf("Division by zero\n");
+          exit(EXIT_FAILURE);
+        }
+        printf("%d / %d = %f\n", num1, num2, (double)num1 / num2); 
+        break;
+      default: 
+        printf("Invalid operator\n");
+        break;
     }
   }
 
@@ -221,7 +223,8 @@
   int main(int argc, char** argv) 
   {
     int i = 0;
-    while (argv[i] != NULL){
+    while (argv[i] != NULL)
+    {
       printf("argv[%d] = %s\n", i, argv[i]);
       ++i;
     }
@@ -246,7 +249,8 @@
     char source_file_name[FILE_NAME_SIZE];
     char destination_file_name[FILE_NAME_SIZE];
 
-    if (argc != 3) {
+    if (argc != 3) 
+    {
       printf("Usage: %s <source> <destination>\n", argv[0]);
       printf("Enter source file name: ");
       scanf("%s", source_file_name);
@@ -254,7 +258,8 @@
       printf("Enter destination file name: ");
       scanf("%s", destination_file_name);
     }
-    else {
+    else 
+    {
       strcpy(source_file_name, argv[1]);
       strcpy(destination_file_name, argv[2]);
     }

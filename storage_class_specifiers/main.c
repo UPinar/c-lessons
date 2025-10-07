@@ -49,6 +49,7 @@
   {
     for(int i = 0; i < 5; i++)
       foo();
+
     // output ->
     //  x = 10, y = 20
     //  x = 10, y = 30
@@ -62,8 +63,7 @@
   void foo(auto int param){}  // syntax error
   // error: storage class specified for parameter 'param'
 
-  // because that parameter variables can not have
-  // a static storage duration 
+  // because that parameter variables can not have a static storage duration 
   // `auto` keyword is not allowed for parameter variables
 */
 
@@ -82,8 +82,7 @@
 */
 
 /*
-  - there is no reason to use `register` keyword 
-    with modern compilers.
+  - there is no reason to use `register` keyword with modern compilers.
 */
 
 /*
@@ -112,7 +111,10 @@
 */
 
 /*
-  void foo(register int a){}  
+  void foo(register int a)
+  {
+
+  }  
   // `register` keyword can also be used with parameter variables
 */
 
@@ -149,21 +151,18 @@
 
 /*
   int g_x = 10;   
-  // static storage duration
-  // global variable 
+  // global variable - static storage duration
 
   void foo(void)
   {
     static int x = 10;
-    // static storage duration
-    // static local variable
+    // static local variable - static storage duration
 
     int y = 10;
-    // automatic storage duration
-    // automatic local variable
+    // local variable - automatic storage duration
   }
   // when foo is called for the first time, 
-  // "x" is initialized once(lifetime begins) 
+  // "x" is initialized once so its lifetime begins
   // and its lifetime will end at the end of the program
 
   // "y"'s lifetime starts at the beginning of foo's scope  
@@ -190,10 +189,12 @@
 
   int main(void)
   {
-    for(int i = 0; i < 5; i++){
+    for(int i = 0; i < 5; i++)
+    {
       foo();
       ++g_x;
     }
+
     // output ->
     //  x = 10, y = 10, g_x = 10
     //  x = 10, y = 11, g_x = 12
@@ -256,8 +257,8 @@
 /*
   void foo(void)
   {
-    static int x = 5;
-    int static y = 10;  
+    static int x = 5;     // static local variable
+    int static y = 10;    // static local variable
     // storage type specifier and type specifier can be swapped
   }
 */
@@ -267,8 +268,8 @@
   {
     static int x = 10, y = 10;
     // when storage class specifiers or type qualifiers
-    // are used with comma seperated lists 
-    // they qualify all the variables in the list
+    // are used with comma seperated lists,
+    // they qualify all the variables in the list.
 
     printf("x = %d, y = %d\n", x, y);
     ++x, ++y;
@@ -386,7 +387,8 @@
   {
     static int first_call_flag = 1;
 
-    if (first_call_flag){
+    if (first_call_flag)
+    {
       printf("foo called for the first time\n");
       first_call_flag = 0;
     }
@@ -422,9 +424,7 @@
     if (call_count == UNIQUE_RAND_MAX)
       return -1;
 
-
     int val;
-
     while (flags[val = rand() % UNIQUE_RAND_MAX])
       ; // null statement
 
@@ -453,8 +453,15 @@
   {
     // lookup table
     static const char* const p_days[] = { 
-      "", "pazartesi", "sali", "carsamba", "persembe", 
-      "cuma", "cumartesi", "pazar" };
+      "", 
+      "pazartesi", 
+      "sali", 
+      "carsamba", 
+      "persembe", 
+      "cuma", 
+      "cumartesi", 
+      "pazar" 
+    };
   }
 
   // to check if string is a valid day
@@ -462,8 +469,15 @@
   {
     // lookup table
     static const char* const p_days[] = { 
-      "", "pazartesi", "sali", "carsamba", "persembe", 
-      "cuma", "cumartesi", "pazar" };
+      "", 
+      "pazartesi", 
+      "sali", 
+      "carsamba", 
+      "persembe", 
+      "cuma", 
+      "cumartesi", 
+      "pazar" 
+    };
   }
 */
 
@@ -488,15 +502,14 @@
 */
 
 /*
-  - linkage, birden fazla kaynak dosya(source file) 
-    söz konusu olduğunda, bu kaynak dosyalar arasında kullanılan 
-    isimlere yönelik bir özelliktir.
+  - linkage, birden fazla kaynak dosya(source file) söz konusu olduğunda,
+    bu kaynak dosyalar arasında kullanılan isimlere yönelik bir özelliktir.
+
       - external linkage  (dış bağlantı)
       - internal linkage  (iç bağlantı)
       - no linkage        (bağlantısız)
 
-  - değişken isimleri ve fonksiyon isimleri için bağlantı özelliği
-    vardır.
+  - değişken isimleri ve fonksiyon isimleri için bağlantı özelliği vardır.
 */
 
 /*
@@ -504,10 +517,9 @@
 
   eğer bir isim birden fazla kaynak dosyada kullanılıyor ve
   bu isim bağlama zamanında(linking phase) bütün kaynak dosyalarında
-  aynı varlığa ilişkin ise, bu isim dış bağlantıya(external linkage) 
-  sahiptir.
+  aynı varlığa ilişkin ise, bu isim dış bağlantıya(external linkage) sahiptir.
 
-  i.e. "printf" identifier has external linkage.
+  i.e. "printf" identifier has an external linkage.
 
   // --------------------------------------------------
 
@@ -516,13 +528,12 @@
   programın çalışma zamanında farklı varlıklara ilişkin iseler,
   bu isim iç bağlantıya(internal linkage) sahiptir.
 
-  - global bir değişken olup dış bağlantıya sahip değil ise 
-    iç bağlantıya sahiptir.
+  - global bir değişken olup dış bağlantıya sahip değil ise iç bağlantıya sahiptir.
 
   // --------------------------------------------------
 
-  kullanılan isim kendi kaynak dosyasında bile her yerde bilinmiyor
-  ise, bu isim bağlantısız(no linkage) bir isme sahiptir.
+  kullanılan isim kendi kaynak dosyasında bile her yerde bilinmiyor ise,
+  bu isim bağlantısızdır(no linkage).
   - yerel değişkenlerin bağlantısı yoktur.
 
   // --------------------------------------------------
@@ -549,29 +560,24 @@
 */
 
 /*
-  - dış bağlantıya ait isimler projede tek bir tanıma sahip
-    olmak zorundadır.
-    identifiers have an external linkage must have a single definition
+  - dış bağlantıya ait isimler projede tek bir tanıma sahip olmak zorundadır.
+    identifiers have an external linkage must have a single definition.
 
-  - iç bağlantıya ait isimler projede birden fazla tanıma sahip
-    olabilirler.
-    identifiers have an internal linkage can have multiple definitions
+  - iç bağlantıya ait isimler projede birden fazla tanıma sahip olabilirler.
+    identifiers have an internal linkage can have multiple definitions.
 */
 
 /*
   // source1.c 
   // ----------------
-  int g_x = 10;             // (default)external linkage
-  void print(int x) {}      // (default)external linkage
+  int g_x = 10;               // (default)external linkage
+  void print(int x) {}        // (default)external linkage
 
-  static int g_y = 20;      // internal linkage
-  static void foo(void) {}  // internal linkage
+  static int g_y = 20;        // internal linkage
+  static void foo(void) {}    // internal linkage
 
-  // "print" and "g_x" identifiers
-  // have external linkage.
-
-  // "foo" and "g_y" identifiers
-  // have internal linkage.
+  // "print" and "g_x" identifiers have external linkage.
+  // "foo" and "g_y" identifiers have internal linkage.
 */
 
 
@@ -579,10 +585,10 @@
   #include "../headers/nutility.h"
 
   // "nutility.c" source file has a function called "randomize"
-  // and it has external linkage
+  // and it has an external linkage
 
   void randomize(void){}  // function definition
-  // "randomize" function has external linkage
+  // "randomize" function has an external linkage
   // "randomize" function also defined in "main.c" source file 
 
   int main(){}
@@ -629,17 +635,16 @@
 
   // --------------------------------------------------
 
-  // "file2.c" kaynak dosyası "file1.h" başlık dosyasını 
-  // include ettiğinde, "g_x" isminin `extern` bildirimini de 
-  // kendi kaynak dosyasına yapıştırıyor.
-  // Compiler(derleyici) file2.c kaynak dosyasını
-  // derlerken "g_x" isimli değişkenin `extern` bildirimini görüp
+  // "file2.c" kaynak dosyası "file1.h" başlık dosyasını include ettiğinde,
+  // "g_x" isminin `extern` bildirimini de kendi kaynak dosyasına yapıştırılıyor.
+
+  // Compiler(derleyici) file2.c kaynak dosyasını derlerken,
+  // "g_x" isimli değişkenin `extern` bildirimini görüp
   // bu değişken için herhangi bir bellek alanı ayırmıyor.
   // "g_x" isimli değişkenin, projedeki başka bir kaynak dosyasında
-  // tanımlanmış olduğunu varsayıyor.
+  // tanımlanmış olduğunu(file1.c) varsayıyor.
 
-  // fonksiyon bildirimlerinde `extern` keyword kullanımı
-  // zorunlu değildir. 
+  // fonksiyon bildirimlerinde `extern` keyword kullanımı zorunlu değildir. 
 
   // --------------------------------------------------
 */
@@ -657,7 +662,7 @@
   // ----------------
 
   const int primes_arr[10] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
-  // "primes" identifier has external linkage
+  // "primes_arr" identifier has an external linkage
 
   // --------------------------------------------------
 
@@ -697,9 +702,9 @@
 
   // --------------------------------------------------
 
-  "file1.c", "file2.c" ve "file3.c" kaynak dosyalarında
-  tanımlanan "g_x" isimli değişkenlerin ve "foo" isimli fonksiyonların
-  hepsi farklı varlıklara ilişkin isimlerdir(internal linkage).
+  "file1.c", "file2.c" ve "file3.c" kaynak dosyalarında tanımlanan
+  "g_x" isimli değişkenlerin ve "foo" isimli fonksiyonların
+  hepsi FARKLI varlıklara ilişkin isimlerdir(internal linkage).
 
   // --------------------------------------------------
 */
@@ -740,8 +745,7 @@
 
   // if "foo" function is not invoked in "file1.c" source file
   // this is not a logic error because "foo" function 
-  // has an external linkage and it can be called from
-  // another source file.
+  // has an external linkage and it can be called from another source file.
 
   static bar(void){}  // internal linkage
 
@@ -749,11 +753,13 @@
   // this is a logic error because "bar" function
   // has an internal linkage and it can only be called
   // inside "file1.c" source file.
+  // So not calling an internal linkage function inside its own source file
+  // is a logic error.
 */
 
 /*
   static void bar(void){}
-  // warning: 'bar' defined but not used
+  // warning: 'bar' defined but not used -> LOGIC ERROR
 
   int main(void)
   {
@@ -771,13 +777,12 @@
   }
   // definition of "foo" function with an external linkage
 
-  // "foo" function has external linkage
-  // and when its definition is in a header file("file1.h")
-  // when other source file includes this header file
-  // it will also have a definition of "foo" function
-  // and external linkage identifiers CAN HAVE only one definition
-  // CAN NOT have multiple definitions
-  // Linker error will occur
+  // "foo" function has an external linkage
+  // and its definition is in "file1.h" header file,
+  // when another source file includes this header file
+  // it will also have a definition of "foo" function.
+  // Because of external linkage identifiers CAN HAVE only one definition
+  // Linker error will occur.
 */
 
 /*
@@ -790,12 +795,13 @@
   }
   // definition of "foo" function with an internal linkage
 
-  // "foo" function has internal linkage
-  // and when its definition is in a header file("file1.h")
-  // when other source file includes this header file
+  // "foo" function has an internal linkage
+  // and its definition is in a header file("file1.h").
+  // When other source files includes this header file
   // all of them will have their own internal linkage "foo" function
-  // address of "foo" function will be different in each source file
-  // There won't be any linker error
+  // defined in their own source file.
+  // address of "foo" function will be different for each source file
+  // so there won't be any linker error.
 
   // this situation might be useful in some cases.
 */

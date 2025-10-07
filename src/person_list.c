@@ -20,7 +20,8 @@ static size_t g_count = 0;
 static Node_t* create_node(void)
 {
   Node_t* p_node = malloc(sizeof(Node_t));
-  if (!p_node) {
+  if (!p_node) 
+  {
     printf("Memory allocation error!\n");
     exit(EXIT_FAILURE);
   }
@@ -54,7 +55,8 @@ void list_push_front(const Person_t* p_person)
 
 void list_pop_front(void)
 {
-  if (g_count == 0) {
+  if (g_count == 0) 
+  {
     printf("List is empty!\n");
     exit(EXIT_FAILURE);
   }
@@ -67,7 +69,8 @@ void list_pop_front(void)
 
 void list_get_first(Person_t* p_person)
 {
-  if (g_count == 0) {
+  if (g_count == 0) 
+  {
     printf("List is empty!\n");
     exit(EXIT_FAILURE);
   }

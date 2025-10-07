@@ -46,10 +46,10 @@
     - bazen daha önce dinamik olarak edinilmiş bellek
     alanının bir kısmının geri verlimesi(küçültülmesi) için kullanılır.
   free :
-    - kullanılmayacak dinamik bellek alanının 
+    - artık kullanılmayacak dinamik bellek alanının 
     geri verilmesi için kullanılır.
 
-  standart C fonksiyonları <stdlib.h> modülünde tanımlıdır.
+  yukarıdaki standart C fonksiyonları <stdlib.h> modülünde tanımlıdır.
 
   ---------------------------------------------------------
 
@@ -87,7 +87,7 @@
 
   - malloc ile bir bellek bloğu edinilmek istendiğinde, 
     istenilen bellek bloğunun yanında bir HEADER bloğu da
-    edinilir. Bu ek HEADER bloğu edinilen bellek bloğuna dair 
+    edinilir. Bu ek HEADER bloğu, edinilen bellek bloğuna dair 
     bilgileri içerir. (edinilen bloğun adresi, boyutu)
 */
 
@@ -109,7 +109,8 @@
 
     int* p = malloc(N * sizeof(int)); // 20 * 4 = 80 byte
 
-    if (!p){
+    if (!p)
+    {
       fprintf(stderr, "Memory allocation failed!\n");
       exit(EXIT_FAILURE);
     }
@@ -133,10 +134,10 @@
   {
     int* p = malloc(N * sizeof(int));
 
-    // when "dynamic_alloc" function's execution is completed
-    // p pointer will be lost and
-    // there won't be any chance to free the memory block
-    // so it will cause memory leak
+    // when "dynamic_alloc" function's execution is completed,
+    // p pointer will be lost because of it is a local variable 
+    // and there won't be any chance to free the memory block
+    // so it will cause a memory leak.
   }
 
   int main(void)
@@ -144,9 +145,9 @@
     for (int i = 0; i < 1000000; ++i)
       dynamic_alloc(1000);
 
-    // Some time(lots of call to "dynamic_alloc" function) later 
-    // malloc will fail because of not enough memory to allocate
-    // the reason why is memory leak.
+    // After some time(executing "dynamic_alloc" function lots of times) 
+    // malloc will fail because of there won't be enough memory to allocate
+    // because of the memory leak.
   }
 */
 
@@ -160,24 +161,24 @@
 
     int* p = malloc(N * sizeof(int)); // 20 * 4 = 80 byte
 
-    if (!p){
+    if (!p)
+    {
       fprintf(stderr, "Memory allocation failed!\n");
       exit(EXIT_FAILURE);
     }
 
     print_array(p, N);  // undefined behavior(UB)
-    // because of malloc function's returned memory block 
-    // have garbage values.
+    // the dynamically allocated memory block that malloc returns
+    // have garbage values inside of it so using those values is UB.
 
     free(p);
   }
 */
 
 /*
-  iki defa malloc çağrısı yapıldığında, elde edilen iki 
-  bellek bloğu ardışık DEĞİLDİR. 
+  iki defa malloc çağrısı yapıldığında, edinilen iki bellek bloğu ardışık DEĞİLDİR. 
   Ardışık olabilir fakat olmak zorunda değil.
-  Böyle bir ihtiyaç halinde realloc fonksiyonu çağrılmalıdır.
+  Böyle bir ihtiyaç halinde "realloc" fonksiyonu çağrılmalıdır.
 */
 
 /*
@@ -188,7 +189,8 @@
   {
     void* vp = malloc(N);
 
-    if (!vp){
+    if (!vp)
+    {
       fprintf(stderr, "Memory allocation failed!\n");
       exit(EXIT_FAILURE);
     }
@@ -202,7 +204,8 @@
   {
     void* vp = malloc(N);
 
-    if (!vp){
+    if (!vp)
+    {
       fprintf(stderr, "%s\n", p_err_msg);
       exit(EXIT_FAILURE);
     }
@@ -233,8 +236,11 @@
 
   eğer edinilen her bellek alanı için tutulan HEADER bloğu 12 byte ise
 
-  1 -> 10'000 * 12  = 120'000  + 200'000  = 320'000 byte
-  2 -> 20 * 12      = 240 + 200'000       = 200'240 byte
+  1 -> 10'000 * 12  = 120'000  byte
+  2 -> 20 * 12      = 240      byte
+
+  Total 1 -> 320'000 byte
+  Total 2 -> 200'240 byte
 */
 
 /*
@@ -292,7 +298,8 @@
     size_t N = 20;
     int* p = malloc(N * sizeof(int));
 
-    if (!p){
+    if (!p)
+    {
       fprintf(stderr, "Memory allocation failed!\n");
       exit(EXIT_FAILURE);
     }
@@ -305,7 +312,7 @@
 
     free(p);
   }
-  // This is basically `calloc` functions behaviour
+  // This is basically `calloc` functions behavior
   // allocating memory and setting all bytes to zero
 */
 
@@ -322,12 +329,12 @@
 
     // when "p" identifier on the right side of assignment(=) operator
     // gets in to namelookup phase
-    // "p" identifier on the left will be found 
-    // so NO syntax error
+    // "p" identifier on the left side of the assignment(=) operator  
+    // will be found so NO syntax error.
 
-    // `sizeof` operator cretes unevaluated context
+    // `sizeof` operator creates an unevaluated context
     // there won't be any code generated for "*p" expression
-    // so NO undefined behavior(UB)
+    // so it will NOT be an undefined behavior(UB)
 
     free(p);
   }
@@ -342,11 +349,11 @@
     adresini ister, bellek bloğunun boyutunu(size) istemez.
 
   - malloc ile bir bellek bloğu edinildiğinde, arkaplanda bir 
-    veri yapısı o bellek bloğunun adresini ve boyutunu tutar.
+    veri yapısı(HEADER) o bellek bloğunun adresini ve boyutunu tutar.
   - free fonksiyonu bu veri yapısında arama yaparak geri 
     verilmek istenilen bellek bloğunun adresini bulup 
-    birlikte tutulan boyut bilgisini kullanarak bellek bloğunu
-    geri verir. 
+    birlikte tutulan boyut bilgisini kullanarak 
+    edinilmiş bellek bloğunu geri verir. 
 
   - free fonksiyonun veri yapısında yaptığı arama programda 
     ek bir maliyet oluşturur.
@@ -366,20 +373,20 @@
   - dinamik olarak edinilmemiş bir bloğu free etme girişimi 
     tanımsız davranış(UB) oluşturur.
 
-  - free ile dinamik bellek bloğunun bir kısmını deallocate
+  - free ile dinamik bellek bloğunun bir kısmını deallocate(geri vermek)
     etme girişimi tanımsız davranış(UB) oluşturur.
-    Bu seneryo için realloc fonksiyonu kullanılmalıdır.
+    Bu seneryo için "realloc" fonksiyonu kullanılmalıdır.
 
   - bir bellek bloğu free edildikten sonra, bu bellek bloğunun 
     adresini tutan pointer invalid hale gelir(dangling pointer).
     Dangling pointer kullanımı tanımsız davranış(UB) oluşturur.
-    Ancak bu pointera yeni bir değer atanarak kullanılmalıdır.
-    -> bu hatanın özel bir biçimi double free (double deletion) 
+    Ancak bu pointera yeni bir değer atanarak kullanılabilir.
+    -> bu hatanın özel bir biçimi ise double free (double deletion) 
       hatasıdır.
 
   - bir dinamik bellek bloğunu free etmemek memory leak oluşturur.
     -> bu hataya sebep olan başka bir durum pointer'ın
-      değerini değiştirmek.
+      değerini değiştirmektir.
 */
 
 /*
@@ -411,6 +418,7 @@
     int* p = malloc(N * sizeof(int));
 
     free(p + N / 2); // undefined behavior(UB)
+    // trying to free only a part of the dynamically allocated memory block
   }
 */
 
@@ -433,7 +441,8 @@
     // p1 and p2 pointers become dangling pointers.
 
     print_array(p2, N); // undefined behavior(UB)
-    // using dangling pointer causes undefined behavior(UB)
+    // using dangling pointer which has been freed by "free(p1)" call
+    // will cause undefined behavior(UB)
   }
 */
 
@@ -456,6 +465,7 @@
 
     free(p2); // undefined behavior(UB)
     // double free(double deletion)
+    // freeing already freed memory block
   }
 */
 
@@ -475,8 +485,8 @@
     int* p2 = arr;
     p1 = p2;
     // p1 pointer's value changed
-    // there is no chance to free the memory block 
-    // that p1 was pointing to.
+    // and there is no chance to free the memory block that p1 was pointing to.
+    // this will cause a memory leak
   }
 */
 
@@ -494,8 +504,7 @@
 
     free(p);
     p = NULL; 
-    // idiomatic usage that decreases the risk of 
-    // using dangling pointer
+    // idiomatic usage that decreases the risk of using dangling pointer
   }
 */
 
@@ -537,7 +546,8 @@
     size_t N = 20;
     int* p = calloc(N, sizeof(int));
 
-    if (!p){
+    if (!p)
+    {
       fprintf(stderr, "Memory allocation failed!\n");
       exit(EXIT_FAILURE);
     }
@@ -677,7 +687,7 @@
 
     // pointer to the memory block that is returned by
     // `Strconcat("hello ", "world")` 
-    // is lost because it directly passed to next function 
+    // is lost because it is directly passed to next function 
     // as an argument so NO chance to free that memory block
 
     printf("str = %s\n", str);
@@ -693,6 +703,7 @@
   #include <stdlib.h>   // malloc, free, qsort
   #include "../headers/nutility.h"  
 
+  // accepting that no overflow will happen(signed integer)
   int fn_compare_int(const void* vp1, const void* vp2)
   {
     return *(const int*)vp1 - *(const int*)vp2;
@@ -757,7 +768,7 @@
       print_array(array_of_p_arr[i], i * 2 + 5);
     
     // output ->
-    //   41 467 334 500 169
+    //  41 467 334 500 169
     //  ---------------------------------------
     //  724 478 358 962 464 705 145
     //  ---------------------------------------
@@ -813,9 +824,9 @@
   {
     randomize();  
 
-    char password[SIZE];
-    get_random_password(password);
-    puts(password); // output -> PHQGHUMEAYLNLFDX
+    char pwd[SIZE];
+    get_random_password(pwd);
+    puts(pwd); // output -> PHQGHUMEAYLNLFDX
   }
 */
 
@@ -864,9 +875,9 @@
     // BUAUVGCMVEOVSFMB overrides VNWHLIEOSXZRKGUI
 
     // every call to get_random_password will
-    // override the previous password
-    // because of static local array is used
-    // password will be always been created at the same address
+    // override the previous password.
+    // Because of static local array has been used
+    // password will always be created at the same address
 
     for (size_t i = 0; i < PSW_ARR_SIZE; ++i)
       puts(psw_arr[i]);
@@ -956,8 +967,6 @@
 
 /*
   -------------------------------------------------------
-              <--- check dynamic_array.png --->
-  -------------------------------------------------------
   we want to hold int pointers(int*) in a dynamic array
 
     int** p_pint_arr = malloc(N * sizeof(int*));
@@ -1002,7 +1011,8 @@
     if (!intptrarr_to_intarr)
       return EXIT_FAILURE;
 
-    for (size_t i = 0; i < ROW_SIZE; ++i) {
+    for (size_t i = 0; i < ROW_SIZE; ++i) 
+    {
       intptrarr_to_intarr[i] = malloc(COL_SIZE * sizeof(int));
       // int arrays are allocated
 
@@ -1065,7 +1075,8 @@
     if (!intptrarr_to_intarr)
       return EXIT_FAILURE;
 
-    for (size_t i = 0; i < ROW_SIZE; ++i) {
+    for (size_t i = 0; i < ROW_SIZE; ++i) 
+    {
       intptrarr_to_intarr[i] = malloc(COL_SIZE * sizeof(int));
       // int arrays are allocated
 
@@ -1481,7 +1492,8 @@
     {
       p = realloc(p, (N + 1) * sizeof(int));
 
-      if (!p){
+      if (!p)
+      {
         printf("Memory allocation failed!\n");
         return 1;
       }
@@ -1620,7 +1632,8 @@
       const char* str = get_random_string();
       printf("ismi girin : %s\n", str);
 
-      if (is_name_entered_before(p_str_arr, p_str_arr_size, str)){
+      if (is_name_entered_before(p_str_arr, p_str_arr_size, str))
+      {
         printf("bu isim daha once girilmisti.\n");
         continue;
       }

@@ -245,8 +245,7 @@
 */
 
 /*
-  // assert macro is giving less information so 
-  // it can be customized.
+  // assert macro is giving less information so it can be customized.
 
   #include <assert.h> 
 
@@ -266,9 +265,8 @@
 */
 
 /*
-  // no guarantee that assert macro will be evaluated as 
-  // true or false, so code that include side effect 
-  // should not be used in assert macro.
+  // assert macro will be evaluated as true or false,
+  // so code that has a side effect should NOT be used in assert macro.
 
   #include <assert.h>
 
@@ -312,8 +310,8 @@
 
 /*
   - eğer bir fonksiyon üstlendiği işi yapamadığında 
-    kendisini çağıran fonksiyona bir şekilde bilgi vermesi
-    gerekiyor. (error handling)
+    kendisini çağıran fonksiyona bir şekilde bilgi vermesi gerekiyor.
+    (error handling)
 
     - fonksiyonun geri dönüş değerinin bu amaçla kullanılması
       fputc (On failure, returns EOF(-1))
@@ -395,9 +393,10 @@
   int main(void)
   {
     printf("errno = %d\n", errno);  // output -> errno = 0
-    FILE* f = fopen("abcdefxyz.txt", "rb");
 
-    if (!f){
+    FILE* f = fopen("abcdefxyz.txt", "rb");
+    if (!f)
+    {
       fprintf(stderr, 
               "file can not be opened: %s\n", 
               strerror(errno));

@@ -15,13 +15,9 @@ static Node_t* get_valid_node()
 
 List_t* list_create(void)
 {
-  List_t* list = malloc(sizeof(List_t));
+  List_t* list = calloc(1, sizeof(List_t));
   if (list == NULL)
     return NULL;
-
-  list->mp_head_node = NULL;
-  list->mp_tail_node = NULL;
-  list->m_size = 0;
 
   return list;
 }
@@ -43,8 +39,8 @@ void list_destroy(List_t* list)
 Node_t* list_push_back_by_value(List_t* list, DATATYPE value)
 {
   Node_t* p_new_node = get_valid_node();
-  p_new_node->m_data = value;
 
+  p_new_node->m_data = value;
   p_new_node->mp_next_node = NULL;
 
   if (list_is_empty(list)) 
@@ -54,8 +50,8 @@ Node_t* list_push_back_by_value(List_t* list, DATATYPE value)
   }
   else 
   {
-    list->mp_tail_node->mp_next_node = p_new_node;
     p_new_node->mp_prev_node = list->mp_tail_node;
+    list->mp_tail_node->mp_next_node = p_new_node;
   }
 
   list->mp_tail_node = p_new_node;
@@ -83,8 +79,8 @@ Node_t* list_push_back_by_ref(List_t* list, const DATATYPE* p_value)
   }
   else 
   {
-    list->mp_tail_node->mp_next_node = p_new_node;
     p_new_node->mp_prev_node = list->mp_tail_node;
+    list->mp_tail_node->mp_next_node = p_new_node;
   }
 
   list->mp_tail_node = p_new_node;
@@ -110,8 +106,8 @@ Node_t* list_push_front_by_value(List_t* list, DATATYPE value)
   }
   else 
   {
-    list->mp_head_node->mp_prev_node = p_new_node;
     p_new_node->mp_next_node = list->mp_head_node;
+    list->mp_head_node->mp_prev_node = p_new_node;
   }
 
   list->mp_head_node = p_new_node;
@@ -137,8 +133,8 @@ Node_t* list_push_front_by_ref(List_t* list, const DATATYPE* p_value)
   }
   else 
   {
-    list->mp_head_node->mp_prev_node = p_new_node;
     p_new_node->mp_next_node = list->mp_head_node;
+    list->mp_head_node->mp_prev_node = p_new_node;
   }
 
   list->mp_head_node = p_new_node;
@@ -167,10 +163,11 @@ Node_t* list_insert_next_by_value(List_t* list,
   }
   else
   {
+    p_node->mp_next_node = p_new_node;
+    p_new_node->mp_prev_node = p_node;
+
     p_new_node->mp_next_node = p_node->mp_next_node;
     p_node->mp_next_node->mp_prev_node = p_new_node;
-    p_new_node->mp_prev_node = p_node;
-    p_node->mp_next_node = p_new_node;
   }
 
   ++list->m_size;
@@ -196,10 +193,11 @@ Node_t* list_insert_next_by_ref(List_t* list,
   }
   else
   {
+    p_node->mp_next_node = p_new_node;
+    p_new_node->mp_prev_node = p_node;
+
     p_new_node->mp_next_node = p_node->mp_next_node;
     p_node->mp_next_node->mp_prev_node = p_new_node;
-    p_new_node->mp_prev_node = p_node;
-    p_node->mp_next_node = p_new_node;
   }
 
   ++list->m_size;
@@ -226,10 +224,11 @@ Node_t* list_insert_prev_by_value(List_t* list,
   }
   else
   {
+    p_node->mp_prev_node = p_new_node;
+    p_new_node->mp_next_node = p_node;
+
     p_new_node->mp_prev_node = p_node->mp_prev_node;
     p_node->mp_prev_node->mp_next_node = p_new_node;
-    p_new_node->mp_next_node = p_node;
-    p_node->mp_prev_node = p_new_node;
   }
 
   ++list->m_size;
@@ -256,10 +255,11 @@ Node_t* list_insert_prev_by_ref(List_t* list,
   }
   else
   {
+    p_node->mp_prev_node = p_new_node;
+    p_new_node->mp_next_node = p_node;
+
     p_new_node->mp_prev_node = p_node->mp_prev_node;
     p_node->mp_prev_node->mp_next_node = p_new_node;
-    p_new_node->mp_next_node = p_node;
-    p_node->mp_prev_node = p_new_node;
   }
 
   ++list->m_size;

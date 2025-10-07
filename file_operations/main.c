@@ -157,7 +157,8 @@
   {
     FILE* f1 = fopen("file1.txt", "r");   // read mode
 
-    if (f1 == NULL){
+    if (f1 == NULL)
+    {
       printf("file1.txt could not be opened.\n");
       return 1;
     }
@@ -176,7 +177,8 @@
   {
     FILE* f1 = fopen("file1.txt", "w");   // write mode
 
-    if (f1 == NULL){
+    if (f1 == NULL)
+    {
       printf("file1.txt could not be created.\n");
       return 1;
     }
@@ -196,7 +198,8 @@
   {
     FILE* f1 = fopen("file1.txt", "r");   // read mode
 
-    if (f1 == NULL){
+    if (f1 == NULL)
+    {
       printf("file1.txt could not be opened.\n");
       return 1;
     }
@@ -217,7 +220,8 @@
   {
     char filename[40];
 
-    for (int i = 0; i < 3; ++i){
+    for (int i = 0; i < 3; ++i)
+    {
       sprintf(filename, "file%02d.txt", i + 1);
       FILE* f = fopen(filename, "w");   // write mode
       fclose(f);
@@ -245,13 +249,14 @@
 /*
   #include <stdio.h>  // fopen, fclose
   #include <stdlib.h> // exit, EXIT_FAILURE
-  #include <time.h>   // time
+  #include <time.h>   // time, time_t
 
   int main(void)
   {
     FILE* f = fopen("log.txt", "w");   // write mode
 
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("log.txt could not be created.\n");
       exit(EXIT_FAILURE);
     }
@@ -278,7 +283,8 @@
   {
     FILE* f = fopen("log.txt", "w");   // write mode
 
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("log.txt could not be created.\n");
       exit(EXIT_FAILURE);
     }
@@ -293,7 +299,7 @@
   // log.txt -> 
   //  current time : Sat Nov 30 05:42:11 2024
 
-  // log.txt is trucated and new data is written.
+  // log.txt is truncated and new data is written.
 */
 
 /*
@@ -307,7 +313,8 @@
   {
     FILE* f = fopen("log.txt", "a");   // append mode
 
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("log.txt could not be opened.\n");
       exit(EXIT_FAILURE);
     }
@@ -344,7 +351,8 @@
   {
     char filename[40];
 
-    for (int i = 0; i < 3; ++i){
+    for (int i = 0; i < 3; ++i)
+    {
       sprintf(filename, "file%02d.txt", i + 1);
       FILE* f = fopen(filename, "w");   // write mode
     }
@@ -380,7 +388,8 @@
   {
     FILE* f = fopen("../headers/date.h", "r");   // read mode
 
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("date.h could not be opened.\n");
       return 1;
     }
@@ -400,7 +409,8 @@
   {
     FILE* f = fopen("../headers/date.h", "r");   // read mode
 
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("date.h could not be opened.\n");
       return 1;
     }
@@ -410,8 +420,7 @@
 
     // because of "fclose(f)" already been invoked. 
     // f(pointer to a structure) becomes a dangling pointer.
-    // passing "f" to `fclose` function for the second time 
-    // is undefined behaviour(UB).
+    // passing "f" to `fclose` function for the second time is undefined behaviour(UB).
   }
 */
 
@@ -421,14 +430,15 @@
 
   int main(int argc, char** argv)
   {
-    if (argc != 2){
+    if (argc != 2)
+    {
       printf("usage: %s <filename>\n", argv[0]);
       exit(EXIT_FAILURE);
     }
 
     FILE* f = fopen(argv[1], "r");   // read mode
-
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("%s could not be opened.\n", argv[1]);
       exit(EXIT_FAILURE);
     }
@@ -463,13 +473,15 @@
 
   int main(int argc, char** argv)
   {
-    if (argc != 3){
+    if (argc != 3)
+    {
       printf("usage: %s <filename> <character>\n", argv[0]);
       exit(EXIT_FAILURE);
     }
 
     FILE* f = fopen(argv[1], "r");   // read mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("%s could not be opened.\n", argv[1]);
       exit(EXIT_FAILURE);
     }
@@ -501,13 +513,15 @@
 
   int main(int argc, char** argv)
   {
-    if (argc != 2){
+    if (argc != 2)
+    {
       printf("usage: %s <filename>\n", argv[0]);
       exit(EXIT_FAILURE);
     }
 
     FILE* f = fopen(argv[1], "r");   // read mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("%s could not be opened.\n", argv[1]);
       exit(EXIT_FAILURE);
     }
@@ -521,7 +535,8 @@
 
     fclose(f);
 
-    for (int i = 0; i < ALPHABET_SIZE; ++i){
+    for (int i = 0; i < ALPHABET_SIZE; ++i)
+    {
       printf("'%c' character count in %s : %d\n", 'A' + i, 
                                                   argv[1], 
                                                   alp_count[i]);
@@ -588,7 +603,8 @@
     }
 
     FILE* f = fopen(argv[1], "r");   // read mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("%s could not be opened.\n", argv[1]);
       exit(EXIT_FAILURE);
     }
@@ -603,7 +619,8 @@
     };
 
     int ch;
-    while ((ch = fgetc(f)) != EOF){
+    while ((ch = fgetc(f)) != EOF)
+    {
       if (isalpha(ch))
         ++data_arr[toupper(ch) - 'A'].m_count;
     }
@@ -665,7 +682,8 @@
   int main(void)
   {
     FILE* f = fopen("log.txt", "w");   // write mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("log.txt could not be created.\n");
       exit(EXIT_FAILURE);
     }
@@ -686,7 +704,8 @@
   int main(void)
   {
     FILE* f = fopen("log.txt", "w");   // write mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("log.txt could not be created.\n");
       exit(EXIT_FAILURE);
     }
@@ -731,30 +750,33 @@
 
   int main(int argc, char** argv)
   {
-    if (argc != 5){
+    if (argc != 5)
+    {
       printf("usage: %s <filename> <line> <min> <max>\n", argv[0]);
       exit(EXIT_FAILURE);
     }
 
-    int line_count = atoi(argv[2]);
-    int min_line_len = atoi(argv[3]);
-    int max_line_len = atoi(argv[4]);
+    int line_count    = atoi(argv[2]);
+    int min_line_len  = atoi(argv[3]);
+    int max_line_len  = atoi(argv[4]);
 
     FILE* f = fopen(argv[1], "w");   // write mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("%s could not be created.\n", argv[1]);
       exit(EXIT_FAILURE);
     }
 
     randomize();
 
-    for (int i = 0; i < line_count; ++i){
+    for (int i = 0; i < line_count; ++i)
+    {
       int line_len = rand() % (max_line_len - min_line_len + 1) + 
                                                     min_line_len;
 
-      while (line_len--){
+      while (line_len--)
         fputc(get_random_char(), f);
-      }
+      
       fputc('\n', f);
     }
 
@@ -826,7 +848,8 @@
   {
     FILE* f = fopen("log.txt", "w");   // write-text mode
 
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("log.txt could not be created.\n");
       exit(EXIT_FAILURE);
     }
@@ -849,7 +872,8 @@
   {
     FILE* f = fopen("log.txt", "wb");   // write-binary mode
 
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("log.txt could not be created.\n");
       exit(EXIT_FAILURE);
     }
@@ -871,8 +895,8 @@
   int main(void)
   {
     FILE* f = fopen("log.txt", "w");   // write-text mode
-
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("log.txt could not be created.\n");
       exit(EXIT_FAILURE);
     }
@@ -925,8 +949,8 @@
   int main(void)
   {
     FILE* f = fopen("log.txt", "w");   // write-text mode
-
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("log.txt could not be created.\n");
       exit(EXIT_FAILURE);
     }
@@ -984,29 +1008,31 @@
 
   int main(int argc, char** argv)
   {
-    if (argc != 3){
+    if (argc != 3)
+    {
       printf("usage: %s <source> <destination>\n", argv[0]);
       return 1;
     }
 
     FILE* f_src = fopen(argv[1], "rb");
-
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("%s could not be opened.\n", argv[1]);
       exit(EXIT_FAILURE);
     }
 
     FILE* f_dst = fopen(argv[2], "wb");
-
-    if (f_dst == NULL){
+    if (f_dst == NULL)
+    {
       printf("%s could not be created.\n", argv[2]);
       fclose(f_src);
       exit(EXIT_FAILURE);
     }
 
     int ch;
-    int byte_count;
-    while ((ch = fgetc(f_src)) != EOF){
+    int byte_count = 0;
+    while ((ch = fgetc(f_src)) != EOF)
+    {
       fputc(ch, f_dst);
       ++byte_count;
     }
@@ -1036,14 +1062,15 @@
 
   int main(int argc, char** argv)
   {
-    if (argc != 3){
+    if (argc != 3)
+    {
       printf("usage: %s <source> <bytes>\n", argv[0]);
       exit(EXIT_FAILURE);
     }
 
     FILE* f_src = fopen(argv[1], "rb");
-
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("%s could not be opened.\n", argv[1]);
       exit(EXIT_FAILURE);
     }
@@ -1056,12 +1083,15 @@
     int byte_count = 0;
     FILE* f_dst = NULL;
 
-    while ((ch = fgetc(f_src)) != EOF){
-      if (f_dst == NULL){
+    while ((ch = fgetc(f_src)) != EOF)
+    {
+      if (f_dst == NULL)
+      {
         sprintf(dest_filename, "part%02d.txt", ++file_count);
         f_dst = fopen(dest_filename, "wb");
 
-        if (f_dst == NULL){
+        if (f_dst == NULL)
+        {
           printf("%s could not be created.\n", dest_filename);
           fcloseall();
           exit(EXIT_FAILURE);
@@ -1071,7 +1101,8 @@
       fputc(ch, f_dst);
       ++byte_count;
 
-      if (byte_count % chunk_size == 0){
+      if (byte_count % chunk_size == 0)
+      {
         fclose(f_dst);
         f_dst = NULL;
       }
@@ -1114,12 +1145,14 @@
   {
     char filename[FILENAME_LEN];
 
-    for (int i = 1; i <= 27; ++i){
+    for (int i = 1; i <= 27; ++i)
+    {
       sprintf(filename, "part%02d.txt", i);
 
       if (remove(filename) == 0)
         printf("%s is deleted.\n", filename);
-      else {
+      else 
+      {
         printf("%s could not be deleted.\n", filename);
         exit(EXIT_FAILURE);
       }
@@ -1172,14 +1205,15 @@
 
   int main(int argc, char** argv)
   {
-    if (argc != 2){
+    if (argc != 2)
+    {
       printf("usage: %s <destination>\n", argv[0]);
       return 1;
     }
 
     FILE* f_dst = fopen(argv[1], "wb");
-
-    if (f_dst == NULL){
+    if (f_dst == NULL)
+    {
       printf("%s could not be created.\n", argv[1]);
       exit(EXIT_FAILURE);
     }
@@ -1190,17 +1224,19 @@
     int byte_count = 0;
     
     FILE* f_src = NULL;
-    while(1){
+    while(1)
+    {
       sprintf(source_filename, "part%02d.txt", file_count + 1);
-      f_src = fopen(source_filename, "rb");
 
+      f_src = fopen(source_filename, "rb");
       if (f_src == NULL)
         break;
 
       ++file_count;
 
       int ch;
-      while ((ch = fgetc(f_src)) != EOF){
+      while ((ch = fgetc(f_src)) != EOF)
+      {
         fputc(ch, f_dst);
         ++byte_count;
       }
@@ -1212,12 +1248,14 @@
     printf("%d files merged to total %d bytes %s file\n", 
       file_count, byte_count, argv[1]);
 
-    for (int i = 1; i <= file_count; ++i){
+    for (int i = 1; i <= file_count; ++i)
+    {
       sprintf(source_filename, "part%02d.txt", i);
 
       if (remove(source_filename) == 0)
         printf("%s is deleted.\n", source_filename);
-      else {
+      else 
+      {
         printf("%s could not be deleted.\n", source_filename);
         exit(EXIT_FAILURE);
       }
@@ -1256,7 +1294,8 @@
 
   int main(int argc, char** argv)
   {
-    if (argc != 3){
+    if (argc != 3)
+    {
       printf("usage: %s <source> <destination>\n", argv[0]);
       return 1;
     }
@@ -1283,12 +1322,12 @@
   // tmpnam function prototype
   char* tmpnam(char* buffer);
 
-  - if buffer (char array address) passed to the function, 
-    function will write the unique file name to the buffer.
+  - if buffer (char array's address) passed to the function, 
+   it will write a unique file name to the buffer.
 
-  - if NULL passed to the function, function will 
-    allocate memory for the buffer and returns
-    static storage duration char array address
+  - if NULL passed to the function, it will allocate memory
+    for the buffer and returns static storage duration
+    char array's address
 
   char filename[L_tmpnam]; 
   - L_tmpname macro guarantees that the buffer is large enough 
@@ -1323,13 +1362,15 @@
 
   int main(int argc, char** argv)
   {
-    if (argc != 3){
+    if (argc != 3)
+    {
       printf("usage: %s <source_file> <seed>\n", argv[0]);
       exit(EXIT_FAILURE);
     }
 
     FILE* f_src = fopen(argv[1], "rb");
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("%s could not be opened.\n", argv[1]);
       exit(EXIT_FAILURE);
     }
@@ -1338,7 +1379,8 @@
     tmpnam(dest_filename);
 
     FILE* f_dst = fopen(dest_filename, "wb");  
-    if (f_dst == NULL){
+    if (f_dst == NULL)
+    {
       printf("%s temp file could not be created.\n", dest_filename);
       fclose(f_src);
       exit(EXIT_FAILURE);
@@ -1354,16 +1396,25 @@
     fclose(f_src);
     fclose(f_dst);
 
-    if (remove(argv[1])){
+    if (remove(argv[1]))
+    {
       printf("%s could not be deleted.\n", argv[1]);
       exit(EXIT_FAILURE);
     }
 
-    if (rename(dest_filename, argv[1])){
-      printf("%s file could not be renamed\n", dest_filename);
+    if (rename(dest_filename, argv[1]))
+    {
+      printf("%s could not be renamed as %s.\n", dest_filename, argv[1]);
       exit(EXIT_FAILURE);
     }
   }
+
+  // command line -> prog.exe command.bat 123456
+  // command line -> command.bat
+  // output ->
+  //  'í' is not recognized as an internal or
+  //  external command, operable program or batch file.
+
 
   // command line -> prog.exe command.bat 123456
   // command line -> command.bat 
@@ -1417,7 +1468,8 @@
   {
     FILE* f = fopen("log.txt", "w");
 
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("log.txt could not be created.\n");
       return 1;
     }
@@ -1438,7 +1490,8 @@
   {
     FILE* f = fopen("records.txt", "w");
 
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("records.txt could not be created.\n");
       return 1;
     }
@@ -1446,11 +1499,13 @@
     randomize();
 
     for (int i = 0; i < 10000; ++i)
-      fprintf(f, "%-12d %-16s %-18s %d\n",  
-        rand(), 
-        get_random_name(),
-        get_random_surname(),
-        rand() % 101);
+    {
+      fprintf(f, "%-12d %-16s %-18s %d\n",  rand(), 
+                                            get_random_name(),
+                                            get_random_surname(),
+                                            rand() % 101);
+    }
+
 
     // records.txt ->
     //  12842        nahit            damar              67
@@ -1472,7 +1527,8 @@
   {
     FILE* f = fopen("primes.txt", "w");
 
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("primes.txt could not be created.\n");
       return 1;
     }
@@ -1480,8 +1536,10 @@
     int x = 2;
     int prime_count = 0;
 
-    while (prime_count < 100000){
-      if (is_prime(x)){
+    while (prime_count < 100000)
+    {
+      if (is_prime(x))
+      {
         if (prime_count && prime_count % 5 == 0)
           fputc('\n', f);
 
@@ -1511,7 +1569,8 @@
   int main(void)
   {
     FILE* f = fopen("run.bat", "r");   // read-text mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("run.bat could not be opened.\n");
       return 1;
     }
@@ -1564,7 +1623,8 @@
   int main(void)
   {
     FILE* f = fopen("records.txt", "r");   // read-text mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("records.txt could not be opened.\n");
       return 1;
     }
@@ -1595,7 +1655,8 @@
   int main(void)
   {
     FILE* f = fopen("records.txt", "r");   // read-text mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("records.txt could not be opened.\n");
       return 1;
     }
@@ -1628,7 +1689,8 @@
   int main(void)
   {
     FILE* f = fopen("records.txt", "r");   // read-text mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("records.txt could not be opened.\n");
       return 1;
     }
@@ -1676,14 +1738,16 @@
       sprintf(filename, "grades%d.txt", i);
 
       f_arr[i] = fopen(filename, "w");
-      if (f_arr[i] == NULL){
+      if (f_arr[i] == NULL)
+      {
         printf("%s could not be created.\n", filename);
         return 1;
       }
     }
 
     FILE* f_src = fopen("records.txt", "r");
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("records.txt could not be opened.\n");
       return 1;
     }
@@ -1703,7 +1767,6 @@
 
     for (int i = 0; i < FILE_COUNT; ++i)
       fclose(f_arr[i]);
-
   }
     // grades0.txt ->
     //  18118 yurdagul     kapici           0
@@ -1738,9 +1801,9 @@
   // fgets function prototype
   char* fgets(char* buffer, int size, FILE* file_handle);
 
-  - buffer : address of the buffer where the line will be written.
+  - buffer  : address of the buffer that the line will be written.
               guaranteed to be NTBS.
-  - size : maximum number of characters to be read.
+  - size    : maximum number of characters to be read.
 
   - return value is the buffer address if minimum 1 character read, 
     NULL if EOF reached before reading any character.
@@ -1756,7 +1819,8 @@
     char buf[BUFFER_SIZE];
 
     FILE* f_src = fopen("records.txt", "r");
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("records.txt could not be opened.\n");
       return 1;
     }
@@ -1787,7 +1851,8 @@
     char buf[BUFFER_SIZE];
 
     FILE* f_src = fopen("records.txt", "r");
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("records.txt could not be opened.\n");
       return 1;
     }
@@ -1825,7 +1890,8 @@
     char buf[BUFFER_SIZE];
 
     FILE* f_src = fopen("records.txt", "r");
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("records.txt could not be opened.\n");
       return 1;
     }
@@ -1862,7 +1928,8 @@
     char buf[BUFFER_SIZE];
 
     FILE* f_src = fopen("../headers/nutility.h", "r");
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("nutility.h could not be opened.\n");
       return 1;
     }
@@ -1915,14 +1982,16 @@
   int main(void)
   {
     FILE* f = fopen("log.txt", "w");
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("log.txt could not be created.\n");
       return 1;
     }
 
     char str[] = "hello world";
 
-    for (int i = 0; i < 5; ++i){
+    for (int i = 0; i < 5; ++i)
+    {
       fputs(str, f);
       fputs("\n", f);
     }
@@ -1971,8 +2040,8 @@
 */
 
 /*
-  - because of those functions are unformatted 
-    IO functions, we need to open the file in binary mode.
+  - because of those functions are unformatted IO functions,
+    files need to be opened in binary mode.
 */
 
 /*
@@ -1989,7 +2058,8 @@
     sprintf(filename, "primes%d.dat", primes_count);
 
     FILE* f_dest = fopen(filename, "wb");
-    if (f_dest == NULL){
+    if (f_dest == NULL)
+    {
       printf("%s could not be created.\n", filename);
       return 1;
     }
@@ -1997,8 +2067,10 @@
     int x = 2;
     int count = 0;
 
-    while (count < primes_count){
-      if (is_prime(x)){
+    while (count < primes_count)
+    {
+      if (is_prime(x))
+      {
         fwrite(&x, sizeof(int), 1, f_dest);
         ++count;
       }
@@ -2026,7 +2098,8 @@
     sprintf(filename, "person%d.dat", person_count);
 
     FILE* f_dest = fopen(filename, "wb");
-    if (f_dest == NULL){
+    if (f_dest == NULL)
+    {
       printf("%s could not be created.\n", filename);
       return 1;
     }
@@ -2034,7 +2107,8 @@
     randomize();
     Person_t per;
 
-    while (person_count--){
+    while (person_count--)
+    {
       person_set_random(&per);
       fwrite(&per, sizeof(Person_t), 1, f_dest);
     } 
@@ -2052,7 +2126,8 @@
   {
     FILE* f_src = fopen("primes100000.dat", "rb");
 
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("primes100000.dat could not be opened.\n");
       return 1;
     }
@@ -2083,8 +2158,8 @@
   int main(void)
   {
     FILE* f_src = fopen("primes100000.dat", "rb");
-
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("primes100000.dat could not be opened.\n");
       return 1;
     }
@@ -2095,7 +2170,6 @@
 
     while ((N = fread(&arr, sizeof(int), SIZE, f_src)) != 0)
       print_array(arr, N);
-
 
     fclose(f_src);
 
@@ -2125,9 +2199,9 @@
   int main(void)
   {
     FILE* f_src = fopen("person1000.dat", "rb");
-
-    if (f_src == NULL){
-      printf("primes100000.dat could not be opened.\n");
+    if (f_src == NULL)
+    {
+      printf("person1000.dat could not be opened.\n");
       return 1;
     }
 
@@ -2154,9 +2228,9 @@
   int main(void)
   {
     FILE* f_src = fopen("person1000000.dat", "rb");
-
-    if (f_src == NULL){
-      printf("person1000.dat could not be opened.\n");
+    if (f_src == NULL)
+    {
+      printf("person1000000.dat could not be opened.\n");
       return 1;
     }
 
@@ -2192,9 +2266,9 @@
   int main(void)
   {
     FILE* f_src = fopen("person1000000.dat", "rb");
-
-    if (f_src == NULL){
-      printf("person1000.dat could not be opened.\n");
+    if (f_src == NULL)
+    {
+      printf("person1000000.dat could not be opened.\n");
       return 1;
     }
 
@@ -2231,9 +2305,9 @@
   int main(void)
   {
     FILE* f_src = fopen("person1000000.dat", "rb");
-
-    if (f_src == NULL){
-      printf("person1000.dat could not be opened.\n");
+    if (f_src == NULL)
+    {
+      printf("person1000000.dat could not be opened.\n");
       return 1;
     }
 
@@ -2269,19 +2343,22 @@
 
   int main(int argc, char* argv[])
   {
-    if (argc != 3){
+    if (argc != 3)
+    {
       printf("usage: %s <source> <destination>\n", argv[0]);
       return 1;
     }
     
     FILE* f_src = fopen(argv[1], "rb");
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("%s could not be opened.\n", argv[1]);
       return 2;
     }
 
     FILE* f_dst = fopen(argv[2], "wb");
-    if (f_dst == NULL){
+    if (f_dst == NULL)
+    {
       printf("%s could not be created.\n", argv[2]);
       fclose(f_src);
       return 3;
@@ -2291,7 +2368,8 @@
     size_t N;
     int byte_count = 0;
 
-    while ((N = fread(buffer, 1, CHUNK_SIZE, f_src)) != 0){
+    while ((N = fread(buffer, 1, CHUNK_SIZE, f_src)) != 0)
+    {
       fwrite(buffer, 1, N, f_dst);
       byte_count += (int)N;
     }
@@ -2331,13 +2409,15 @@
     change_extension(dest_filename, src_filename);
 
     FILE* f_src = fopen(src_filename, "rb");  // read-binary mode
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("%s could not be opened.\n", src_filename);
       return 1;
     }
 
     FILE* f_dst = fopen(dest_filename, "w");  // write-text mode
-    if (f_dst == NULL){
+    if (f_dst == NULL)
+    {
       printf("%s could not be created.\n", dest_filename);
       fclose(f_src);
       return 2;
@@ -2455,7 +2535,8 @@
   int main(void)
   {
     FILE* f_src = fopen("person1000000.dat", "rb");
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("person1000000.dat could not be opened.\n");
       return 1;
     }
@@ -2474,7 +2555,8 @@
   int main(void)
   {
     FILE* f_src = fopen("primes100000.dat", "rb");
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("primes100000.dat could not be opened.\n");
       return 1;
     }
@@ -2498,8 +2580,9 @@
   int main(void)
   {
     FILE* f_src = fopen("person1000000.dat", "rb");
-    if (f_src == NULL){
-      printf("primes100000.dat could not be opened.\n");
+    if (f_src == NULL)
+    {
+      printf("person1000000.dat could not be opened.\n");
       return 1;
     }
 
@@ -2524,7 +2607,8 @@
   void print_person_records(const char* filename)
   {
     FILE* f = fopen(filename, "rb");
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("%s could not be opened.\n", filename);
       exit(EXIT_FAILURE);
     }
@@ -2561,7 +2645,8 @@
   void print_person_records(const char* filename)
   {
     FILE* f = fopen(filename, "rb");
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("%s could not be opened.\n", filename);
       exit(EXIT_FAILURE);
     }
@@ -2579,7 +2664,8 @@
                     const char* new_name)
   {
     FILE* f = fopen(filename, "r+b"); // read(+)-binary mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("%s could not be opened.\n", filename);
       return 0;
     }
@@ -2628,19 +2714,19 @@
 /*
   dosyadan silmek denilen bir işlem yoktur.
     - dosyanın kopyası çıkartılır, silinecek bytelar yazılmaz.
-    - eski dosya sikinir kopya olan dosyanın ismi değiştirilir.
+    - eski dosya silinir kopya olan dosyanın ismi değiştirilir.
 */
 
 /*
-  #include <stdio.h>  
-  // fopen, fclose, tmpnam, L_tmpnam, fread, fwrite
-  #include <stdlib.h> // exit, EXIT_FAILURE
+  #include <stdio.h>    // fopen, fclose, tmpnam, L_tmpnam, fread, fwrite
+  #include <stdlib.h>   // exit, EXIT_FAILURE
   #include "../headers/person.h"
 
   int delete_records( const char* filename, int day)
   {
     FILE* f_src = fopen(filename, "rb");
-    if (f_src == NULL){
+    if (f_src == NULL)
+    {
       printf("%s could not be opened.\n", filename);
       exit(EXIT_FAILURE);
     }
@@ -2649,7 +2735,8 @@
     tmpnam(dest_filename);
 
     FILE* f_dst = fopen(dest_filename, "wb");
-    if (f_dst == NULL){
+    if (f_dst == NULL)
+    {
       printf("%s could not be created.\n", dest_filename);
       fclose(f_src);
       exit(EXIT_FAILURE);
@@ -2663,7 +2750,8 @@
     {
       ++record_count;
 
-      if (per.m_birth_date.m_day != day){
+      if (per.m_birth_date.m_day != day)
+      {
         fwrite(&per, sizeof(Person_t), 1, f_dst);
         ++copy_count;
       }
@@ -2672,12 +2760,14 @@
     fclose(f_dst);
     fclose(f_src);
 
-    if (remove(filename) != 0){
+    if (remove(filename) != 0)
+    {
       printf("%s could not be deleted.\n", filename);
       exit(EXIT_FAILURE);
     }
 
-    if (rename(dest_filename, filename) != 0){
+    if (rename(dest_filename, filename) != 0)
+    {
       printf("%s could not be renamed.\n", dest_filename);
       exit(EXIT_FAILURE);
     }
@@ -2688,7 +2778,8 @@
   void print_person_records(const char* filename)
   {
     FILE* f = fopen(filename, "rb");
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("%s could not be opened.\n", filename);
       exit(EXIT_FAILURE);
     }
@@ -2741,6 +2832,7 @@
     //  i = 28, 319 records deleted.
     //  i = 29, 268 records deleted.
     //  i = 30, 321 records deleted.
+
     //  16156 cetin        fakir        31 Ekim 1957 Persembe
     //  18    bekir        sonmez       31 Ocak 1999 Pazar
     //  24954 nuri         cuhadar      31 Aralik 2017 Pazar
@@ -2764,7 +2856,8 @@
   void sort_records(const char* filename)
   {
     FILE* f = fopen(filename, "r+b"); // read(+)-binary mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("%s could not be opened.\n", filename);
       return;
     }
@@ -2774,7 +2867,8 @@
     size_t person_count = (size_t)file_size / sizeof(Person_t);
 
     Person_t* mem_records = (Person_t*)malloc((size_t)file_size);
-    if (mem_records == NULL){
+    if (mem_records == NULL)
+    {
       printf("Memory allocation failed.\n");
       fclose(f);
       exit(EXIT_FAILURE);
@@ -2798,7 +2892,8 @@
   void print_person_records(const char* filename)
   {
     FILE* f = fopen(filename, "rb");
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("%s could not be opened.\n", filename);
       exit(EXIT_FAILURE);
     }
@@ -2859,11 +2954,11 @@
 
 /*
   #include <stdio.h>  // fopen, fclose, fsetpos, fpos_t
-
   int main(void)
   {
     FILE* f = fopen("primes100000.dat", "rb");
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("primes100000.dat could not be opened.\n");
       return 1;
     }
@@ -2881,7 +2976,8 @@
   int main(void)
   {
     FILE* f = fopen("primes100000.dat", "rb");
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("primes100000.dat could not be opened.\n");
       return 1;
     }
@@ -2935,7 +3031,8 @@
   int main(void)
   {
     FILE* f = fopen("primes100000.dat", "rb");
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("primes100000.dat could not be opened.\n");
       return 1;
     }
@@ -2953,7 +3050,8 @@
   int main(void)
   {
     FILE* f = fopen("primes100000.dat", "rb");
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("primes100000.dat could not be opened.\n");
       return 1;
     }
@@ -2977,7 +3075,8 @@
   int main(void)
   {
     FILE* f = fopen("primes100000.dat", "rb");
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("primes100000.dat could not be opened.\n");
       return 1;
     }
@@ -3011,7 +3110,8 @@
   int main(void)
   {
     FILE* f = fopen("out.txt", "r"); // read-text mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("out.txt could not be opened.\n");
       return 1;
     }
@@ -3085,7 +3185,8 @@
   int main(void)
   {
     FILE* f = fopen("out.txt", "r"); // read-text mode
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("out.txt could not be opened.\n");
       return 1;
     }
@@ -3096,17 +3197,20 @@
     while(1)
     {
       int n = fscanf(f, "%d", &val);
-      if (n == 1){
+      if (n == 1)
+      {
         printf("%d\n", val);
         continue;
       }
 
-      if (feof(f)){
+      if (feof(f))
+      {
         printf("EOF flag is SET, no bytes to read\n");
         break;
       }
 
-      if (ferror(f)){
+      if (ferror(f))
+      {
         printf("OS error occured while reading\n");
         exit(EXIT_FAILURE);
       }
@@ -3168,7 +3272,8 @@
   int main(void)
   {
     FILE* f = fopen("primes100000.dat", "rb");
-    if (f == NULL){
+    if (f == NULL)
+    {
       printf("primes100000.dat could not be opened.\n");
       return 1;
     }
@@ -3433,7 +3538,8 @@
   int main(void)
   {
     FILE* f_temp = tmpfile();
-    if (f_temp == NULL){
+    if (f_temp == NULL)
+    {
       fprintf(stderr, "temp file could not be created.\n");
       return 1;
     }
@@ -3454,9 +3560,9 @@
                 const char* file_open_mode, 
                 FILE* file_handle);
 
-  - freopen will close the file "file_handle" argument 
-    points to and open a new file with the name "file_name"
-    and mode "file_open_mode" with the "file_handle"
+  - freopen will close the file that "file_handle" argument points to
+    and open a new file with the name using its "file_name" parameter
+    and its mode is declared by using "file_open_mode" parameter 
     and return the "file_handle".
 
   - if fails it will return NULL
@@ -3477,7 +3583,8 @@
     FILE* f = freopen("out.txt", "w", stdout);
     if (f != NULL)
       printf("%p %p\n", (void*)f, (void*)stdout);
-    else {
+    else 
+    {
       perror("freopen failed");
       exit(EXIT_FAILURE);
     }
@@ -3488,13 +3595,13 @@
 */
 
 /*
-  #include <stdio.h>  
-  // freopen, stdin, fprintf, stderr, getchar, putchar
+  #include <stdio.h>  // freopen, stdin, fprintf, stderr, getchar, putchar
   #include <stdlib.h> // exit, EXIT_FAILURE
 
   int main(void)
   {
-    if (!freopen("out.txt", "r", stdin)) {
+    if (!freopen("out.txt", "r", stdin)) 
+    {
       fprintf(stderr, "can not redirected");
       exit(EXIT_FAILURE);
     }
@@ -3503,7 +3610,7 @@
     while ((ch = getchar()) != '\n')
       putchar(ch);
 
-    // constole output -> 00007FFB20867C98 00007FFB20867C98
+    // console output -> 00007FFB20867C98 00007FFB20867C98
   }
 */
 
@@ -3513,13 +3620,13 @@
   //  11 22
   //  3.4
 
-  #include <stdio.h>  
-  // freopen, scanf, printf, fprintf, stderr
+  #include <stdio.h>  // freopen, scanf, printf, fprintf, stderr
   #include <stdlib.h> // exit, EXIT_FAILURE
 
   int main(void)
   {
-    if (!freopen("out.txt", "r", stdin)) {
+    if (!freopen("out.txt", "r", stdin)) 
+    {
       fprintf(stderr, "can not redirected");
       exit(EXIT_FAILURE);
     }
